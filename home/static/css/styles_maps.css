@@ -1,0 +1,302 @@
+#map {
+    float: none;
+    height: 100%;
+    width: 100%;
+}
+
+#contentMap {
+    float: left;
+    background: #bbbbbb;
+    width: 68%;
+    height: 600px;
+    padding: 7px;
+    margin-top: 4%;
+    margin-left: 15%;
+    /* box-shadow: 0px 0px 40px #5c5c5c; */
+    transition: 600ms;
+}
+
+#maps_reserve {
+    /* border: 1px solid yellow; */
+    width: 40%;
+    height: 500px;
+    margin: 1%;
+    /* padding: 7px;
+    background-color: #bbbbbb; */
+    box-shadow: 0px 0px 10px #5c5c5c;
+}
+
+
+/*
+#contentMap:hover{
+    float: left;    
+    background: #bbbbbb;
+    width: 72%;
+    height: 600px;
+    margin-left: 13%;
+    padding: 6px;
+    box-shadow: 0px 0px 60px #5abb5f;
+}
+*/
+
+.content-map {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* border: 2px solid yellow; */
+}
+
+.info-map {
+    display: block;
+    margin: 0px auto;
+    margin-top: 35px;
+    width: 90%;
+    text-align: center;
+    /* border: 2px solid red; */
+}
+
+.info-map img {
+    width: 100%;
+}
+
+.boxMap {
+    /* background: #bbbbbb; */
+    width: 95%;
+    padding: 25px 25px ;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #bbbbbb;
+    transition: 600ms;
+    /* border: 1px solid red; */
+    margin: 0px auto;
+}
+
+.label_reserve {
+    width: 40%;
+    font-size: 19px;
+}
+
+.form_reserve {
+    width: 40%;
+    /* padding: 5px; */
+    /* margin: 1%; */
+    margin-left: 0%;
+    font-size: 19px;
+}
+
+.reserva {
+    width: 180px;
+    position: center;
+    padding: 14px;
+    margin-top: 10px;
+    background-color: #e19328;
+    border: none;
+    border-radius: 5px;
+}
+
+.reserva:hover {
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #e19328;
+}
+
+/*
+#boxMap:hover {
+    background: #bbbbbb;
+    width: 77%;
+    padding: 18px;
+    margin-top: 3%;
+    margin-left: 9%;
+    box-shadow: 0px 0px 60px #5abb5f;
+}
+*/
+
+
+.menu_flotante {
+    /* background: #214ed7; */
+    width: 34%;
+    padding: 18px;
+    /* border: 3px solid green; */
+}
+
+.box-art{
+    width: 100%;
+    /* background-color: #e1942888; */
+    margin-top: 25px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    box-shadow: 0px 0px 7px #bbbbbb;
+}
+
+.box-art:hover{
+    box-shadow: 0px 0px 7px #5c5c5c;
+    cursor: pointer;
+}
+
+.box-art .car-n{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.box-art .car-d{
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+}
+
+.c-title{
+    color: #222;
+    font-weight: 700;
+}
+
+.c-val {
+    display: block;
+    font-family: "Roboto Black";
+    color: #E7B10A;
+    font-size: 24px;
+    margin-top: 7px;
+}
+
+.box-art .car-d i{
+    color: #E7B10A;
+    margin-right: 6px;
+}
+.box-art .car-i{
+    width: 40%;
+}
+
+.box-art .car-i img{
+    width: 100%
+}
+
+.box-art input[type="submit"]{
+    padding: 7px;
+    border: 1px solid #e19328;
+}
+
+/* 
+.menu_flotante>form>ul {
+    background: rgba(65, 217, 217, 0.623);
+    width: 84%;
+    padding: 18px;
+    margin: 3px;
+    transition: 350ms;
+}
+
+.menu_flotante>form>ul>li {
+    width: 40%;
+} */
+
+/* .menu_flotante>form>ul:hover>li>div {
+    float: right;
+    overflow: visible;
+}
+
+.menu_flotante>form>ul:hover {
+    background: rgb(65, 217, 217);
+    width: 100%;
+    height: 60px;
+    padding: 18px;
+    margin: 5px;
+} */
+
+/* FORMULARIO DE MAPA  */
+
+.boxMap input[type="text"],
+.boxMap input[type="tel"],
+.boxMap input[type="search"],
+.boxMap input[type="date"],
+.boxMap input[type="time"]{
+    display: block;
+    width: 95%;
+    padding: 12px 0px;
+    padding-left: 12px;
+    font-size: 12px;
+}
+
+.boxMap input[type="email"]{
+    display: block;
+    width: 95%;
+    padding: 12px 0px;
+    padding-left: 12px;
+    font-size: 12px;
+}
+
+
+.boxMap label{
+    display: block;
+    width: 100%;
+    font-size: 13px;
+    /* margin-top: 15px; */
+    color: #5c5c5c;
+    margin-bottom: 5px;
+}
+
+.form-date{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+.d-box{
+    width: 48%;
+}
+
+.d-cont{
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+.c-map{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* DETALLES DE RESERVAS  */
+
+.det-resesrva{
+    width: 92%;
+    min-height: 50px;
+    background-color: #222;
+    color: white;
+    box-shadow: 0px 0px 7px #5c5c5c;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    padding: 20px 40px;
+}
+
+.det-resesrva .sub-title-3{
+    color: white;
+}
+
+.detail-v{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.box-det-des,
+.box-det{
+    width: 15%;
+    border-right: 1px solid #444;
+    padding: 10px ;
+}
+
+.box-det-des{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.box-det-des input[type="search"]{
+    width: 100%;
+    padding: 5px 15px;
+}

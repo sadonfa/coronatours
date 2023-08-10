@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home/style.css' %} ">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+
+    <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/brands.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/solid.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/home/nav/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home/nav/responsive.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+
+    <title>Inicio | Corona Tours</title>
+</head>
+
+<body>
+
+    <header id="header-h">
+        <div class="nav-home">
+            <!-- <i class="fa-solid fa-bars"></i> -->
+            <nav id="nav" class="main-nav">
+                <div class="nav-links">
+                    <a class="link-item" href="{% url 'home' %}" >Inicio</a>
+                    <a class="link-item" href="{% url 'about' %}" >Nosotros</a>
+                    <a class="link-item" href="{% url 'reserve' %}">transportes</a> 
+                    <a class="link-item" href="{% url 'tours' %}">Actividades</a> 
+                    <a class="link-item" href="{% url 'contact' %} ">Contacto</a> 
+                </div>
+            </nav>
+            <button id="button-menu" class="button-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="logo">
+            <img src="{% static 'img/logo.png' %} " alt="logoCoronatour">
+        </div>
+    </header>
+
+
+    <div class="ob-page">
+        <div class="transfer">
+            <a href="{% url 'reserve' %}">
+                <h1 class="t-home">Translados</h1>
+                <hr class="separador aling-l" />
+                <p class="p-home aling-l">
+                    Transportese seguro en nuestra ciudad,
+                    para que viva una experiencia inolvidable.
+                </p>
+            </a>
+
+        </div>
+
+        <div class="collage">
+            <img src="{% static 'img/collages_home.png' %} " alt="Collage Cartagena">
+        </div>
+
+        <div class="actividades">
+            <a href="{% url 'tours' %}">
+                <h1 class="t-home aling-r">actividades</h1>
+                <hr class="separador aling-r" />
+                <p class="p-home aling-r">
+                    Recorre los mejores rincones de cartagena cuen
+                    nuestros actividades personalizadas
+                </p>
+                
+                
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="redes aling-l">
+            <img src="{% static 'img/Instagram.svg' %} " alt="Instagram CoronaTours">
+            <img src="{% static 'img/facebook.svg' %}" alt="Facebook CoronaTours">
+            <img src="{% static 'img/whatsapp.svg' %}" alt="whatsapp CoronaTours">
+        </div>
+        <div class="autor aling-r">
+            Creado por &copy; <a href="gegova.co">gegova.co</a>
+        </div>
+    </footer>
+    <script src=" {% static 'js/script.js' %} "></script>
+</body>
+
+</html>

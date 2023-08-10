@@ -1,0 +1,243 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{title}} {% endblock  %}
+
+{% block content %}
+    <datalist id="bookmark_list_start">
+        <option> {{start_of_route}} </option>  
+    </datalist>
+    <datalist id="bookmark_list_end">
+        <option> {{end_of_route}} </option>  
+    </datalist>
+
+    <!--
+    -->
+
+   
+
+    <div class="c-map">
+        <!-- Este es el menu para los vehiculos -->
+        <div class="menu_flotante">
+            <h2 class="sub-title-2">Seleccione su vehiculo</h2>
+            
+            <!-- Auto estandar -->
+           
+                <form method="POST" action="{% url 'check' %}">
+                    {% csrf_token %}
+                    <div class="box-art">
+
+                        <div class="car-n">
+                            <label class="c-title" for="name" >{{transports.1.name}}</label>
+                            <input type="hidden" class="c-title" id="name" name="name" value="{{transports.1.name}}"/>                            
+                            
+                            <label class="c-val" for="value" >{{ v_trayecto.standar }}</label>
+                            <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.standar }}"/>  
+                                                                 
+                        </div>
+                        <div class="car-d">
+                            <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.1.amount_luggage}} </p>
+                            <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.1.Number_passengers}} </p>         
+                        </div>
+                        <div class="car-i">
+                            <img src="{{transports.1.image.url}}" alt="{{ transports.1.name }}" />
+                        </div>
+                        <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    </div>
+                    <input type="hidden" name="date" value="{{date}}"/>
+                    <input type="hidden" name="time" value="{{time}}"/>
+                    <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                    <input type="hidden" name="destino" value="{{end_of_route}}"/>
+                </form>   
+                
+            <!-- Mini Van -->
+            <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.3.name}}</label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.3.name}}"/>
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.mini_van  }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.mini_van }}"/>                                           
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.3.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.3.Number_passengers}} </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.3.image.url}}" alt="{{ transports.3.name }}" />
+                    </div>
+
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>
+            
+
+            <!-- Van estandar -->
+            <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.2.name}}</label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.2.name}}"/>
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.van_standar }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.van_standar }}"/>                                           
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.2.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.2.Number_passengers}} </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.2.image.url}}" alt="{{ transports.3.name }}" />
+                    </div>
+
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>
+
+            <!-- Micro Bus -->
+            <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.4.name}}</label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.4.name}}"/>
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.micro_bus  }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.micro_bus }}"/>                                           
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.4.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.4.Number_passengers}} </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.4.image.url}}" alt="{{ transports.4.name }}" />
+                    </div>
+
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>
+
+
+            <!-- Bus -->
+            <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.5.name}}</label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.5.name}}"/>
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.bus  }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.bus }}"/>                                           
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.5.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.5.Number_passengers}} </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.5.image.url}}" alt="{{ transports.5.name }}" />
+                    </div>
+
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>
+
+            <!-- SUV -->
+            <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.6.name}}</label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.6.name}}"/>
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.SUV  }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.SUV }}"/>                                           
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.6.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.6.Number_passengers}} </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.6.image.url}}" alt="{{ transports.6.name }}" />
+                    </div>
+
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>
+               {% comment %} 
+                    <input type="hidden" name="fullname" value="{{d_reserve.1.fullname}}"/>
+                    <input type="hidden" name="email" value="{{d_reserve.1.email}}"/>
+                    <input type="hidden" name="phone" value="{{d_reserve.1.phone}}"/>
+                    <input type="hidden" name="date" value="{{d_reserve.1.date}}"/>
+                    <input type="hidden" name="time" value="{{d_reserve.1.time}}"/>
+                {% endcomment %}
+                
+                
+            
+        </div>
+
+        <div id="maps_reserve" >
+            <!-- Con este div se esta invocando el mapa, si este div no se muestra un mapa -->    
+            
+            <div id="map"></div>
+
+            <div class="det-resesrva">
+            <h3 class="sub-title-3"> Detalles de viaje </h3>
+            <div class="detail-v">
+                
+                <div class="box-det">
+                    <h3 class="sub-title-3"> Fecha de recogida </h3>
+                    {{ date }} 
+                </div>
+                <div class="box-det">
+                    <h3 class="sub-title-3"> Hora de recogida </h3>
+                    {{ time }} 
+                </div>
+                <div class="box-det-des">
+                    <h3 class="sub-title-3">Confirmar Ruta </h3>
+                    <span id="start" value="{{start_of_route}}">{{start_of_route}}</span>
+                    <hr>
+                    <span id="end" value="{{end_of_route}}">{{end_of_route}}</span>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        
+
+    </div>
+
+
+{% endblock  %}

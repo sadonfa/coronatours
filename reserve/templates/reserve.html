@@ -1,0 +1,99 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% block title %} {{title}} {% endblock  %}
+
+{% block content %}
+
+
+<div class="hd-title">
+    <div class="bg-transp">
+    </div>       
+        <img src="{% static 'img/Traslados-desde-los-aeropuertos.jpg' %}" alt="Toures Cartagena" />
+        <h2> Reserva en línea </h2>
+</div>
+
+    <div class="content-map">      
+
+        <div class="boxMap">
+            
+            <form method="POST" action="{% url 'transporte' 1 %}" >
+                {% csrf_token %}
+
+                <datalist id="bookmark_list">
+                    
+                    <!-- Este bucle invoca el listado de los destinos -->
+                    {% for destino in destination %}
+                        <option value="{{destino.value}}">
+                            {{destino.title}}
+                        </option>
+                    {% endfor %}
+                    
+                </datalist>
+
+                <div class="box-form">
+                    <div class="d-cont" >
+                        <label class="label_reserve" for="start_of_route" >Elije la ubicación de partida</label>
+                        <input type="search"  name="start_of_route" list="bookmark_list" class="form_reserve" required/>
+                    </div>
+
+                    <div class="d-cont" >
+                        <label class="label_reserve" for="end_of_route" >Elije un destino</label>
+                        <input type="search"   name="end_of_route" list="bookmark_list" class="form_reserve" required/>
+                    </div>
+                </div>
+
+                {% comment %} <div class="box-form">
+                    <div class="d-cont" >
+                        <label class="label_reserve" for="name" >Nombres y Apellidos</label>
+                        <input type="text" name="name" class="form_reserve" required/>
+                    </div>
+
+                    <div class="d-cont" >
+                        <label class="label_reserve" for="tel" >Celular</label>
+                        <input type="tel" id="tel" name="tel" class="form_reserve" required/>
+                    </div>
+                </div>
+
+                <div class="box-form">
+                <div class="d-cont" >
+                    <label class="label_reserve" for="mail" >Correo</label>
+                    <input type="email" id="mail" name="mail" class="form_reserve" required/>
+                </div>
+            </div> {% endcomment %}
+                
+                <div class="box-form">
+                    <div class="d-box" >
+                        <label class="label_reserve" for="date" >Fecha de Recogida</label>
+                        <input type="date" name="date" class="form_reserve" required/>
+                    </div>
+                    <div  class="d-box" >
+                        <label class="label_reserve" for="time" >Hora de Recogida</label>
+                        <input type="time" name="time" class="form_reserve" required/>
+                    </div>
+                </div>
+                
+
+                <input type="submit" class="reserva" value="Realizar Reserva" />
+            </form>
+        </div>
+
+
+        <div class="info-map" >
+            {% comment %} <h2 class="sub-title-2" > Reserva en línea </h2> {% endcomment %}
+            <p class="parrafo" >    
+                Nuestro proceso de reserva en línea le guiará en 3 pasos para seleccionar sus detalles de recogida, 
+                vehículo y numero de pasajeros. A continuación, podrá revisar su selección y su solicitud será 
+                enviada directamente a nuestro sistema.<br /><br />
+                Contamos con servicio de transporte para rutas empresariales, eventos, convenciones, 
+                puestas a dispocición y traslados punto a punto. En caso de requerirlos nos pueden contactar a las siguientes
+                lineas de atencion: +57 316 2203 798, +57 3015214550, +57 310 389 89 17, +57 304 211 79 88. +57 301 6275 445
+                o enviarnos un correo electronico info@coronatours.com.co
+            </p>
+            <img src=" {% static 'img/PhotoCollage.png'%}" alt="Collage Vehiculos" />
+        </div>
+
+        
+
+    </div>
+   
+{% endblock  %}

@@ -1,0 +1,116 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<h1> {{ title }} </h1>
+
+<form class="form-booking" action="{% url 'detail_booking' det_booking.origen %}" method="post">
+   {% csrf_token %}
+    <div class="box-form">
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">nombres</label>
+            <input type="text" name="name" id="">
+        </div>
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">apellidos</label>
+            <input type="text" name="lastname" id="">
+        </div>
+
+    </div>
+    <div class="box-form">
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">telefono</label>
+            <input type="tel" name="phone" id="">
+        </div>
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">correo</label>
+            <input type="email" name="mail" id="" >
+        </div>
+
+    </div>
+    <div class="box-form">
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">Nacionalidad</label>
+            <input type="text" name="contry" id="">
+        </div>
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">ciudad de origen</label>
+            <input type="text" name="city" id="">
+        </div>
+
+    </div>
+
+    {% if det_booking.opcion  != transporte  %}
+        
+        <input type="hidden" name="date" value="{{ det_booking.date }}" readonly>
+        <input type="hidden" name="time" value="{{ det_booking.time }}" readonly>
+        <input type="hidden" name="origen" value="{{ det_booking.origen }}" readonly>
+        <input type="hidden" name="destino" value="{{ det_booking.destino }}" readonly>
+           
+        <div class="box-form">
+            <div class="box-form-item">
+
+                <label class="sub-title-3" for=""> Vehiculo </label>
+                <input type="text" name="tour" value="{{ det_booking.name }}" readonly>
+
+            </div>
+            <div class="box-form-item">
+                <label class="sub-title-3" for="">valor </label>
+                <input type="number" name="cash" value="{{ det_booking.cash|safe }}" readonly>
+                <input type="hidden" name="hotel" value="transporte">
+            </div>
+        </div >
+
+    {% else %}
+
+        <div class="box-form">
+            <div class="box-form-one">
+                <label class="sub-title-3" for="">hotel </label>
+                <input type="text" name="hotel" id="">
+            </div>
+        </div> 
+
+        <div class="box-form">
+        <div class="box-form-item">
+        
+            <label class="sub-title-3" for="">Tour </label>
+            <input type="text" name="tour" value="{{ det_booking.name }}" readonly>        
+
+        </div>
+        <div class="box-form-item">
+            <label class="sub-title-3" for="">valor Por persona</label>
+            <input type="number" name="cash" value="{{ det_booking.cash|safe }}" readonly>
+        </div>
+    </div >
+
+    {% endif %}
+
+    <div class="box-form-last">
+
+        <div class="box-form-mult">
+            <label class="sub-title-3" for="">cantidad adultos</label>
+            <select name="adults" id="">                
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="box-form-mult">
+            <label class="sub-title-3" for="">cantidad de niños </label>
+            <select name="childre" id="">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <input type="submit" class="btn" value="Continuar">
+    </div>
+
+</form>
+
+{% endblock %}

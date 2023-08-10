@@ -1,0 +1,14 @@
+@media screen and (max-width: 725px) {
+
+    .ob-page {
+        background-image: url("../img/background-r.png");
+        flex-direction: column;
+    }
+
+    .transfer,
+    .actividades {
+        width: 100%;
+        height: 50vh;
+    }
+
+}
