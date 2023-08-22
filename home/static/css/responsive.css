@@ -11,4 +11,67 @@
         height: 50vh;
     }
 
+    .transfer{
+        margin-top: 130px;
+        margin-bottom: 100px;
+    }
+
+    .actividades{        
+        margin-left: 100px;
+        margin-top: -80px;
+    }
+
+    .transfer .p-home{
+        width: 75%;
+    }
+
+    #header-h{
+        padding-top: 25px;
+    }
+
+    .nav-home {
+        width: 100px;
+        margin-left: 40px;
+    }
+
+    #header-h .logo{
+        width: 150px;
+        height: 100%;
+        margin-right: 25px;
+    }
+
+    #header-h .logo img{
+        height: 100%;
+    }
+
+    .transfer .t-home{
+        margin-left: 40px;
+        margin-top: 0px;
+    }
+
+    .aling-l{
+        margin-left: 40px;
+    }
+
+    .aling-r {
+        text-align: left;
+        margin-right: 0px;
+    }
+
+    .collage{
+        width: 100%;
+        height: 100vh;
+        /* border: 1px solid grey; */
+    }
+
+    .footer{
+        position: relative;
+        margin-top: 30px;
+    }
+
+
+    .arti{
+        flex-basis: 35%;
+    }
+
 }
