@@ -69,9 +69,13 @@
         margin-top: 30px;
     }
 
-
-    .arti{
+    .art-tours .arti{
         flex-basis: 35%;
     }
+
+    #box{
+        border: 1px solid red;
+    }
+
 
 }

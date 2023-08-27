@@ -6,7 +6,11 @@
 
 <h1> {{ title }} </h1>
 
-<form class="form-booking" action="{% url 'detail_booking' det_booking.origen %}" method="post">
+    {% if det_booking.opcion  != transporte  %}
+        <form class="form-booking" action="{% url 'detail_booking' det_booking.origen %}" method="post">
+    {% else %}
+        <form class="form-booking" action="{% url 'detail_booking' det_booking.id %}" method="post">
+    {% endif %}
    {% csrf_token %}
     <div class="box-form">
         <div class="box-form-item">

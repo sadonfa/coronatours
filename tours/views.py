@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import Tours
+import locale
 
 # Create your views here.
 
@@ -23,8 +24,12 @@ def tour(request):
 def tour(request, id):
 
     tours = Tours.objects.get(id=id)
-   
+    cash = locale.currency(tours.cash, grouping=True)
+    
+
+
     return render(request, 'tour.html', {
         'title': 'San Basilio de Palenque ',
-        'tours': tours 
+        'tours': tours ,
+        'cash': cash
     })

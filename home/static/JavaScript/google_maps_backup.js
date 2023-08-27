@@ -6,7 +6,7 @@ function initMap() {
   let start = document.getElementById("start");
   let end = document.getElementById("end");
 
-
+  
   // --- <<<<<<<< --- Cree un cuadro delimitador con lados a ~150 km de distancia del punto central --- >>>>>>>> ---
   const defaultBounds = {
     north: center.lat + 0.15,
@@ -23,11 +23,11 @@ function initMap() {
     strictBounds: false,
   };
 
-  const autocomplete = new google.maps.places.Autocomplete(start, options);
-  const autocomplete2 = new google.maps.places.Autocomplete(end, options);
+  const autocomplete = new google.maps.places.Autocomplete(startP, options);
+  const autocomplete2 = new google.maps.places.Autocomplete(endP, options);
 
   autocomplete.setComponentRestrictions({
-    country: ["co", "mx"],
+    country: ["co","mx"],
   });
 
   autocomplete2.setComponentRestrictions({
@@ -42,7 +42,7 @@ function initMap() {
   });
 
   // --- <<<<<<<< --- Autocompletador de lugares para el buscador --- >>>>>>>> ---
-
+  
   autocomplete.bindTo("bounds", map);
 
   autocomplete.addListener("place_changed", () => {
@@ -50,45 +50,38 @@ function initMap() {
     const info = new google.maps.place.PlaceResult()
     const place = autocomplete.getPlace(info);
 
-    if (!place.geometry || !place.geometry.location) { return; }
+    if (!place.geometry || !place.geometry.location) {return;}
 
   });
 
   // --- <<<<<<<< --- Marca en el mapa la ruta --- >>>>>>>> ---
+  const {DistanceMatrixElementStatus} = google.maps.importLibrary("routes")
   directionsRenderer.setMap(map);
+  const dista = DirectionsRoutes();
+  console.log(DistanceMatrixElementStatus);
+  // directionsRenderer.setPanel(document.getElementById("directionsPanel"));
   const request = {
     origin: start.innerHTML,
     destination: end.innerHTML,
     travelMode: 'DRIVING',
+    // unitySystem: google.maps.UnitySystem.METRIC
   };
   directionsService.route(request, response => {
     directionsRenderer.setDirections(response);
-    showSteps(response)
   });
 
 };
 
-function showSteps(directionResult) {
-  const myRoute = directionResult.routes[0].legs[0];
-  let distance = myRoute.distance
-  let duration = myRoute.duration
-  const dista = document.getElementById("distanceId").innerHTML = distance.value;
-  const durat = document.getElementById("durationId").value = duration.value;
-  // element.innerHTML = dista
 
-  if (typeof (Storage) !== "undefined") {
-    localStorage.setItem("distancia", dista);
+//  -------------
 
-
-  } else {
-    console.log("LocalStorage no soportado en este navegador")
-  }
-
-  const ti = localStorage.getItem("distancia");
-  const test = document.getElementById("v-store").value = ti;
-  console.log(test);
-  console.log(distance);
-  console.log(dista);
-  console.log(durat);
-}
-
+/**
+ * Bocagrande             lat : 10.4101185, lng : -75.5505696.
+ * Crespo                 Lat : 10.4454451, Lng : -75.5176517. 
+ * Ciudad Amurallada      lat : 10.4231546, lng : -75.55021649999999.
+ * Castillo Grande        lat : 10.3942723, lng : -75.55168789999999.
+ * Manga                  Lat : 10.4119699, Lng : -75.5349485.
+ * La Boquilla            Lat : 10.471126,  lng : -75.49687.
+ * Marbella               Lat : 10.4357484, lng : -75.536103.
+ * Mamonal                Lat : 10.31258,   Lng : -75.50099.
+ */

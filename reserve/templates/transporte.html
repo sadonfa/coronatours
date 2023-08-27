@@ -203,7 +203,9 @@
                     <input type="hidden" name="time" value="{{d_reserve.1.time}}"/>
                 {% endcomment %}
                 
-                
+               <p> probando: {{distance}}  </p>
+               <p> probando: {{duration}} </p>
+               <p> probando: {{store}} </p>
             
         </div>
 
@@ -225,10 +227,20 @@
                     {{ time }} 
                 </div>
                 <div class="box-det-des">
-                    <h3 class="sub-title-3">Confirmar Ruta </h3>
-                    <span id="start" value="{{start_of_route}}">{{start_of_route}}</span>
+                    <h3 class="sub-title-3">ruta </h3>
+                    <span id="start" onchange="calcRoute();" value="{{start_of_route}}">{{start_of_route}}</span>
                     <hr>
-                    <span id="end" value="{{end_of_route}}">{{end_of_route}}</span>
+                    <span id="end" onchange="calcRoute();" value="{{end_of_route}}">{{end_of_route}}</span>
+                </div>
+                <div class="box-det-des">
+                    <h3 class="sub-title-3">Distancia </h3>
+                    <span id="distanceId"></span>
+                   
+                </div>
+                <div class="box-det-des">
+                    <h3 class="sub-title-3">Duracion </h3>
+                    <span id="durationId" ></span>
+                   
                 </div>
             </div>
         </div>
