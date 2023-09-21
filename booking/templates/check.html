@@ -12,7 +12,7 @@
         <form class="form-booking" action="{% url 'detail_booking' det_booking.id %}" method="post">
     {% endif %}
    {% csrf_token %}
-    <div class="box-form">
+    <div class="box-form-booking">
         <div class="box-form-item">
             <label class="sub-title-3" for="">nombres</label>
             <input type="text" name="name" id="">
@@ -23,7 +23,7 @@
         </div>
 
     </div>
-    <div class="box-form">
+    <div class="box-form-booking">
         <div class="box-form-item">
             <label class="sub-title-3" for="">telefono</label>
             <input type="tel" name="phone" id="">
@@ -34,7 +34,7 @@
         </div>
 
     </div>
-    <div class="box-form">
+    <div class="box-form-booking">
         <div class="box-form-item">
             <label class="sub-title-3" for="">Nacionalidad</label>
             <input type="text" name="contry" id="">
@@ -52,8 +52,22 @@
         <input type="hidden" name="time" value="{{ det_booking.time }}" readonly>
         <input type="hidden" name="origen" value="{{ det_booking.origen }}" readonly>
         <input type="hidden" name="destino" value="{{ det_booking.destino }}" readonly>
-           
-        <div class="box-form">
+        <input type="hidden" name="opcion" value="{{ det_booking.opcion }}" readonly>
+        
+        <div class="box-form-booking">
+            <div class="box-form-item">
+
+                <label class="sub-title-3" for=""> Aerolinea </label>
+                <input type="text" name="aerolinea" >
+
+            </div>
+            <div class="box-form-item">
+                <label class="sub-title-3" for="">Numero de vuelo </label>
+                <input type="text" name="nvuelo" >
+            </div>
+        </div >
+
+        <div class="box-form-booking">
             <div class="box-form-item">
 
                 <label class="sub-title-3" for=""> Vehiculo </label>
@@ -62,21 +76,21 @@
             </div>
             <div class="box-form-item">
                 <label class="sub-title-3" for="">valor </label>
-                <input type="number" name="cash" value="{{ det_booking.cash|safe }}" readonly>
+                <input type="number" name="cash" value="{{ cash|safe }}" readonly>
                 <input type="hidden" name="hotel" value="transporte">
             </div>
         </div >
 
     {% else %}
 
-        <div class="box-form">
+        <div class="box-form-booking">
             <div class="box-form-one">
                 <label class="sub-title-3" for="">hotel </label>
                 <input type="text" name="hotel" id="">
             </div>
         </div> 
 
-        <div class="box-form">
+        <div class="box-form-booking">
         <div class="box-form-item">
         
             <label class="sub-title-3" for="">Tour </label>

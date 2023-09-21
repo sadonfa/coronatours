@@ -10,7 +10,7 @@ def tours(request):
 
     return render(request, 'toures.html', {
         'title': 'Toures',
-        'toures': toures
+        'toures': toures,
     })
 
     # return HttpResponse("<h1>Toures</h1>")

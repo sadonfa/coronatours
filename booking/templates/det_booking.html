@@ -1,5 +1,5 @@
 {% extends 'layouts/layout.html' %}
-
+{% load static %}
 
 {% block title %} {{ title }} {% endblock %}
 
@@ -8,6 +8,7 @@
 
 
 <div class="cont-det-booking">
+  <img src="{% static 'img/logo.pnp' %}" alt="">
 <h2> {{ title }} # {{ booking.get_id_formateado }} </h2>
 
 <table>
@@ -91,43 +92,61 @@
   
 </table>
 
-
- {% comment %} <form>
+ <form>
       <script
         src="https://checkout.wompi.co/widget.js"
         data-render="button"
-        data-public-key="pub_prod_9Q0j3Er5qtTcXx4X2cPd4b3wTFoyElX0"
+        data-public-key="pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM"
         data-currency="COP"
-        data-amount-in-cents="4950000"
-        data-reference="4XMPGKWWPKWQ"
-        data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5"
+        data-amount-in-cents="{{ booking.total }}00"
+        data-reference="{{ booking.get_id_formateado }}"
+        data-redirect-url="http://localhost:8000/respuesta/"
+        {% comment %} data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5" {% endcomment %}
         >
       </script>
-    </form>   {% endcomment %}
-    <a href="#" class="btn">Corregir Datos</a>
-    <script>
+    </form>   
+    {% comment %} <a href="#" class="btn">Corregir Datos</a> {% endcomment %}
+
+
+    
+
+    {% comment %} <script>
         var checkout = new WidgetCheckout({
             currency: 'COP',
-            amountInCents: "300000",
+            amountInCents: {{ booking.total }}+"00",
             reference: '{{ booking.get_id_formateado }}',
-            publicKey: 'pub_prod_9Q0j3Er5qtTcXx4X2cPd4b3wTFoyElX0',
-            redirectUrl: "http://localhost:8000/toures", // Opcional
+            publicKey: 'pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM',
+            redirectUrl: 'http://localhost:8000', // Opcional
             taxInCents: { // Opcional
               vat: 1900,
               consumption: 800
             }
-          })
-        </script>
 
-    <button 
+          })
+          
+        </script> {% endcomment %}
+
+        {% comment %} <button 
                 class="btn"
                 onclick="checkout.open(function ( result ) {
                     var transaction = result.transaction
-                    console.log('Transaction ID: ', transaction.id)
+                    console.log('Transaction ID: ', transaction.redirectUrl + transaction.id)
                     console.log('Transaction object: ', transaction)
+                    transaction.redirectUrl + transaction.id
                   })"
                 > Pagar 
-      </button>
+    </button> {% endcomment %}
+
+    {% comment %} <button 
+                class="btn"
+                onclick="checkout.open(function ( result ) {
+                    var transaction = result.transaction
+                    console.log('Transaction ID: ', transaction.redirectUrl + transaction.id)
+                    console.log('Transaction object: ', transaction)
+                    transaction.redirectUrl + transaction.id
+                  })"
+                > Pagar 
+      </button> {% endcomment %}
 
 </div>
 

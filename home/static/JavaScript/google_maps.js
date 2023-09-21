@@ -14,8 +14,14 @@ function initMap() {
     east: center.lng + 0.15,
     west: center.lng - 0.15,
   };
-  const startP = document.getElementById("start_p");
-  const endP = document.getElementById("end_p");
+  const start_a = document.getElementById("start_a")
+  const start_b = document.getElementById("start_b")
+  const start_b2 = document.getElementById("start_b2")
+  const start_c = document.getElementById("start_c")
+  const end_a = document.getElementById("end_a");
+  const end_b = document.getElementById("end_b");
+  const end_b2 = document.getElementById("end_b2");
+  const end_c = document.getElementById("end_c");
   const options = {
     bounds: defaultBounds,
     componentRestrictions: { country: "co" },
@@ -23,14 +29,40 @@ function initMap() {
     strictBounds: false,
   };
 
-  const autocomplete = new google.maps.places.Autocomplete(start, options);
-  const autocomplete2 = new google.maps.places.Autocomplete(end, options);
+  const autocomplete_a = new google.maps.places.Autocomplete(start_a, options);
+  const autocomplete_b_1 = new google.maps.places.Autocomplete(start_b, options);
+  const autocomplete_b_2 = new google.maps.places.Autocomplete(start_b2, options);
+  const autocomplete_c = new google.maps.places.Autocomplete(start_c, options);
 
-  autocomplete.setComponentRestrictions({
+  const autocomplete_a2 = new google.maps.places.Autocomplete(end_a, options);
+  const autocomplete_b2_1 = new google.maps.places.Autocomplete(end_b, options);
+  const autocomplete_b2_2 = new google.maps.places.Autocomplete(end_b2, options);
+  const autocomplete_c2 = new google.maps.places.Autocomplete(end_c, options);
+
+  autocomplete_a.setComponentRestrictions({
+    country: ["co", "mx"],
+  });
+  autocomplete_b_1.setComponentRestrictions({
+    country: ["co", "mx"],
+  });
+  autocomplete_b_2.setComponentRestrictions({
+    country: ["co", "mx"],
+  });
+  autocomplete_c.setComponentRestrictions({
     country: ["co", "mx"],
   });
 
-  autocomplete2.setComponentRestrictions({
+
+  autocomplete_a2.setComponentRestrictions({
+    country: ["co", "mx"]
+  })
+  autocomplete_b2_1.setComponentRestrictions({
+    country: ["co", "mx"]
+  })
+  autocomplete_b2_2.setComponentRestrictions({
+    country: ["co", "mx"]
+  })
+  autocomplete_c2.setComponentRestrictions({
     country: ["co", "mx"]
   })
 
@@ -43,12 +75,12 @@ function initMap() {
 
   // --- <<<<<<<< --- Autocompletador de lugares para el buscador --- >>>>>>>> ---
 
-  autocomplete.bindTo("bounds", map);
+  autocomplete_a.bindTo("bounds", map);
 
-  autocomplete.addListener("place_changed", () => {
+  autocomplete_a.addListener("place_changed", () => {
 
     const info = new google.maps.place.PlaceResult()
-    const place = autocomplete.getPlace(info);
+    const place = autocomplete_a.getPlace(info);
 
     if (!place.geometry || !place.geometry.location) { return; }
 
@@ -74,6 +106,8 @@ function showSteps(directionResult) {
   let duration = myRoute.duration
   const dista = document.getElementById("distanceId").innerHTML = distance.value;
   const durat = document.getElementById("durationId").value = duration.value;
+  const d_distancia = document.getElementById("distancia-d").innerHTML = distance.text;
+  const d_duracion = document.getElementById("duracion-d").innerHTML = duration.text;
   // element.innerHTML = dista
 
   if (typeof (Storage) !== "undefined") {

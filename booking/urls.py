@@ -5,4 +5,6 @@ urlpatterns = [
     path('check/', views.check, name="check"),
     path('check/<int:id>/', views.check, name="check"),
     path('detalles-reserva/<str:opc>/', views.det_booking, name="detail_booking"),
+    path('respuesta/', views.answer_booking, name="answer"),
+    path('respuesta/<int:id>/', views.answer_booking, name="answer"),
 ]

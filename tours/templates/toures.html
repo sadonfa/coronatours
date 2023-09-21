@@ -1,34 +1,47 @@
-{% extends 'layouts/layout.html' %}
-{% load static %}
-
-{% block title %} {{title}} {% endblock  %}
-
-{% block content %}
-
-{% comment %} <div class="box-title">
-    <h1 class="title"> {{ title }} </h1>
-</div> {% endcomment %}
+{% extends 'layouts/layout.html' %} {% load static %} {% block title %}
+{{title}} {% endblock %} {% block content %} {% comment %}
+<div class="box-title">
+  <h1 class="title">{{ title }}</h1>
+</div>
+{% endcomment %}
 
 <div class="hd-title">
-    <div class="bg-transp">
-    </div>       
-        <img src="{% static 'img/encanto9-1-1024x683.jpg' %}" alt="Toures Cartagena" />
-        <h2> Toures </h2>
+  <div class="bg-transp"></div>
+  <img
+    src="{% static 'img/encanto9-1-1024x683.jpg' %}"
+    alt="Toures Cartagena"
+  />
+  <h2>Toures</h2>
 </div>
-
 
 <div class="art-tours">
-    {% for tour in toures %}
-        <article class="arti">
-            <a href=" {% url 'tour' tour.id  %} ">
-                <img src="{{ tour.image1.url }} " />
-                <span> {{ tour.name }}</span>
-                <p> {{ tour.description }} </p>
-            </a>        
-        </article>    
-    {% endfor %}
-    
+  {% for tour in toures %}
+  <article class="arti">
+    <a href=" {% url 'tour' tour.id  %} ">
+      <img src="{{ tour.image1.url }} " />
+      <span> {{ tour.name }}</span>
+      <p>{{ tour.description }}</p>
+      <div class="inf-tarj">
+         <div class="serv-icon">
+        <div class="box-icon">
+            <i class="fa-solid fa-martini-glass-citrus"></i>
+            <p>Bebida (opcional) </p>
+        </div>
+        <div class="box-icon">
+            <i class="fa-solid fa-utensils"></i>
+            <p>Comida (opcional) </p>
+        </div>
+        <div class="box-icon">
+            <i class="fa-solid fa-car"></i>
+            <p>Translados </p>
+        </div>
+      </div>
+     <p class="art-cash"> $ {{ tour.cash }} </p> 
+    </div>
+      
+    </a>
+  </article>
+  {% endfor %}
 </div>
 
-
-{% endblock  %}
+{% endblock %}

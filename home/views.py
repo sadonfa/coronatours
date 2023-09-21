@@ -61,7 +61,7 @@ def index(request):
         #reserva.save()
 
         # Aqui se envia el correo, comenta este send_email si necesitas que no se envie el correo
-        #send_email(mail, name, value)
+        send_email(mail, name, value)
         
         print(f"EL email en el momento es {mail} y los datos que se añaden a la base de datos son : {name}, {value}")
 

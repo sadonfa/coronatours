@@ -11,14 +11,48 @@
     </datalist>
 
     <!--
-    -->
-
-   
+    -->   
 
     <div class="c-map">
         <!-- Este es el menu para los vehiculos -->
         <div class="menu_flotante">
             <h2 class="sub-title-2">Seleccione su vehiculo</h2>
+
+            <!-- Auto Compartido -->
+           
+            <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.0.name}} (Compartido) </label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.0.name}}"/>                            
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.compartido }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.compartido }}"/>  
+                                                             
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.0.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> 
+                            <select name="comp-cantidad" id="">                                
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.0.image.url}}" alt="{{ transports.0.name }}" />
+                    </div>
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>   
             
             <!-- Auto estandar -->
            
@@ -108,7 +142,37 @@
                 <input type="hidden" name="destino" value="{{end_of_route}}"/>
             </form>
 
-            <!-- Micro Bus -->
+
+             <!-- Micro Bus -->
+             <form method="POST" action="{% url 'check' %}">
+                {% csrf_token %}
+                <div class="box-art">
+
+                    <div class="car-n">
+                        <label class="c-title" for="name" >{{transports.0.name}}</label>
+                        <input type="hidden" class="c-title" id="name" name="name" value="{{transports.0.name}}"/>
+                        
+                        <label class="c-val" for="value" >{{ v_trayecto.micro_bus  }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.micro_bus }}"/>                                           
+                    </div>
+                    <div class="car-d">
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.4.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.0.Number_passengers}} </p>         
+                    </div>
+                    <div class="car-i">
+                        <img src="{{transports.0.image.url}}" alt="{{ transports.0.name }}" />
+                    </div>
+
+                    <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+                    
+                </div>
+                <input type="hidden" name="date" value="{{date}}"/>
+                <input type="hidden" name="time" value="{{time}}"/>
+                <input type="hidden" name="origen" value="{{start_of_route}}"/>
+                <input type="hidden" name="destino" value="{{end_of_route}}"/>
+            </form>
+
+            <!-- Buseta -->
             <form method="POST" action="{% url 'check' %}">
                 {% csrf_token %}
                 <div class="box-art">
@@ -117,11 +181,11 @@
                         <label class="c-title" for="name" >{{transports.4.name}}</label>
                         <input type="hidden" class="c-title" id="name" name="name" value="{{transports.4.name}}"/>
                         
-                        <label class="c-val" for="value" >{{ v_trayecto.micro_bus  }}</label>
-                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.micro_bus }}"/>                                           
+                        <label class="c-val" for="value" >{{ v_trayecto.buseta  }}</label>
+                        <input type="hidden" class="c-val" id="value" name="value" value="{{ v_trayecto.buseta }}"/>                                           
                     </div>
                     <div class="car-d">
-                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{transports.4.amount_luggage}} </p>
+                        <p> <i class="fa-sharp fa-solid fa-suitcase-rolling"></i> {{ transports.4.amount_luggage }} </p>
                         <p> <i class="fa-sharp fa-solid fa-person"></i> {{transports.4.Number_passengers}} </p>         
                     </div>
                     <div class="car-i">
@@ -136,6 +200,8 @@
                 <input type="hidden" name="origen" value="{{start_of_route}}"/>
                 <input type="hidden" name="destino" value="{{end_of_route}}"/>
             </form>
+
+           
 
 
             <!-- Bus -->
@@ -202,10 +268,7 @@
                     <input type="hidden" name="date" value="{{d_reserve.1.date}}"/>
                     <input type="hidden" name="time" value="{{d_reserve.1.time}}"/>
                 {% endcomment %}
-                
-               <p> probando: {{distance}}  </p>
-               <p> probando: {{duration}} </p>
-               <p> probando: {{store}} </p>
+              
             
         </div>
 
@@ -214,6 +277,7 @@
             
             <div id="map"></div>
 
+            <div class="separador"></div>
             <div class="det-resesrva">
             <h3 class="sub-title-3"> Detalles de viaje </h3>
             <div class="detail-v">
@@ -234,12 +298,12 @@
                 </div>
                 <div class="box-det-des">
                     <h3 class="sub-title-3">Distancia </h3>
-                    <span id="distanceId"></span>
+                    <span id="distancia-d"></span>
                    
                 </div>
                 <div class="box-det-des">
                     <h3 class="sub-title-3">Duracion </h3>
-                    <span id="durationId" ></span>
+                    <span id="duracion-d" ></span> 
                    
                 </div>
             </div>
