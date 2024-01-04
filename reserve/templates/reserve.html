@@ -21,27 +21,26 @@
       {% endcomment %}
 
       <form action="index.php" method="post" class="select_form">
-       Seleccione rutas:
+        Seleccione rutas:
         <select id="status" name="status" onChange="mostrar(this.value);">
           <option value="ida">Ida</option>
           <option value="idayvuelta">Ida y vuelta</option>
           <option value="puntoapunto">Punto a Punto</option>
         </select>
-      </form>     
+      </form>
 
-
-      <div id="ida" >
+      <div id="ida">
         <div class="ida">
           <form method="POST" action="{% url 'reserve_detail' %}">
-            {% csrf_token %}
-  
-            {% comment %} <datalist id="bookmark_list">
+            {% csrf_token %} {% comment %}
+            <datalist id="bookmark_list">
               <!-- Este bucle invoca el listado de los destinos -->
               {% for destino in destination %}
               <option value="{{destino.value}}">{{destino.title}}</option>
               {% endfor %}
-            </datalist> {% endcomment %}
-  
+            </datalist>
+            {% endcomment %}
+
             <div class="box-form">
               {% comment %} Le Coloque id a los dos inputs donde se definia la
               ruta {% endcomment %}
@@ -57,7 +56,7 @@
                   required
                 />
               </div>
-  
+
               <div class="d-cont">
                 <label class="label_reserve" for="end_of_route"
                   >Elije un destino</label
@@ -71,10 +70,12 @@
                 />
               </div>
             </div>
-  
-            <div class="box-form">
+
+            <div class="box-form-date">
               <div class="d-box">
-                <label class="label_reserve" for="date">Fecha de Recogida</label>
+                <label class="label_reserve" for="date"
+                  >Fecha de Recogida</label
+                >
                 <input type="date" name="date" class="form_reserve" required />
               </div>
               <div class="d-box">
@@ -90,192 +91,187 @@
             <input type="submit" class="btn" value="Realizar Reserva" />
           </form>
         </div>
-    </div>
+      </div>
 
+      {% comment %} IDA Y VUELTA {% endcomment %}
 
-    {% comment %} IDA Y VUELTA {% endcomment %}
-  
-    <div id="idayvuelta" style="display: none;">
-      <h3> Datos de Ida</h3>
+      <div id="idayvuelta" style="display: none">
+        <h3>Datos de Ida</h3>
 
-      <form method="POST" action="{% url 'reserve_detail' %}">
-        {% csrf_token %}
+        <form method="POST" action="{% url 'reserve_detail' %}">
+          {% csrf_token %}
 
-        <datalist id="bookmark_list">
-          <!-- Este bucle invoca el listado de los destinos -->
-          {% for destino in destination %}
-          <option value="{{destino.value}}">{{destino.title}}</option>
-          {% endfor %}
-        </datalist>
+          <datalist id="bookmark_list">
+            <!-- Este bucle invoca el listado de los destinos -->
+            {% for destino in destination %}
+            <option value="{{destino.value}}">{{destino.title}}</option>
+            {% endfor %}
+          </datalist>
 
-        <div class="box-form">
-          {% comment %} Le Coloque id a los dos inputs donde se definia la
-          ruta {% endcomment %}
-          <div class="d-cont">
-            <label class="label_reserve" for="start_of_route"
-              >Elije la ubicación de partida</label
-            >
-            <input
-              type="text"
-              id="start_b"
-              name="start_of_route"
-              class="form_reserve"
-              required
-            />
+          <div class="box-form">
+            {% comment %} Le Coloque id a los dos inputs donde se definia la
+            ruta {% endcomment %}
+            <div class="d-cont">
+              <label class="label_reserve" for="start_of_route"
+                >Elije la ubicación de partida</label
+              >
+              <input
+                type="text"
+                id="start_b"
+                name="start_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
+
+            <div class="d-cont">
+              <label class="label_reserve" for="end_of_route"
+                >Elije un destino</label
+              >
+              <input
+                type="text"
+                id="end_b"
+                name="end_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
           </div>
 
-          <div class="d-cont">
-            <label class="label_reserve" for="end_of_route"
-              >Elije un destino</label
-            >
-            <input
-              type="text"
-              id="end_b"
-              name="end_of_route"
-              class="form_reserve"
-              required
-            />
+          <div class="box-form">
+            <div class="d-box">
+              <label class="label_reserve" for="date">Fecha de Recogida</label>
+              <input type="date" name="date" class="form_reserve" required />
+            </div>
+            <div class="d-box">
+              <label class="label_reserve" for="time"
+                >Hora de Recogida (Ida)</label
+              >
+              <input type="time" name="time" class="form_reserve" required />
+              <span>*Formato 24 horas</span>
+            </div>
           </div>
-        </div>
+          <input type="hidden" id="distanceId" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+          <h3>Datos de Regreso</h3>
 
-        <div class="box-form">
-          <div class="d-box">
-            <label class="label_reserve" for="date">Fecha de Recogida</label>
-            <input type="date" name="date" class="form_reserve" required />
-          </div>
-          <div class="d-box">
-            <label class="label_reserve" for="time"
-              >Hora de Recogida (Ida)</label
-            >
-            <input type="time" name="time" class="form_reserve" required />
-            <span>*Formato 24 horas</span>
-          </div>
-        </div>
-        <input type="hidden" id="distanceId" value="" name="distance" />
-        <input type="hidden" name="duration" id="durationId" value="" />
-         <h3> Datos de Regreso</h3>
+          <datalist id="bookmark_list">
+            <!-- Este bucle invoca el listado de los destinos -->
+            {% for destino in destination %}
+            <option value="{{destino.value}}">{{destino.title}}</option>
+            {% endfor %}
+          </datalist>
 
-        <datalist id="bookmark_list">
-          <!-- Este bucle invoca el listado de los destinos -->
-          {% for destino in destination %}
-          <option value="{{destino.value}}">{{destino.title}}</option>
-          {% endfor %}
-        </datalist>
+          <div class="box-form">
+            {% comment %} Le Coloque id a los dos inputs donde se definia la
+            ruta {% endcomment %}
+            <div class="d-cont">
+              <label class="label_reserve" for="start_of_route"
+                >Elije la ubicación de partida</label
+              >
+              <input
+                type="text"
+                id="start_b2"
+                name="start_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
 
-        <div class="box-form">
-          {% comment %} Le Coloque id a los dos inputs donde se definia la
-          ruta {% endcomment %}
-          <div class="d-cont">
-            <label class="label_reserve" for="start_of_route"
-              >Elije la ubicación de partida</label
-            >
-            <input
-              type="text"
-              id="start_b2"
-              name="start_of_route"
-              class="form_reserve"
-              required
-            />
-          </div>
-
-          <div class="d-cont">
-            <label class="label_reserve" for="end_of_route"
-              >Elije un destino</label
-            >
-            <input
-              type="text"
-              id="end_b2"
-              name="end_of_route"
-              class="form_reserve"
-              required
-            />
-          </div>
-        </div>
-
-        <div class="box-form">
-          <div class="d-box">
-            <label class="label_reserve" for="date">Fecha de Recogida</label>
-            <input type="date" name="date" class="form_reserve" required />
-          </div>
-          <div class="d-box">
-            <label class="label_reserve" for="time"
-              >Hora de Recogida (Ida)</label
-            >
-            <input type="time" name="time" class="form_reserve" required />
-            <span>*Formato 24 horas</span>
-          </div>
-        </div>
-        <input type="hidden" id="distanceId" value="" name="distance" />
-        <input type="hidden" name="duration" id="durationId" value="" />
-        <input type="hidden" name="idayvuelta" value="idayvuelta">
-        <input type="submit" class="btn" value="Realizar Reserva" />
-      </form>
-
-    </div>
-
-    <div id="puntoapunto" style="display: none;">
-      <h2>punto a punto ...</h2>
-      <form method="POST" action="{% url 'reserve_detail' %}">
-        {% csrf_token %}
-
-        <datalist id="bookmark_list">
-          <!-- Este bucle invoca el listado de los destinos -->
-          {% for destino in destination %}
-          <option value="{{destino.value}}">{{destino.title}}</option>
-          {% endfor %}
-        </datalist>
-
-        <div class="box-form">
-          {% comment %} Le Coloque id a los dos inputs donde se definia la
-          ruta {% endcomment %}
-          <div class="d-cont">
-            <label class="label_reserve" for="start_of_route"
-              >Elije la ubicación de partida</label
-            >
-            <input
-              type="text"
-              id="start_c"
-              name="start_of_route"
-              class="form_reserve"
-              required
-            />
+            <div class="d-cont">
+              <label class="label_reserve" for="end_of_route"
+                >Elije un destino</label
+              >
+              <input
+                type="text"
+                id="end_b2"
+                name="end_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
           </div>
 
-          <div class="d-cont">
-            <label class="label_reserve" for="end_of_route"
-              >Elije un destino</label
-            >
-            <input
-              type="text"
-              id="end_c"
-              name="end_of_route"
-              class="form_reserve"
-              required
-            />
+          <div class="box-form">
+            <div class="d-box">
+              <label class="label_reserve" for="date">Fecha de Recogida</label>
+              <input type="date" name="date" class="form_reserve" required />
+            </div>
+            <div class="d-box">
+              <label class="label_reserve" for="time"
+                >Hora de Recogida (Ida)</label
+              >
+              <input type="time" name="time" class="form_reserve" required />
+              <span>*Formato 24 horas</span>
+            </div>
           </div>
-        </div>
+          <input type="hidden" id="distanceId" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+          <input type="hidden" name="idayvuelta" value="idayvuelta" />
+          <input type="submit" class="btn" value="Realizar Reserva" />
+        </form>
+      </div>
 
-        <div class="box-form">
-          <div class="d-box">
-            <label class="label_reserve" for="date">Fecha de Recogida</label>
-            <input type="date" name="date" class="form_reserve" required />
+      <div id="puntoapunto" style="display: none">
+        <h2>punto a punto ...</h2>
+        <form method="POST" action="{% url 'reserve_detail' %}">
+          {% csrf_token %}
+
+          <datalist id="bookmark_list">
+            <!-- Este bucle invoca el listado de los destinos -->
+            {% for destino in destination %}
+            <option value="{{destino.value}}">{{destino.title}}</option>
+            {% endfor %}
+          </datalist>
+
+          <div class="box-form">
+            {% comment %} Le Coloque id a los dos inputs donde se definia la
+            ruta {% endcomment %}
+            <div class="d-cont">
+              <label class="label_reserve" for="start_of_route"
+                >Elije la ubicación de partida</label
+              >
+              <input
+                type="text"
+                id="start_c"
+                name="start_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
+
+            <div class="d-cont">
+              <label class="label_reserve" for="end_of_route"
+                >Elije un destino</label
+              >
+              <input
+                type="text"
+                id="end_c"
+                name="end_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
           </div>
-          <div class="d-box">
-            <label class="label_reserve" for="time"
-              >Hora de Recogida (Ida)</label
-            >
-            <input type="time" name="time" class="form_reserve" required />
+
+          <div class="box-form">
+            <div class="d-box">
+              <label class="label_reserve" for="date">Fecha de Recogida</label>
+              <input type="date" name="date" class="form_reserve" required />
+            </div>
+            <div class="d-box">
+              <label class="label_reserve" for="time"
+                >Hora de Recogida (Ida)</label
+              >
+              <input type="time" name="time" class="form_reserve" required />
+            </div>
           </div>
-        </div>
-        <input type="hidden" id="distanceId" value="" name="distance" />
-        <input type="hidden" name="duration" id="durationId" value="" />
-        <input type="submit" class="btn" value="Realizar Reserva" />
-      </form>
-    </div>
+          <input type="hidden" id="distanceId" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+          <input type="submit" class="btn" value="Realizar Reserva" />
+        </form>
+      </div>
       {% comment %} <input class="seleccion" type="checkbox" /> {% endcomment %}
-
-      
-
     </div>
 
     <div class="anuncio">

@@ -2,6 +2,8 @@ from ssl import AlertDescription
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
 from .models import Reserver, Destination, Vehiculos, Zone
+import datetime
+# import time
 import locale
 
 
@@ -30,7 +32,6 @@ def det_reserve(request):
         date = request.POST['date']
         time = request.POST['time']
         duration = request.POST['duration']
-
 
         # reserve = Reserver(
         #     start_and_route=start_of_route,
@@ -68,10 +69,25 @@ def transporte(request):
         # email = request.POST['mail']
         # tel  = request.POST['tel']
         date = request.POST['date']
-        time = request.POST['time']
+        time_tran = request.POST['time']
         distance = request.POST['distance']
         duration = request.POST['duration']
         store = request.POST['store']
+
+        def Convert(string):
+            li = list(string.split(":"))
+            return li
+
+        list_time = Convert(time_tran)
+        hours = int(list_time[0])
+        print(type(hours))
+
+        # print(type(time_tran))
+        # lista = []
+        # lista.append(time_tran)
+        # print(lista)
+        # print(time_tran)
+        # print(time.monotonic_ns(time_tran))
 
         # id_POST  = request.POST['id']
 
@@ -89,45 +105,48 @@ def transporte(request):
 
         # reserve.save()
         # d_reserve = Reserver.objects.all()
-        st_distancia = int(store)*10**-3;
+        st_distancia = int(store)*10**-3
         print(round(st_distancia))
         kilometros = int(round(st_distancia))
 
         if int(kilometros) in range(1, 12):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'compartido': 10000,  # multiplicar por personas
-                'standar': 45000, #locale.currency(45000, grouping=True),
-                'mini_van': 85000, #locale.currency(85000, grouping=True),
-                'van_standar': 100000, #locale.currency(100000, grouping=True),
-                'micro_bus': 140000, # locale.currency(120000, grouping=True),
-                'buseta': 170000, #locale.currency(170000, grouping=True),
-                'bus': 200000, #locale.currency(200000, grouping=True),
-                'SUV': 150000, # locale.currency(150000, grouping=True),
+                'compartido': 15000,  # multiplicar por personas
+                'standar': 45000,  # locale.currency(45000, grouping=True),
+                'mini_van': 85000,  # locale.currency(85000, grouping=True),
+                # locale.currency(100000, grouping=True),
+                'van_standar': 100000,
+                'micro_bus': 140000,  # locale.currency(120000, grouping=True),
+                'buseta': 170000,  # locale.currency(170000, grouping=True),
+                'bus': 200000,  # locale.currency(200000, grouping=True),
+                'SUV': 150000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilometros) in range(13, 30):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'compartido': 10000,
-                'standar': 60000, #locale.currency(60000, grouping=True),
-                'mini_van': 100000, #locale.currency(100000, grouping=True),
-                'van_standar': 140000, # locale.currency(120000, grouping=True),
-                'micro_bus': 180000 , #locale.currency(150000, grouping=True),
-                'buseta': 190000, #locale.currency(190000, grouping=True),
-                'bus': 260000 ,#locale.currency(260000, grouping=True),
-                'SUV': 180000, # locale.currency(180000, grouping=True),
+                'compartido': 25000,
+                'standar': 60000,  # locale.currency(60000, grouping=True),
+                'mini_van': 100000,  # locale.currency(100000, grouping=True),
+                # locale.currency(120000, grouping=True),
+                'van_standar': 140000,
+                'micro_bus': 180000,  # locale.currency(150000, grouping=True),
+                'buseta': 190000,  # locale.currency(190000, grouping=True),
+                'bus': 260000,  # locale.currency(260000, grouping=True),
+                'SUV': 180000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilometros) in range(31, 58):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'compartido': 10000, #locale.currency(10000, grouping=True),
-                'standar':200000, # locale.currency(190000, grouping=True),
-                'mini_van': 350000, #locale.currency(280000,  grouping=True),
-                'van_standar': 450000,#locale.currency(400000, grouping=True),
-                'micro_bus': 550000, #locale.currency(480000, grouping=True),
-                'buseta': 600000, #locale.currency(530000, grouping=True),
-                'bus': 700000,#locale.currency(600000, grouping=True),
-                'SUV': 500000 #locale.currency(500000, grouping=True),
+                'compartido': 15000,  # locale.currency(10000, grouping=True),
+                'standar': 200000,  # locale.currency(190000, grouping=True),
+                'mini_van': 350000,  # locale.currency(280000,  grouping=True),
+                # locale.currency(400000, grouping=True),
+                'van_standar': 450000,
+                'micro_bus': 550000,  # locale.currency(480000, grouping=True),
+                'buseta': 600000,  # locale.currency(530000, grouping=True),
+                'bus': 700000,  # locale.currency(600000, grouping=True),
+                'SUV': 500000  # locale.currency(500000, grouping=True),
             }
         else:
             print("Incorrecto")
@@ -145,8 +164,9 @@ def transporte(request):
             "distance": distance,
             "duration": duration,
             'date': date,
-            'time': time,
-            'store': store
+            'time': hours,
+            'store': store,
+            'kilometros': kilometros
         })
     else:
         return HttpResponse("No se guardo ninguna informacion vuelva a <a href='/inicio'>Inicio</a> ")

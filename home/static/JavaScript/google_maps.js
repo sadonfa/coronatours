@@ -113,7 +113,6 @@ function showSteps(directionResult) {
   if (typeof (Storage) !== "undefined") {
     localStorage.setItem("distancia", dista);
 
-
   } else {
     console.log("LocalStorage no soportado en este navegador")
   }

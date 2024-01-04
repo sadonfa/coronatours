@@ -1,120 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
- {% load static %}    
-    <head>
-        <meta charset="utf-8" / >
-        <title>
-            {% block title %}{% endblock  %}
-            | Corona Tours
-        </title>
-       
-        <!-- Estilos generales de la pagina -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
-        <link rel="shortcut icon" type="image/png" href="{% static 'img/logo.png' %}"/>
-        
-        <!-- Estilos generales del mapa -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles_maps.css' %}" >
-        
-        <!-- Estilos Fuentes -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}" >
+  {% load static %}
+  <head>
+    <meta charset="utf-8" / >
+    <title>{% block title %}{% endblock %} | Corona Tours</title>
 
-        <!-- Estilos Responsive -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}" >
+    <!-- Estilos generales de la pagina -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'img/logo.png' %}"
+    />
 
+    <!-- Estilos generales del mapa -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles_maps.css' %}"
+    />
 
-        <!-- Estilos Botones -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/botones.css' %}" >
+    <!-- Estilos Fuentes -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/fonts.css' %}"
+    />
 
-         <!-- FONTAWESOME -->
-        <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome.css'%}">
-        <link rel="stylesheet" href="{% static 'fontawesome/css/brands.css'%}">
-        <link rel="stylesheet" href="{% static 'fontawesome/css/solid.css'%}">
+    <!-- Estilos Responsive -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/responsive.css' %}"
+    />
 
-        <script src="{% static 'JavaScript/script.js' %}"></script>
-        <script src="{% static 'JavaScript/jquery.js' %}"></script>
-        
-        <script type="text/javascript" src="https://checkout.wompi.co/widget.js"></script>
-    </head>
-    <body> 
-        <div class="header-t">
+    <!-- Estilos Botones -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/botones.css' %}"
+    />
 
-            <div class="info-h">
-              <span> <i class="fa-solid fa-phone"></i> (+57) 316 2203 798  </span><span> <i class="fa-solid fa-phone"></i>  301 6275 445 </span> <span> <i class="fa-solid fa-envelope"></i> reservas@coronatours.com.co </span>
-            </div>
+    <!-- FONTAWESOME -->
+    <link
+      rel="stylesheet"
+      href="{% static 'fontawesome/css/fontawesome.css'%}"
+    />
+    <link rel="stylesheet" href="{% static 'fontawesome/css/brands.css'%}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/css/solid.css'%}" />
 
-            <div class="redes aling-l">
-                <img src="{% static 'img/Instagram.svg' %} " alt="Instagram CoronaTours">
-                <img src="{% static 'img/facebook.svg' %}" alt="Facebook CoronaTours">
-                <img src="{% static 'img/whatsapp.svg' %}" alt="whatsapp CoronaTours">
-            </div>
-        </div>
-        <header>
-            <!-- Encabezado -->
-            
-            <!-- Logo-->
-            
-                <div id="logotipo">
-                    <!-- logo -->
-                    <a href="{% url 'home' %}"> <img src="{% static 'img/logo.png' %}" > </a>
-                </div>
-            
-                
-            <!-- Barra de navegacion -->
-            <nav>
-                <ul>
-                    <li>
-                        <a class="link-item" href="{% url 'home' %}" >Inicio</a>
-                    </li>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
 
-                    <li>
-                        <a class="link-item" href="{% url 'about' %} " >Nosotros</a>      
-                    </li>
+    <script src="{% static 'JavaScript/script.js' %}"></script>
+    <script src="{% static 'JavaScript/jquery.js' %}"></script>
 
-                    <li>
-                        <a class="link-item" href="{% url 'reserve' %}">transportes</a> 
-                    </li>
-    
-                    <li>
-                        <a class="link-item" href="{% url 'tours' %}">Actividades</a> 
-                    </li>
-    
-                    <li>
-                        <a class="link-item" href="{% url 'contact' %} ">Contacto</a> 
-                        {% comment %} <a  >Acerca de nosotros</a>
-                        <ul>
-                            <li>¿Quienes Somos?</li>
-                            <li>Preguntas Frecuentes</li>
-                            <li>Testimonios</li>
-                            <li>Actualidades</li>
-                            <li>Bioseguridad</li>
-                            <li>A Bordo</li>
-                        </ul> {% endcomment %}
-                    </li>
-                                
-                </ul>
-            </nav>
+    <script
+      type="text/javascript"
+      src="https://checkout.wompi.co/widget.js"
+    ></script>
 
-        </header>        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  </head>
+  <body>
+    <div class="header-t">
+      <div class="info-h">
+        <span> <i class="fa-solid fa-phone"></i> (+57) 316 2203 798 </span
+        ><span> <i class="fa-solid fa-phone"></i> 301 6275 445 </span>
+        <span>
+          <i class="fa-solid fa-envelope"></i> reservas@coronatours.com.co
+        </span>
+      </div>
 
-        <!-- Contenido -->
-        <div id="content">
-            <div id="box">
-                {% block content %}
-                
-                {% endblock  %}
-            </div>
-        </div>
+      <div class="redes aling-l">
+        <img
+          src="{% static 'img/Instagram.svg' %} "
+          alt="Instagram CoronaTours"
+        />
+        <img src="{% static 'img/facebook.svg' %}" alt="Facebook CoronaTours" />
+        <img src="{% static 'img/whatsapp.svg' %}" alt="whatsapp CoronaTours" />
+      </div>
+    </div>
+    <header>
+      <!-- Encabezado -->
 
-        <!-- Pie de Pagina -->
-        <footer>
-            CoronaTour  |  Creado por &copy;  <a href="gegova.co">gegova.co</a>
-        </footer>
+      <!-- Logo-->
 
-        <!-- Invocado JavaScript -->
-        
-        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPpj5IuMirA0F7XgqGGjIQg9_PeBrASE&callback=initMap&libraries=places"></script>
-        <script type="text/javascript" src="{% static 'JavaScript/google_maps.js' %}"></script>
-       
-        <script type="text/javascript" src="{% static 'js/enlaces.js' %}"></script>
-    </body>
+      <div id="logotipo">
+        <!-- logo -->
+        <a href="{% url 'home' %}">
+          <img src="{% static 'img/logo.png' %}" />
+        </a>
+      </div>
+
+      <!-- Barra de navegacion -->
+      <nav>
+        <ul>
+          <li>
+            <a class="link-item" href="{% url 'home' %}">Inicio</a>
+          </li>
+
+          <li>
+            <a class="link-item" href="{% url 'about' %} ">Nosotros</a>
+          </li>
+
+          <li>
+            <a class="link-item" href="{% url 'reserve' %}">transportes</a>
+          </li>
+
+          <li>
+            <a class="link-item" href="{% url 'tours' %}">Actividades</a>
+          </li>
+
+          <li>
+            <a class="link-item" href="{% url 'contact' %} ">Contacto</a>
+            {% comment %} <a>Acerca de nosotros</a>
+            <ul>
+              <li>¿Quienes Somos?</li>
+              <li>Preguntas Frecuentes</li>
+              <li>Testimonios</li>
+              <li>Actualidades</li>
+              <li>Bioseguridad</li>
+              <li>A Bordo</li>
+            </ul>
+            {% endcomment %}
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contenido -->
+    <div id="content">
+      <div id="box">{% block content %} {% endblock %}</div>
+    </div>
+
+    <!-- Pie de Pagina -->
+    <footer>
+      CoronaTour | Creado por &copy; <a href="gegova.co">gegova.co</a>
+    </footer>
+
+    <!-- Invocado JavaScript -->
+
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRPpj5IuMirA0F7XgqGGjIQg9_PeBrASE&callback=initMap&libraries=places"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{% static 'JavaScript/google_maps.js' %}"
+    ></script>
+
+    <script type="text/javascript" src="{% static 'js/enlaces.js' %}"></script>
+    <script>
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+
+      const info = document.querySelector(".alert-info");
+
+      function process(event) {
+        event.preventDefault();
+
+        const phoneNumber = phoneInput.getNumber();
+
+        info.style.display = "";
+        info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+      }
+    </script>
+  </body>
 </html>

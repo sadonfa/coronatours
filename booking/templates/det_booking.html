@@ -1,154 +1,145 @@
-{% extends 'layouts/layout.html' %}
-{% load static %}
-
-{% block title %} {{ title }} {% endblock %}
-
-{% block content %}
-
-
+{% extends 'layouts/layout.html' %} {% load static %} {% block title %} {{ title
+}} {% endblock %} {% block content %}
 
 <div class="cont-det-booking">
-  <img src="{% static 'img/logo.pnp' %}" alt="">
-<h2> {{ title }} # {{ booking.get_id_formateado }} </h2>
+  <img src="{% static 'img/logo.pnp' %}" alt="" />
+  <h2>{{ title }} # {{ booking.get_id_formateado }}</h2>
 
-<table>
-  <tr>
-    <td><span> Nombre: </span></td>
-    <td class="det-celda">{{ booking.name }}</td>
-  </tr>
-  <tr>
-    <td><span> Apellido: </span></td>
-    <td class="det-celda">{{ booking.lastname }}</td>
-  </tr>
-  <tr>
-    <td><span> Celular: </span></td>
-    <td class="det-celda"> {{ booking.phone }}</td>
-  </tr>
-  <tr>
-    <td><span> Correo: </span></td>
-    <td class="det-celda">{{ booking.mail }}</td>
-  </tr>
-  <tr>
-    <td><span> Pais: </span></td>
-    <td class="det-celda">{{ booking.contry }}</td>
-  </tr>
-  <tr>
-    <td><span> Ciudad de origen: </span></td>
-    <td class="det-celda">{{ booking.city }}</td>
-  </tr>
-  {% if opcion == 'transporte' %}
-  <tr>
-    <td><span> transporte: </span></td>
-    <td class="det-celda"> {{ booking.hotel }}</td>
-  </tr>
-  <tr>
-    <td><span> Vehiculo: </span></td>
-    <td class="det-celda">{{ booking.tour }}</td>
-  </tr> 
-    
-  {% else %}
+  <table>
+    <tr>
+      <td><span> Nombre: </span></td>
+      <td class="det-celda">{{ booking.name }}</td>
+    </tr>
+    <tr>
+      <td><span> Apellido: </span></td>
+      <td class="det-celda">{{ booking.lastname }}</td>
+    </tr>
+    <tr>
+      <td><span> Celular: </span></td>
+      <td class="det-celda">{{ booking.phone }}</td>
+    </tr>
+    <tr>
+      <td><span> Correo: </span></td>
+      <td class="det-celda">{{ booking.mail }}</td>
+    </tr>
+    <tr>
+      <td><span> Pais: </span></td>
+      <td class="det-celda">{{ booking.contry }}</td>
+    </tr>
+    <tr>
+      <td><span> Ciudad de origen: </span></td>
+      <td class="det-celda">{{ booking.city }}</td>
+    </tr>
+    {% if opcion == 'transporte' %}
+    <tr>
+      <td><span> transporte: </span></td>
+      <td class="det-celda">{{ booking.hotel }}</td>
+    </tr>
+    <tr>
+      <td><span> Vehiculo: </span></td>
+      <td class="det-celda">{{ booking.tour }}</td>
+    </tr>
 
-  <tr>
-    <td><span> Hotel: {{opcion}} </span></td>
-    <td class="det-celda"> {{ booking.hotel }}</td>
-  </tr>
-  <tr>
-    <td><span> Tours: </span></td>
-    <td class="det-celda">{{ booking.tour }}</td>
-  </tr>
+    {% else %}
 
-  {% endif %}
-  <tr>
-    <td><span> Cant Adultos: </span></td>
-    <td class="det-celda">{{ booking.adults }} </td>
-  </tr>
-  <tr>
-    <td><span> Cant Niños: </span></td>
-    <td class="det-celda">{{ booking.childre }}</td>
-  </tr>
+    <tr>
+      <td><span> Hotel: {{opcion}} </span></td>
+      <td class="det-celda">{{ booking.hotel }}</td>
+    </tr>
+    <tr>
+      <td><span> Tours: </span></td>
+      <td class="det-celda">{{ booking.tour }}</td>
+    </tr>
 
-  <tr >
-    <td class="det-division"></td>
-    <td class="det-division"></td>
-  </tr>
-  
-  <tr >
-    <td ><span> valor adultos: </span></td>
-    <td class="det-celda"> $ {{ booking.cash }}  </td>
-  </tr>
-  <tr>
-    <td><span> valor Niños: </span></td>
-    <td class="det-celda">{{ booking.childre }}</td>
-  </tr>
+    {% endif %}
+    <tr>
+      <td><span> Cant Adultos: </span></td>
+      <td class="det-celda">{{ booking.adults }}</td>
+    </tr>
+    <tr>
+      <td><span> Cant Niños: </span></td>
+      <td class="det-celda">{{ booking.childre }}</td>
+    </tr>
 
-  <tr>
-    <td><span> valor adicional:  </span></td>
-    <td class="det-celda"> </td>
-  </tr>
-  <tr>
-    <td><span> valor Total: </span></td>
-    <td class="det-celda">$ {{ booking.total }} </td>
-  </tr>
-  
-</table>
+    <tr>
+      <td class="det-division"></td>
+      <td class="det-division"></td>
+    </tr>
 
- <form>
-      <script
-        src="https://checkout.wompi.co/widget.js"
-        data-render="button"
-        data-public-key="pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM"
-        data-currency="COP"
-        data-amount-in-cents="{{ booking.total }}00"
-        data-reference="{{ booking.get_id_formateado }}"
-        data-redirect-url="http://localhost:8000/respuesta/"
-        {% comment %} data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5" {% endcomment %}
-        >
-      </script>
-    </form>   
-    {% comment %} <a href="#" class="btn">Corregir Datos</a> {% endcomment %}
+    <tr>
+      <td><span> valor adultos: </span></td>
+      <td class="det-celda">$ {{ booking.cash }}</td>
+    </tr>
+    <tr>
+      <td><span> valor Niños: </span></td>
+      <td class="det-celda">{{ booking.childre }}</td>
+    </tr>
 
+    <tr>
+      <td><span> valor adicional: </span></td>
+      <td class="det-celda"></td>
+    </tr>
+    <tr>
+      <td><span> valor Total: </span></td>
+      <td class="det-celda">$ {{ booking.total }}</td>
+    </tr>
+  </table>
 
-    
+  <form>
+    <script
+      src="https://checkout.wompi.co/widget.js"
+      data-render="button"
+      data-public-key="pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM"
+      data-currency="COP"
+      data-amount-in-cents="{{ booking.total }}00"
+      data-reference="{{ booking.get_id_formateado }}"
+      data-redirect-url="http://localhost:8000/respuesta/"
+      {%comment%}
+      data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5"
+      {%endcomment%}
+    ></script>
+  </form>
+  {% comment %} <a href="#" class="btn">Corregir Datos</a>
+  <script>
+    var checkout = new WidgetCheckout({
+        currency: 'COP',
+        amountInCents: {{ booking.total }}+"00",
+        reference: '{{ booking.get_id_formateado }}',
+        publicKey: 'pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM',
+        redirectUrl: 'http://localhost:8000', // Opcional
+        taxInCents: { // Opcional
+          vat: 1900,
+          consumption: 800
+        }
 
-    {% comment %} <script>
-        var checkout = new WidgetCheckout({
-            currency: 'COP',
-            amountInCents: {{ booking.total }}+"00",
-            reference: '{{ booking.get_id_formateado }}',
-            publicKey: 'pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM',
-            redirectUrl: 'http://localhost:8000', // Opcional
-            taxInCents: { // Opcional
-              vat: 1900,
-              consumption: 800
-            }
+      })
+  </script>
 
-          })
-          
-        </script> {% endcomment %}
-
-        {% comment %} <button 
-                class="btn"
-                onclick="checkout.open(function ( result ) {
+  <button
+    class="btn"
+    onclick="checkout.open(function ( result ) {
                     var transaction = result.transaction
                     console.log('Transaction ID: ', transaction.redirectUrl + transaction.id)
                     console.log('Transaction object: ', transaction)
                     transaction.redirectUrl + transaction.id
                   })"
-                > Pagar 
-    </button> {% endcomment %}
+  >
+    Pagar
+  </button>
 
-    {% comment %} <button 
-                class="btn"
-                onclick="checkout.open(function ( result ) {
+  <button
+    class="btn"
+    onclick="checkout.open(function ( result ) {
                     var transaction = result.transaction
                     console.log('Transaction ID: ', transaction.redirectUrl + transaction.id)
                     console.log('Transaction object: ', transaction)
                     transaction.redirectUrl + transaction.id
                   })"
-                > Pagar 
-      </button> {% endcomment %}
-
+  >
+    Pagar
+  </button>
+  {% endcomment %}
 </div>
 
 {% comment %} amountInCents: "{{ booking.total }}" + "00", {% endcomment %}
-{% endblock %}
+{%endblock %}

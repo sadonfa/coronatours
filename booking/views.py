@@ -22,53 +22,54 @@ def check(request, id=False):
                 "time": request.POST['time'],
                 "opcion": "transporte"
             }
-
+            opcion = "transporte"
             can_comp = request.POST['comp-cantidad']
             cash = request.POST['value']
             cash = int(can_comp) * int(cash)
-
-            print(cash)
 
         else:
             print("no es compartido")
 
             det_booking = {
-                "name": request.POST['name'],                
+                "name": request.POST['name'],
                 "origen": request.POST['origen'],
                 "destino": request.POST['destino'],
                 "date": request.POST['date'],
                 "time": request.POST['time'],
                 "opcion": "transporte"
             }
+            opcion = "transporte"
             print("Este es la hora actual" + str(det_booking['time']))
 
-            segmentar = list(det_booking['time'])           
+            segmentar = list(det_booking['time'])
             hora_val = segmentar[0] + segmentar[1]
             print("hora dividido" + hora_val)
 
-            if int(hora_val) in range(22, 24) or int(hora_val) in range(0, 6) :
+            if int(hora_val) in range(22, 24) or int(hora_val) in range(0, 6):
                 cash = int(request.POST['value']) + 20000
                 print("Se esta enviando este, hora nocturna ")
                 print(cash)
             else:
                 cash = request.POST['value']
                 print("Se esta enviando este, hora diurna ")
-       
+
     else:
         det_booking = get_object_or_404(Tours, pk=id)
-        print(det_booking)
+        cash = det_booking.cash
+        opcion = "tour"
 
-        # print(tour.cash)
     return render(request, 'check.html', {
         'title': 'Informacion de reserva',
         'det_booking': det_booking,
         'd_reserve': d_reserve,
-        'cash': cash
+        'cash': cash,
+        'opcion': opcion
     })
 
 
 def det_booking(request, opc):
 
+    print(opc)
     tour = Tours.objects.all()
 
     if request.method == 'POST':
@@ -82,7 +83,7 @@ def det_booking(request, opc):
         tour = request.POST['tour']
         adults = request.POST['adults']
         childre = request.POST['childre']
-        option = request.POST['opcion']
+        opcion = request.POST['opcion']
         aerolinea = request.POST['aerolinea']
         nvuelo = request.POST['nvuelo']
 
@@ -110,8 +111,10 @@ def det_booking(request, opc):
 
     booking.save()
 
-    if option == "transporte":
-        opcion = "transporte"
+    print(opcion)
+
+    # if option == "transporte":
+    #     opcion = "transporte"
 
     return render(request, 'det_booking.html', {
         'title': 'Detalles de Reserva',
@@ -122,7 +125,7 @@ def det_booking(request, opc):
 
 
 def answer_booking(request, id):
-    return render(request, 'respuesta.html',{
+    return render(request, 'respuesta.html', {
         'tiitle': 'confirmacion de reserva',
         'id': id
     })
