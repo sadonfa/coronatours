@@ -1,81 +1,88 @@
 @media screen and (max-width: 725px) {
+  .ob-page {
+    background-image: url("../img/background-r.png");
+    flex-direction: column;
+  }
 
-    .ob-page {
-        background-image: url("../img/background-r.png");
-        flex-direction: column;
-    }
+  .transfer,
+  .actividades {
+    width: 75%;
+    height: 50vh;
+  }
 
-    .transfer,
-    .actividades {
-        width: 100%;
-        height: 50vh;
-    }
+  .transfer {
+    margin-top: 130px;
+    margin-bottom: -30px;
+  }
 
-    .transfer{
-        margin-top: 130px;
-        margin-bottom: 100px;
-    }
+  .actividades {
+    margin-left: 0px;
+    margin-top: -30px;
+  }
 
-    .actividades{        
-        margin-left: 100px;
-        margin-top: -80px;
-    }
+  .transfer .p-home {
+    width: 75%;
+  }
 
-    .transfer .p-home{
-        width: 75%;
-    }
+  #header-h {
+    padding-top: 25px;
+  }
 
-    #header-h{
-        padding-top: 25px;
-    }
+  .nav-home {
+    width: 100px;
+    margin-left: 40px;
+  }
 
-    .nav-home {
-        width: 100px;
-        margin-left: 40px;
-    }
+  #header-h .logo {
+    width: 150px;
+    height: 100%;
+    margin-right: 25px;
+  }
 
-    #header-h .logo{
-        width: 150px;
-        height: 100%;
-        margin-right: 25px;
-    }
+  #header-h .logo img {
+    height: 100%;
+  }
 
-    #header-h .logo img{
-        height: 100%;
-    }
+  .transfer .t-home {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
 
-    .transfer .t-home{
-        margin-left: 40px;
-        margin-top: 0px;
-    }
+  .aling-l {
+    margin-left: 0px;
+  }
 
-    .aling-l{
-        margin-left: 40px;
-    }
+  .aling-r {
+    text-align: left;
+    margin-right: 0px;
+  }
 
-    .aling-r {
-        text-align: left;
-        margin-right: 0px;
-    }
+  .collage {
+    width: 100%;
+    height: 50vh;
+    /* border: 1px solid grey; */
+  }
 
-    .collage{
-        width: 100%;
-        height: 100vh;
-        /* border: 1px solid grey; */
-    }
+  .footer {
+    position: relative;
+    margin-top: 30px;
+    flex-direction: column;
+  }
 
-    .footer{
-        position: relative;
-        margin-top: 30px;
-    }
+  .footer .autor {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
 
-    .art-tours .arti{
-        flex-basis: 35%;
-    }
+  .art-tours .arti {
+    flex-basis: 35%;
+  }
 
-    #box{
-        border: 1px solid red;
-    }
+  #box {
+    border: 1px solid red;
+  }
 
-
+  .arti {
+    flex-basis: 100%;
+  }
 }

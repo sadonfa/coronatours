@@ -22,23 +22,22 @@
       <span> {{ tour.name }}</span>
       <p>{{ tour.description }}</p>
       <div class="inf-tarj">
-         <div class="serv-icon">
-        <div class="box-icon">
+        <div class="serv-icon">
+          <div class="box-icon">
             <i class="fa-solid fa-martini-glass-citrus"></i>
-            <p>Bebida (opcional) </p>
-        </div>
-        <div class="box-icon">
+            <p>Bebida (opcional)</p>
+          </div>
+          <div class="box-icon">
             <i class="fa-solid fa-utensils"></i>
-            <p>Comida (opcional) </p>
-        </div>
-        <div class="box-icon">
+            <p>Comida (opcional)</p>
+          </div>
+          <div class="box-icon">
             <i class="fa-solid fa-car"></i>
-            <p>Translados </p>
+            <p>Translados</p>
+          </div>
         </div>
+        <p class="art-cash">$ {{ tour.cash }}</p>
       </div>
-     <p class="art-cash"> $ {{ tour.cash }} </p> 
-    </div>
-      
     </a>
   </article>
   {% endfor %}
