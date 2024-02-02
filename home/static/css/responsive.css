@@ -74,15 +74,34 @@
     margin-bottom: 10px;
   }
 
-  .art-tours .arti {
+  /* .art-tours .arti {
     flex-basis: 35%;
-  }
+  } */
 
   #box {
     border: 1px solid red;
   }
 
-  .arti {
+  .art-tours .arti {
     flex-basis: 100%;
+  }
+  .arti img {
+    height: 500px;
+  }
+
+  .arti span {
+    font-size: 30px;
+  }
+
+  .arti p {
+    font-size: 18px;
+  }
+
+  .arti .art-cash {
+    font-size: 40px;
+  }
+
+  .serv-icon .box-icon i {
+    font-size: 40px;
   }
 }
