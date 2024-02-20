@@ -52,6 +52,7 @@
 
     <input type="hidden" name="date" value="{{ det_booking.date }}" readonly />
     <input type="hidden" name="time" value="{{ det_booking.time }}" readonly />
+    <input type="hidden" name="id" value="{{det_booking.id }}" readonly />
     <input
       type="hidden"
       name="origen"
@@ -139,11 +140,13 @@
 
       <div class="box-form-mult">
         <label class="sub-title-3" for="">cantidad de niños </label>
+
         <select name="childre" id="">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          {% comment %} {% while transports as trans %} {% endcomment %}
+
+          <option value="0">{{transports.Number_passengers }}</option>
+
+          {% comment %} {% endif %} {% endcomment %}
         </select>
       </div>
       <input type="submit" class="btn" value="Continuar" />

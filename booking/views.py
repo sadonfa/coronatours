@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from tours.models import Tours
-from reserve.models import Reserver
+from reserve.models import Reserver, Vehiculos
 from .models import Booking
 
 # Create your views here.
@@ -8,6 +8,8 @@ from .models import Booking
 
 def check(request, id=False):
     d_reserve = Reserver.objects.all()
+    transport = Vehiculos.objects.get(id=request.POST['id'])
+    # transport = Vehiculos.objects.all()
 
     if id == False and request.method == 'POST':
         # det_booking = get_object_or_404(Reserver, pk=id)
@@ -20,6 +22,7 @@ def check(request, id=False):
                 "destino": request.POST['destino'],
                 "date": request.POST['date'],
                 "time": request.POST['time'],
+                "id": request.POST['id'],
                 "opcion": "transporte"
             }
             opcion = "transporte"
@@ -36,6 +39,7 @@ def check(request, id=False):
                 "destino": request.POST['destino'],
                 "date": request.POST['date'],
                 "time": request.POST['time'],
+                "id": request.POST['id'],
                 "opcion": "transporte"
             }
             opcion = "transporte"
@@ -63,7 +67,8 @@ def check(request, id=False):
         'det_booking': det_booking,
         'd_reserve': d_reserve,
         'cash': cash,
-        'opcion': opcion
+        'opcion': opcion,
+        'transports': transport
     })
 
 
