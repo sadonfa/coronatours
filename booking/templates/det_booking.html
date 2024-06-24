@@ -1,6 +1,5 @@
-{% extends 'layouts/layout.html' %} {% load static %} {% block title %} {{ title
-}} {% endblock %} {% block content %}
-
+{% extends 'layouts/layout.html' %} {% block title %}{{ title }} {% endblock %}
+{% block content %} {% load static %}
 <div class="cont-det-booking">
   <img src="{% static 'img/logo.pnp' %}" alt="" />
   <h2>{{ title }} # {{ booking.get_id_formateado }}</h2>
