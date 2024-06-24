@@ -56,12 +56,15 @@ def det_reserve(request):
 
 
 def transporte(request):
+    zona = Zone.objects.all()
+    transports = Vehiculos.objects.all()
+    # n_passgers = Vehiculos.objects.get(Number_passengers = )
+    destination = Destination.objects.all()
 
-    if request.method == 'POST':
+    # for trans in transports:
+    #      print(trans)
 
-        zona = Zone.objects.all()
-        transports = Vehiculos.objects.all()
-        destination = Destination.objects.all()
+    if request.method == 'POST':  
 
         start_of_route = request.POST['start_of_route']
         end_of_route = request.POST['end_of_route']
@@ -80,33 +83,8 @@ def transporte(request):
 
         list_time = Convert(time_tran)
         hours = int(list_time[0])
-        print(type(hours))
 
-        # print(type(time_tran))
-        # lista = []
-        # lista.append(time_tran)
-        # print(lista)
-        # print(time_tran)
-        # print(time.monotonic_ns(time_tran))
-
-        # id_POST  = request.POST['id']
-
-        # ----- Aqui se guradan los datos ingresados en el formulario de reserva -----
-
-        # reserve = Reserver(
-        #     # fullname = name,
-        #     # email = email,
-        #     # phone = tel,
-        #     start_and_route=start_of_route,
-        #     end_and_route=end_of_route,
-        #     date=date,
-        #     hour=time
-        # )
-
-        # reserve.save()
-        # d_reserve = Reserver.objects.all()
         st_distancia = int(store)*10**-3
-        print(round(st_distancia))
         kilometros = int(round(st_distancia))
 
         if int(kilometros) in range(1, 12):

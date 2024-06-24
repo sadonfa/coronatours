@@ -131,22 +131,18 @@
       <div class="box-form-mult">
         <label class="sub-title-3" for="">cantidad adultos</label>
         <select name="adults" id="">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          {% for passenger in passengers_list %}
+          <option value="{{passenger}}">{{ passenger }}</option>
+          {% endfor %}
         </select>
       </div>
-
       <div class="box-form-mult">
         <label class="sub-title-3" for="">cantidad de niños </label>
 
         <select name="childre" id="">
-          {% comment %} {% while transports as trans %} {% endcomment %}
-
-          <option value="0">{{ transports.Number_passengers }}</option>
-
-          {% comment %} {% endif %} {% endcomment %}
+          {% for passenger in passengers_list %}
+          <option value="{{passenger}}">{{ passenger }}</option>
+          {% endfor %}
         </select>
       </div>
       <input type="submit" class="btn" value="Continuar" />

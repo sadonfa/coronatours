@@ -11,6 +11,13 @@ def check(request, id=False):
     transport = Vehiculos.objects.get(id=request.POST['id'])
     # transport = Vehiculos.objects.all()
 
+    # print(transport.Number_passengers)
+    passengers_list = []
+    for passengers in range(0, transport.Number_passengers):        
+        passengers_list.append(passengers)
+        
+    print(passengers_list)
+
     if id == False and request.method == 'POST':
         # det_booking = get_object_or_404(Reserver, pk=id)
 
@@ -68,7 +75,9 @@ def check(request, id=False):
         'd_reserve': d_reserve,
         'cash': cash,
         'opcion': opcion,
-        'transports': transport
+        'transports': transport,
+        'passengers_list': passengers_list
+
     })
 
 
@@ -94,8 +103,11 @@ def det_booking(request, opc):
 
         # if request.POST['hotel'] != "transporte":
         #     hotel  = request.POST['hotel']
-
-        total = int(adults) * int(cash)
+        # print(opcion)
+        if opcion == 'transporte':
+            total = int(cash)
+        else:
+            total = int(adults) * int(cash)
 
     booking = Booking(
         name=name,
