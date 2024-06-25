@@ -13,7 +13,11 @@ def check(request, id=False):
 
     # print(transport.Number_passengers)
     passengers_list = []
-    for passengers in range(0, transport.Number_passengers):        
+    range_passengers = transport.Number_passengers + 1
+
+    print(range_passengers)
+
+    for passengers in range(0, range_passengers):        
         passengers_list.append(passengers)
         
     print(passengers_list)
