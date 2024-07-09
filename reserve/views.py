@@ -27,11 +27,36 @@ def det_reserve(request):
         # ----- Declaracion de variables -----
         # transports = Vehiculos.objects.all()
         # destination = Destination.objects.all()
+        
         start_of_route = request.POST['start_of_route']
         end_of_route = request.POST['end_of_route']
         date = request.POST['date']
         time = request.POST['time']
-        duration = request.POST['duration']
+        start_of_route__return = request.POST['start_of_route']
+        end_of_route__return = request.POST['end_of_route']
+        date_return = request.POST['date']
+        time_return = request.POST['time']
+        # duration = request.POST['duration']
+        viaje = request.POST['viaje']
+
+        if viaje == "ida":        
+            start_of_route = request.POST['start_of_route']
+            end_of_route = request.POST['end_of_route']
+            date = request.POST['date']
+            time = request.POST['time']
+            
+        
+        elif viaje == "idayvuelta":
+            start_of_route = request.POST['start_of_route']
+            end_of_route = request.POST['end_of_route']
+            date = request.POST['date']
+            time = request.POST['time']
+            start_of_route__return = request.POST['start_of_route']
+            end_of_route__return = request.POST['end_of_route']
+            date_return = request.POST['date']
+            time_return = request.POST['time']
+
+        
 
         # reserve = Reserver(
         #     start_and_route=start_of_route,
@@ -45,13 +70,15 @@ def det_reserve(request):
 
     return render(request, 'det_reser.html', {
         'title': 'Detalles Reservas',
-        # 'd_reserve': d_reserve,
-        # 'zonas': zona,
         'start_of_route': start_of_route,
         'end_of_route': end_of_route,
         'date': date,
-        'time': time,
-        "duration": duration
+        'time': time,        
+        'start_of_route_return':  start_of_route__return,
+        'end_of_route__return' : end_of_route__return,
+        'date_return': date_return,
+        'time_return': time_return,
+        'recorrido': viaje
     })
 
 

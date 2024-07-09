@@ -86,6 +86,7 @@
                 {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
               </div>
             </div>
+            <input type="hidden" name="viaje" value="ida" />
             <input type="hidden" id="distanceId" value="" name="distance" />
             <input type="hidden" name="duration" id="durationId" value="" />
             <input type="submit" class="btn" value="Realizar Reserva" />
@@ -153,8 +154,8 @@
           </div>
           <input type="hidden" id="distanceId" value="" name="distance" />
           <input type="hidden" name="duration" id="durationId" value="" />
-          <h3>Datos de Regreso</h3>
 
+          <h3>Datos de Regreso</h3>
           <datalist id="bookmark_list">
             <!-- Este bucle invoca el listado de los destinos -->
             {% for destino in destination %}
@@ -172,7 +173,7 @@
               <input
                 type="text"
                 id="start_b2"
-                name="start_of_route"
+                name="start_of_route_return"
                 class="form_reserve"
                 required
               />
@@ -185,7 +186,7 @@
               <input
                 type="text"
                 id="end_b2"
-                name="end_of_route"
+                name="end_of_route_return"
                 class="form_reserve"
                 required
               />
@@ -195,19 +196,31 @@
           <div class="box-form">
             <div class="d-box">
               <label class="label_reserve" for="date">Fecha de Recogida</label>
-              <input type="date" name="date" class="form_reserve" required />
+              <input
+                type="date"
+                name="date_return"
+                class="form_reserve"
+                required
+              />
             </div>
             <div class="d-box">
               <label class="label_reserve" for="time"
                 >Hora de Recogida (Ida)</label
               >
-              <input type="time" name="time" class="form_reserve" required />
-              <span>*Formato 24 horas</span>
+              <input
+                type="time"
+                name="time_return"
+                class="form_reserve"
+                required
+              />
+              {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
             </div>
           </div>
+          {% comment %}
           <input type="hidden" id="distanceId" value="" name="distance" />
           <input type="hidden" name="duration" id="durationId" value="" />
-          <input type="hidden" name="idayvuelta" value="idayvuelta" />
+          {% endcomment %}
+          <input type="hidden" name="viaje" value="idayvuelta" />
           <input type="submit" class="btn" value="Realizar Reserva" />
         </form>
       </div>
@@ -266,6 +279,7 @@
               <input type="time" name="time" class="form_reserve" required />
             </div>
           </div>
+          <input type="hidden" name="viaje" value="puntoapunto" />
           <input type="hidden" id="distanceId" value="" name="distance" />
           <input type="hidden" name="duration" id="durationId" value="" />
           <input type="submit" class="btn" value="Realizar Reserva" />
