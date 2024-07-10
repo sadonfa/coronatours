@@ -51,9 +51,11 @@ def check(request, id=False):
                 "date": request.POST['date'],
                 "time": request.POST['time'],
                 "id": request.POST['id'],
+                "cash" : request.POST['value'],
                 "opcion": "transporte"
             }
             opcion = "transporte"
+            cash = request.POST['value']
             print("Este es la hora actual" + str(det_booking['time']))
 
             segmentar = list(det_booking['time'])
@@ -72,6 +74,9 @@ def check(request, id=False):
         det_booking = get_object_or_404(Tours, pk=id)
         cash = det_booking.cash
         opcion = "tour"
+
+
+    print(cash)
 
     return render(request, 'check.html', {
         'title': 'Informacion de reserva',
