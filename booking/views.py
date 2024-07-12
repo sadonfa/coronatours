@@ -10,7 +10,7 @@ def check(request, id=False):
     d_reserve = Reserver.objects.all()
     transport = Vehiculos.objects.get(id=request.POST['id'])
     # transport = Vehiculos.objects.all()
-
+    hora_ret =  request.POST['time_return']
     # print(transport.Number_passengers)
     passengers_list = []
     range_passengers = transport.Number_passengers + 1
@@ -97,12 +97,19 @@ def check(request, id=False):
 
                 segmentar = list(det_booking['time'])
                 hora_val = segmentar[0] + segmentar[1]
-                print("hora dividido" + hora_val)
+                segm = list(hora_ret)
+                hora_regreso = segm[0]  + segm[1]
 
-                if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
-                    cash = (int(request.POST['value']) * 2) + 20000
-                    print("Se esta enviando este, hora nocturna ")
-                    print(cash)
+           
+                if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6) :
+                    if int(hora_regreso) in range(21, 24) or int(hora_regreso) in range(0, 6):
+                        cash = (int(request.POST['value']) * 2) + 40000
+                        print("Se esta enviando este, hora nocturna ")
+                        print(cash)
+                    else:
+                        cash = (int(request.POST['value']) * 2) + 20000
+                        print("Se esta enviando este, hora nocturna ")
+                        print(cash)
                 else:
                     cash = int(request.POST['value']) * 2
                     print("Se esta enviando este, hora diurna ")
@@ -122,7 +129,8 @@ def check(request, id=False):
         'cash': cash,
         'opcion': opcion,
         'transports': transport,
-        'passengers_list': passengers_list
+        'passengers_list': passengers_list,
+        'recorrido': request.POST['recorrido']
 
     })
 

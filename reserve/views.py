@@ -104,6 +104,7 @@ def transporte(request):
         duration = request.POST['duration']
         store = request.POST['store']
         recorrido = request.POST['recorrido']
+        time_return = request.POST['time_return']
 
         def Convert(string):
             li = list(string.split(":"))
@@ -173,7 +174,8 @@ def transporte(request):
             'time': hours,
             'store': store,
             'kilometros': kilometros,
-            'recorrido': recorrido
+            'recorrido': recorrido,
+            'time_return': time_return
         })
     else:
         return HttpResponse("No se guardo ninguna informacion vuelva a <a href='/inicio'>Inicio</a> ")

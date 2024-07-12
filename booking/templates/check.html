@@ -88,11 +88,23 @@
           readonly
         />
       </div>
+
+      {% if recorrido == 'ida' %}
+
       <div class="box-form-item">
         <label class="sub-title-3" for=""> valor </label>
         <input type="text" name="cash" value="{{ cash|safe }}" readonly />
         <input type="hidden" name="hotel" value="transporte" />
       </div>
+
+      {% else %}
+      <div class="box-form-item">
+        <label class="sub-title-3" for=""> valor total: ida y vuelta </label>
+        <input type="text" name="cash" value="{{ cash|safe }}" readonly />
+        <input type="hidden" name="hotel" value="transporte" />
+      </div>
+
+      {% endif %}
     </div>
 
     {% else %}
