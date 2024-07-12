@@ -15,60 +15,97 @@ def check(request, id=False):
     passengers_list = []
     range_passengers = transport.Number_passengers + 1
 
-    print(range_passengers)
-
     for passengers in range(0, range_passengers):        
         passengers_list.append(passengers)
-        
-    print(passengers_list)
 
     if id == False and request.method == 'POST':
         # det_booking = get_object_or_404(Reserver, pk=id)
 
         if request.POST['name'] == "Mercedes Sprinter":
             print("Es compartido ")
-            det_booking = {
-                "name": request.POST['name'],
-                "origen": request.POST['origen'],
-                "destino": request.POST['destino'],
-                "date": request.POST['date'],
-                "time": request.POST['time'],
-                "id": request.POST['id'],
-                "opcion": "transporte"
-            }
-            opcion = "transporte"
-            can_comp = request.POST['comp-cantidad']
-            cash = request.POST['value']
-            cash = int(can_comp) * int(cash)
+            if request.POST['recorrido'] == "ida":
+                det_booking = {
+                    "name": request.POST['name'],
+                    "origen": request.POST['origen'],
+                    "destino": request.POST['destino'],
+                    "date": request.POST['date'],
+                    "time": request.POST['time'],
+                    "id": request.POST['id'],
+                    "opcion": "transporte"
+                }
+                opcion = "transporte"
+                can_comp = request.POST['comp-cantidad']
+                cash = request.POST['value']
+                cash = int(can_comp) * int(cash)
+            else:
+                det_booking = {
+                    "name": request.POST['name'],
+                    "origen": request.POST['origen'],
+                    "destino": request.POST['destino'],
+                    "date": request.POST['date'],
+                    "time": request.POST['time'],
+                    "id": request.POST['id'],
+                    "opcion": "transporte"
+                }
+                opcion = "transporte"
+                can_comp = request.POST['comp-cantidad']
+                cash = int(request.POST['value']) * 2
+                cash = int(can_comp) * int(cash)
 
         else:
             print("no es compartido")
-
-            det_booking = {
-                "name": request.POST['name'],
-                "origen": request.POST['origen'],
-                "destino": request.POST['destino'],
-                "date": request.POST['date'],
-                "time": request.POST['time'],
-                "id": request.POST['id'],
-                "cash" : request.POST['value'],
-                "opcion": "transporte"
-            }
-            opcion = "transporte"
-            cash = request.POST['value']
-            print("Este es la hora actual" + str(det_booking['time']))
-
-            segmentar = list(det_booking['time'])
-            hora_val = segmentar[0] + segmentar[1]
-            print("hora dividido" + hora_val)
-
-            if int(hora_val) in range(22, 24) or int(hora_val) in range(0, 6):
-                cash = int(request.POST['value']) + 20000
-                print("Se esta enviando este, hora nocturna ")
-                print(cash)
-            else:
+            if request.POST['recorrido'] == "ida":
+                det_booking = {
+                    "name": request.POST['name'],
+                    "origen": request.POST['origen'],
+                    "destino": request.POST['destino'],
+                    "date": request.POST['date'],
+                    "time": request.POST['time'],
+                    "id": request.POST['id'],
+                    "cash" : request.POST['value'],
+                    "opcion": "transporte"
+                }
+                opcion = "transporte"
                 cash = request.POST['value']
-                print("Se esta enviando este, hora diurna ")
+                print("Este es la hora actual" + str(det_booking['time']))
+
+                segmentar = list(det_booking['time'])
+                hora_val = segmentar[0] + segmentar[1]
+                print("hora dividido" + hora_val)
+
+                if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
+                    cash = int(request.POST['value']) + 20000
+                    print("Se esta enviando este, hora nocturna ")
+                    print(cash)
+                else:
+                    cash = request.POST['value']
+                    print("Se esta enviando este, hora diurna ")
+            else:
+                det_booking = {
+                    "name": request.POST['name'],
+                    "origen": request.POST['origen'],
+                    "destino": request.POST['destino'],
+                    "date": request.POST['date'],
+                    "time": request.POST['time'],
+                    "id": request.POST['id'],
+                    "cash" : request.POST['value'],
+                    "opcion": "transporte"
+                }
+                opcion = "transporte"
+                cash = int(request.POST['value']) * 2
+                print("Este es la hora actual" + str(det_booking['time']))
+
+                segmentar = list(det_booking['time'])
+                hora_val = segmentar[0] + segmentar[1]
+                print("hora dividido" + hora_val)
+
+                if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
+                    cash = int(request.POST['value']) + 20000
+                    print("Se esta enviando este, hora nocturna ")
+                    print(cash)
+                else:
+                    cash = int(request.POST['value']) * 2
+                    print("Se esta enviando este, hora diurna ")
 
     else:
         det_booking = get_object_or_404(Tours, pk=id)
@@ -105,11 +142,12 @@ def det_booking(request, opc):
         cash = request.POST['cash']
         tour = request.POST['tour']
         adults = request.POST['adults']
-        childre = request.POST['childre']
+        # childre = request.POST['childre']
         opcion = request.POST['opcion']
         aerolinea = request.POST['aerolinea']
         nvuelo = request.POST['nvuelo']
 
+        print ("\nesta es la informacion de cash -> " + cash + "\n" )
         # if request.POST['hotel'] != "transporte":
         #     hotel  = request.POST['hotel']
         # print(opcion)
@@ -129,7 +167,7 @@ def det_booking(request, opc):
         cash=cash,
         tour=tour,
         adults=adults,
-        childre=childre,
+        # childre=childre,
         total=total,
         air=aerolinea,
         nair=nvuelo

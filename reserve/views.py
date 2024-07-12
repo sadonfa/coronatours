@@ -51,10 +51,10 @@ def det_reserve(request):
             end_of_route = request.POST['end_of_route']
             date = request.POST['date']
             time = request.POST['time']
-            start_of_route__return = request.POST['start_of_route']
-            end_of_route__return = request.POST['end_of_route']
-            date_return = request.POST['date']
-            time_return = request.POST['time']
+            start_of_route__return = request.POST['start_of_route_return']
+            end_of_route__return = request.POST['end_of_route_return']
+            date_return = request.POST['date_return']
+            time_return = request.POST['time_return']
 
         
 
@@ -103,6 +103,7 @@ def transporte(request):
         distance = request.POST['distance']
         duration = request.POST['duration']
         store = request.POST['store']
+        recorrido = request.POST['recorrido']
 
         def Convert(string):
             li = list(string.split(":"))
@@ -171,7 +172,8 @@ def transporte(request):
             'date': date,
             'time': hours,
             'store': store,
-            'kilometros': kilometros
+            'kilometros': kilometros,
+            'recorrido': recorrido
         })
     else:
         return HttpResponse("No se guardo ninguna informacion vuelva a <a href='/inicio'>Inicio</a> ")
