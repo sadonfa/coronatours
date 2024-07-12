@@ -100,7 +100,7 @@ def check(request, id=False):
                 print("hora dividido" + hora_val)
 
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
-                    cash = (int(request.POST['value']) + 20000) * 2
+                    cash = (int(request.POST['value']) * 2) + 20000
                     print("Se esta enviando este, hora nocturna ")
                     print(cash)
                 else:
