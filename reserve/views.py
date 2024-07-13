@@ -39,9 +39,6 @@ def det_reserve(request):
         # duration = request.POST['duration']
         viaje = request.POST['viaje']
 
-    
-        print("hora de retorno" + time_return)
-
         if viaje == "ida":        
             start_of_route = request.POST['start_of_route']
             end_of_route = request.POST['end_of_route']
@@ -58,9 +55,6 @@ def det_reserve(request):
             end_of_route__return = request.POST['end_of_route_return']
             date_return = request.POST['date_return']
             time_return = request.POST['time_return']
-           
-
-        
 
         # reserve = Reserver(
         #     start_and_route=start_of_route,

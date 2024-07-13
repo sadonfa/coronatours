@@ -70,11 +70,42 @@ def check(request, id=False):
                 }
                 opcion = "transporte"
                 cash = request.POST['value']
-                print("Este es la hora actual" + str(det_booking['time']))
+                
+                #realizo arreglo de hora
+                t = list(det_booking['time'])
+                # print(len(t))
+                if len(t) == 1:
+                    v_time = "0" + str(det_booking['time'])
+                    # print(tim)
+                    segmentar = list(v_time)
 
-                segmentar = list(det_booking['time'])
-                hora_val = segmentar[0] + segmentar[1]
-                print("hora dividido" + hora_val)
+                    print(set(segmentar))
+
+                    if set(segmentar) == range(1, 9):
+                        segmen = segmentar.insert('0')
+                        print(segmen)
+
+                    hora_val = segmentar[0] + segmentar[1]
+                    print("hora dividido" + hora_val)
+
+                else:
+                    v_time = str(det_booking['time'])
+                    # print(tim)
+                    segmentar = list(v_time)
+
+                    print(set(segmentar))
+
+                    if set(segmentar) == range(1, 9):
+                        segmen = segmentar.insert('0')
+                        print(segmen)
+
+                    hora_val = segmentar[0] + segmentar[1]
+                    print("hora dividido" + hora_val)
+
+                
+                # v_time = "0"+ str(det_booking['time'])
+                
+                
 
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
                     cash = int(request.POST['value']) + 20000
