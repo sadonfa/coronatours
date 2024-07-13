@@ -10,7 +10,10 @@ def check(request, id=False):
     d_reserve = Reserver.objects.all()
     transport = Vehiculos.objects.get(id=request.POST['id'])
     # transport = Vehiculos.objects.all()
-    hora_ret =  request.POST['time_return']
+    if request.POST['recorrido'] == "idayvuelta":
+        hora_ret =  request.POST['time_return']
+    else:
+        hora_ret = 0
     # print(transport.Number_passengers)
     passengers_list = []
     range_passengers = transport.Number_passengers + 1
