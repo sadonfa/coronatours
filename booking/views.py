@@ -24,7 +24,7 @@ def check(request, id=False):
     if id == False and request.method == 'POST':
         # det_booking = get_object_or_404(Reserver, pk=id)
 
-        if request.POST['name'] == "Mercedes Sprinter":
+        if request.POST['name'] == "Van Compartida":
             print("Es compartido ")
             if request.POST['recorrido'] == "ida":
                 det_booking = {

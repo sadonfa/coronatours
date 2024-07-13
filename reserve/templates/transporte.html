@@ -20,15 +20,13 @@
       {% csrf_token %}
       <div class="box-art">
         <div class="car-n">
-          <label class="c-title" for="name"
-            >{{transports.0.name}} (Compartido)
-          </label>
+          <label class="c-title" for="name">{{transports.7.name}} </label>
           <input
             type="hidden"
             class="c-title"
             id="name"
             name="name"
-            value="{{transports.0.name}}"
+            value="{{transports.7.name}}"
           />
 
           <label class="c-val" for="value"
@@ -45,7 +43,7 @@
         <div class="car-d">
           <p>
             <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.0.amount_luggage}}
+            {{transports.7.amount_luggage}}
           </p>
           <p>
             <i class="fa-sharp fa-solid fa-person"></i>
@@ -71,7 +69,7 @@
           </p>
         </div>
         <div class="car-i">
-          <img src="{{transports.0.image.url}}" alt="{{ transports.0.name }}" />
+          <img src="{{transports.7.image.url}}" alt="{{ transports.7.name }}" />
         </div>
         <input
           type="submit"
