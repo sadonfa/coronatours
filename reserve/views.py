@@ -39,6 +39,9 @@ def det_reserve(request):
         # duration = request.POST['duration']
         viaje = request.POST['viaje']
 
+    
+        print("hora de retorno" + time_return)
+
         if viaje == "ida":        
             start_of_route = request.POST['start_of_route']
             end_of_route = request.POST['end_of_route']
@@ -55,6 +58,7 @@ def det_reserve(request):
             end_of_route__return = request.POST['end_of_route_return']
             date_return = request.POST['date_return']
             time_return = request.POST['time_return']
+           
 
         
 
@@ -104,7 +108,12 @@ def transporte(request):
         duration = request.POST['duration']
         store = request.POST['store']
         recorrido = request.POST['recorrido']
-        time_return = request.POST['time_return']
+
+        # print(request.POST['time_return'] )
+        if recorrido == "idayvuelta" :
+            time_return = request.POST['time_return']
+        else:
+            time_return = 0
 
         def Convert(string):
             li = list(string.split(":"))
@@ -146,14 +155,14 @@ def transporte(request):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
                 'compartido': 15000,  # locale.currency(10000, grouping=True),
-                'standar': 200000,  # locale.currency(190000, grouping=True),
-                'mini_van': 350000,  # locale.currency(280000,  grouping=True),
+                'standar': 250000,  # locale.currency(190000, grouping=True),
+                'mini_van': 400000,  # locale.currency(280000,  grouping=True),
                 # locale.currency(400000, grouping=True),
-                'van_standar': 450000,
-                'micro_bus': 550000,  # locale.currency(480000, grouping=True),
-                'buseta': 600000,  # locale.currency(530000, grouping=True),
-                'bus': 700000,  # locale.currency(600000, grouping=True),
-                'SUV': 500000  # locale.currency(500000, grouping=True),
+                'van_standar': 500000,
+                'micro_bus': 600000,  # locale.currency(480000, grouping=True),
+                'buseta': 650000,  # locale.currency(530000, grouping=True),
+                'bus': 750000,  # locale.currency(600000, grouping=True),
+                'SUV': 550000  # locale.currency(500000, grouping=True),
             }
         else:
             print("Incorrecto")

@@ -80,8 +80,12 @@
           value="Reservar"
         />
       </div>
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+
+      {% if time_return %}
       <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.0.id }}" />
@@ -136,8 +140,12 @@
           value="Reservar"
         />
       </div>
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+
+      {% if time_return %}
       <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.1.id }}" />
@@ -191,8 +199,12 @@
           value="Reservar"
         />
       </div>
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+
+      {% if time_return %}
       <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.3.id }}" />
@@ -246,8 +258,12 @@
           value="Reservar"
         />
       </div>
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+
+      {% if time_return %}
       <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.2.id }}" />
@@ -301,8 +317,12 @@
           value="Reservar"
         />
       </div>
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+
+      {% if time_return %}
       <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.0.id }}" />
@@ -354,10 +374,13 @@
           value="Reservar"
         />
       </div>
+
+      {% if time_return %}
+      <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
       <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="time_return" value="{{time_return}}" />
       <input type="hidden" name="id" value="{{transports.4.id }}" />
       <input type="hidden" name="origen" value="{{start_of_route}}" />
       <input type="hidden" name="destino" value="{{end_of_route}}" />
@@ -408,8 +431,12 @@
           value="Reservar"
         />
       </div>
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+
+      {% if time_return %}
       <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.5.id }}" />
@@ -461,9 +488,12 @@
           value="Reservar"
         />
       </div>
+      {% if time_return %}
+      <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
       <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time_return" value="{{time_return}}" />
+
       <input type="hidden" name="time" value="{{time}}" />
       <input type="hidden" name="id" value="{{transports.6.id }}" />
       <input type="hidden" name="origen" value="{{start_of_route}}" />
