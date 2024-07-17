@@ -497,13 +497,7 @@
       <input type="hidden" name="origen" value="{{start_of_route}}" />
       <input type="hidden" name="destino" value="{{end_of_route}}" />
     </form>
-    {% comment %}
-    <input type="hidden" name="fullname" value="{{d_reserve.1.fullname}}" />
-    <input type="hidden" name="email" value="{{d_reserve.1.email}}" />
-    <input type="hidden" name="phone" value="{{d_reserve.1.phone}}" />
-    <input type="hidden" name="date" value="{{d_reserve.1.date}}" />
-    <input type="hidden" name="time" value="{{d_reserve.1.time}}" />
-    {% endcomment %}
+    
   </div>
 
   <div id="maps_reserve">
@@ -511,6 +505,8 @@
 
     <div id="map"></div>
 
+    {% if recorrido == "ida" %}
+    
     <div class="separador"></div>
     <div class="det-resesrva">
       <h3 class="sub-title-3">Detalles de viaje</h3>
@@ -543,7 +539,75 @@
         </div>
       </div>
     </div>
+    
+    {% else %}
+    <div class="separador"></div>
+    <div class="det-resesrva">
+      <h3 class="sub-title-3">Detalles de viaje</h3>
+      <div class="detail-v">
+        <div class="box-det">
+          <h3 class="sub-title-3">Fecha de recogida</h3>
+          {{ date }}
+        </div>
+        <div class="box-det">
+          <h3 class="sub-title-3">Hora de recogida</h3>
+          {{ time }}
+        </div>
+        <div class="box-det-des">
+          <h3 class="sub-title-3">ruta</h3>
+          <span id="start" onchange="calcRoute();" value="{{start_of_route}}"
+            >{{start_of_route}}</span
+          >
+          <hr />
+          <span id="end" onchange="calcRoute();" value="{{end_of_route}}"
+            >{{end_of_route}}</span
+          >
+        </div>
+        <div class="box-det-des">
+          <h3 class="sub-title-3">Distancia</h3>
+          <span id="distancia-d"></span>
+        </div>
+        <div class="box-det-des">
+          <h3 class="sub-title-3">Duracion</h3>
+          <span id="duracion-d"></span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="det-resesrva">
+        <h3 class="sub-title-3">Detalles de viaje 2</h3>
+        <div class="detail-v">
+          <div class="box-det">
+            <h3 class="sub-title-3">Fecha de recogida</h3>
+            {{ det_retorno.date }}
+          </div>
+          <div class="box-det">
+            <h3 class="sub-title-3">Hora de recogida</h3>
+            {{ det_retorno.time }}
+          </div>
+          <div class="box-det-des">
+            <h3 class="sub-title-3">ruta</h3>
+            <span id="start" onchange="calcRoute();" value="{{start_of_route}}"
+              >{{det_retorno.start_of_route}}</span
+            >
+            <hr />
+            <span id="end" onchange="calcRoute();" value="{{end_of_route}}"
+              >{{end_of_route}}</span
+            >
+          </div>
+          <div class="box-det-des">
+            <h3 class="sub-title-3">Distancia</h3>
+            <span id="distancia-d"></span>
+          </div>
+          <div class="box-det-des">
+            <h3 class="sub-title-3">Duracion</h3>
+            <span id="duracion-d"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+  {% endif %}
 
-{% endblock %}
+  {% endblock %}
+</div>

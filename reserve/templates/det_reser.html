@@ -70,7 +70,7 @@
         <input type="hidden" name="duration" id="durationId" value="" />
         <input type="hidden" name="store" id="v-store" value="" />
         <div class="box-btns">
-          <a href="{% url 'reserve' %}" class="btn"> Modificar </a>
+          <a href="{% url 'reserve' %}" class="btn-white"> Modificar </a>
           <input
             type="submit"
             class="btn"
@@ -149,7 +149,7 @@
                 id="start"
                 onchange="calcRoute();"
                 name="start_of_route"
-                value="{{start_of_route}}"
+                value="{{start_of_route_return}}"
                 >{{start_of_route_return}}</span
               >
               <hr />
@@ -159,7 +159,7 @@
                 id="end"
                 onchange="calcRoute();"
                 name="end_of_route"
-                value="{{end_of_route}}"
+                value="{{end_of_route__return}}"
                 >{{end_of_route__return}}</span
               >
             </div>
@@ -184,6 +184,9 @@
               value="{{end_of_route}}"
               name="end_of_route"
             />
+            <input type="hidden" value="{{start_of_route_return}}" name="start_of_route_return" />
+            <input type="hidden" value="{{end_of_route__return}}" name="end_of_route__return" />
+            <input type="hidden" value="{{date_return}}" name="date_return" />
             <input type="hidden" value="{{time_return}}" name="time_return" />
             <input type="hidden" value="{{recorrido}}" name="recorrido" />
             <input type="hidden" value="{{date}}" name="date" />
@@ -192,7 +195,7 @@
             <input type="hidden" name="duration" id="durationId" value="" />
             <input type="hidden" name="store" id="v-store" value="" />
             <div class="box-btns">
-              <a href="{% url 'reserve' %}" class="btn"> Modificar </a>
+              <a href="{% url 'reserve' %}" class="btn-white"> Modificar </a>
               <input
                 type="submit"
                 class="btn"

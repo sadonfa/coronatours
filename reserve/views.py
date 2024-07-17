@@ -103,6 +103,16 @@ def transporte(request):
         store = request.POST['store']
         recorrido = request.POST['recorrido']
 
+        if recorrido == "idayvuelta":
+            det_retorno = {
+                    "date": request.POST['date_return'],
+                    "time": request.POST['time_return'],   
+                    "start_of_route": request.POST['start_of_route_return'],
+                    "end_of_route": request.POST['end_of_route__return'],
+                }
+        else:
+            det_retorno = ""
+
         # print(request.POST['time_return'] )
         if recorrido == "idayvuelta" :
             time_return = request.POST['time_return']
@@ -178,7 +188,8 @@ def transporte(request):
             'store': store,
             'kilometros': kilometros,
             'recorrido': recorrido,
-            'time_return': time_return
+            'time_return': time_return,
+            'det_retorno': det_retorno
         })
     else:
         return HttpResponse("No se guardo ninguna informacion vuelva a <a href='/inicio'>Inicio</a> ")
