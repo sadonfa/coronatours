@@ -1,5 +1,5 @@
 {% extends 'layouts/layout.html' %} {% block title %} {{ title }} {% endblock %}
-{% block content %}
+{% load humanize %} {% block content %}
 
 <h1>{{ title }}</h1>
 
@@ -93,14 +93,16 @@
 
       <div class="box-form-item">
         <label class="sub-title-3" for=""> valor </label>
-        <input type="text" name="cash" value="{{ cash|safe }}" readonly />
+        <input type="hidden" name="cash" value="{{ cash|safe }}" />
+        <input type="text" value="$ {{ cash|intcomma }} COP" readonly />
         <input type="hidden" name="hotel" value="transporte" />
       </div>
 
       {% else %}
       <div class="box-form-item">
         <label class="sub-title-3" for=""> valor total: ida y vuelta </label>
-        <input type="text" name="cash" value="{{ cash|safe }}" readonly />
+        <input type="hidden" name="cash" value="{{ cash|safe }}" readonly />
+        <input type="text" value="$ {{ cash|intcomma }} COP" readonly />
         <input type="hidden" name="hotel" value="transporte" />
       </div>
 
@@ -140,7 +142,7 @@
     {% endif %}
 
     <div class="box-form-last">
-      {% if det_booking.name != "Mercedes Sprinter" %}
+      {% if det_booking.name != "Van Compartida" %}
       <div class="box-form-mult">
         <label class="sub-title-3" for="">cantidad adultos</label>
         <select name="adults" id="">

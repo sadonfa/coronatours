@@ -1,5 +1,5 @@
-{% extends 'layouts/layout.html' %} {% block title %}{{ title }} {% endblock %}
-{% block content %} {% load static %}
+{% extends 'layouts/layout.html' %} {% block title %}{{title }} {% endblock %}
+{% block content %} {% load static %}{% load humanize %}
 <div class="cont-det-booking">
   <img src="{% static 'img/logo.pnp' %}" alt="" />
   <h2>{{ title }} # {{ booking.get_id_formateado }}</h2>
@@ -67,7 +67,7 @@
 
     <tr>
       <td><span> valor adultos: </span></td>
-      <td class="det-celda">$ {{ booking.cash }} COP</td>
+      <td class="det-celda">$ {{ booking.cash|intcomma }} COP</td>
     </tr>
     <tr>
       <td><span> valor Niños: </span></td>
@@ -80,7 +80,7 @@
     </tr>
     <tr>
       <td><span> valor Total: </span></td>
-      <td class="det-celda">$ {{ booking.total }} COP</td>
+      <td class="det-celda">$ {{ booking.total|intcomma }} COP</td>
     </tr>
   </table>
 

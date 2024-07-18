@@ -1,4 +1,6 @@
-{% extends 'layouts/layout.html' %} {% block title %} {{title}} {% endblock %}
+{% extends 'layouts/layout.html' %} 
+{% load humanize %}
+{% block title %} {{title}} {% endblock %}
 {% block content %}
 <datalist id="bookmark_list_start">
   <option>{{start_of_route}}</option>
@@ -30,7 +32,7 @@
           />
 
           <label class="c-val" for="value"
-            >$ {{ v_trayecto.compartido }} COP</label
+            >$ {{ v_trayecto.compartido|intcomma }} COP</label
           >
           <input
             type="hidden"
@@ -108,7 +110,7 @@
           />
 
           <label class="c-val" for="value"
-            >$ {{ v_trayecto.standar }} COP</label
+            >$ {{ v_trayecto.standar|intcomma }} COP</label
           >
           <input
             type="hidden"
@@ -166,7 +168,7 @@
           />
 
           <label class="c-val" for="value"
-            >$ {{ v_trayecto.mini_van }} COP
+            >$ {{ v_trayecto.mini_van|intcomma }} COP
           </label>
           <input
             type="hidden"
@@ -225,7 +227,7 @@
           />
 
           <label class="c-val" for="value"
-            >$ {{ v_trayecto.van_standar }} COP</label
+            >$ {{ v_trayecto.van_standar|intcomma }} COP</label
           >
           <input
             type="hidden"
@@ -284,7 +286,7 @@
           />
 
           <label class="c-val" for="value"
-            >$ {{ v_trayecto.micro_bus }} COP</label
+            >$ {{ v_trayecto.micro_bus|intcomma }} COP</label
           >
           <input
             type="hidden"
@@ -342,7 +344,7 @@
             value="{{transports.4.name}}"
           />
 
-          <label class="c-val" for="value">$ {{ v_trayecto.buseta }} COP</label>
+          <label class="c-val" for="value">$ {{ v_trayecto.buseta|intcomma }} COP</label>
           <input
             type="hidden"
             class="c-val"
@@ -399,7 +401,7 @@
             value="{{transports.5.name}}"
           />
 
-          <label class="c-val" for="value">$ {{ v_trayecto.bus }} COP</label>
+          <label class="c-val" for="value">$ {{ v_trayecto.bus|intcomma }} COP</label>
           <input
             type="hidden"
             class="c-val"
@@ -456,7 +458,7 @@
             value="{{transports.6.name}}"
           />
 
-          <label class="c-val" for="value">$ {{ v_trayecto.SUV }} COP</label>
+          <label class="c-val" for="value">$ {{ v_trayecto.SUV|intcomma }} COP</label>
           <input
             type="hidden"
             class="c-val"
