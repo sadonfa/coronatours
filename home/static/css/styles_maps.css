@@ -89,6 +89,8 @@
   /* margin: 1%; */
   margin-left: 0%;
   font-size: 19px;
+  border: 2px solid red;
+  border-color: red;
 }
 
 .reserva {
@@ -122,14 +124,21 @@
   flex-direction: column;
   width: 70%;
   margin-bottom: 15px;
+  font-family: "Montserrat";
+  font-size: 13px;
+  color: #5c5c5c;
 }
 
 .select_form select {
-  padding: 10px 5px;
-  font-size: 14px;
+  padding: 10px 15px;
+  /* font-size: 14px; */
   color: #5c5c5c;
-  border: 1px solid #999;
+  border: 1px solid #f6f6f6;
+  border-radius: 5px;
   margin-top: 10px;
+  background-color: #f6f6f6;
+  font-family: "Montserrat";
+  font-size: 12px;
 }
 
 .menu_flotante {
@@ -241,11 +250,20 @@
 .boxMap input[type="search"],
 .boxMap input[type="date"],
 .boxMap input[type="time"] {
-  display: block;
+  display: inline-block;
   width: 95%;
   padding: 12px 0px;
   padding-left: 12px;
+  /* border: 1px solid red; */
+  border: 1px solid #f6f6f6;
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  font-family: "Montserrat";
   font-size: 12px;
+}
+
+.boxMap input[type="text"]:focus {
+  border-color: 2px solid #5c5c5c;
 }
 
 .boxMap input[type="time"]::-webkit-calendar-picker-indicator,

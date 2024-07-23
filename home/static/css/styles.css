@@ -285,7 +285,7 @@ footer a {
 .arti .art-cash {
   display: block;
   text-align: right;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   margin-top: 10px;
 }
@@ -388,7 +388,7 @@ footer a {
   padding: 10px;
   padding-left: 15px;
   width: 250px;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .email .descrip-email input[type="submit"] {
@@ -719,10 +719,22 @@ hr {
 
 .box-form-booking input,
 .box-form input {
-  width: 95%;
+  /* width: 95%;
   padding: 14px 15px;
+  
+  border: 1px solid #999; */
+
   box-shadow: 0px 0px 5px #ccc;
-  border: 1px solid #999;
+  display: inline-block;
+  width: 95%;
+  padding: 12px 0px;
+  padding-left: 12px;
+  /* border: 1px solid red; */
+  border: 1px solid #f6f6f6;
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  font-family: "Montserrat";
+  font-size: 12px;
 }
 
 .box-form-last {
@@ -732,9 +744,12 @@ hr {
 
 .box-form-last select {
   width: 100%;
-  padding: 14px 15px;
+  padding: 10px 15px;
   box-shadow: 0px 0px 5px #ccc;
-  border: 1px solid #999;
+  border: 1px solid #f6f6f6;
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  cursor: pointer;
 }
 
 .box-form-last .box-form-mult {

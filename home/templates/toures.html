@@ -1,5 +1,5 @@
-{% extends 'layouts/layout.html' %} {% load static %} {% block title %}
-{{title}} {% endblock %} {% block content %} {% comment %}
+{% extends 'layouts/layout.html' %} {% load static %} {%block title %} {{title}}
+{% endblock %} {% load humanize %} {% block content %} {% comment %}
 <div class="box-title">
   <h1 class="title">{{ title }}</h1>
 </div>
@@ -36,7 +36,7 @@
             <p>Translados</p>
           </div>
         </div>
-        <p class="art-cash">$ {{ tour.cash }}</p>
+        <p class="art-cash">$ {{ tour.cash|intcomma }}</p>
       </div>
     </a>
   </article>

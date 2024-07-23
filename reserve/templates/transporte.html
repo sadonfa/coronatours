@@ -85,6 +85,7 @@
       <input type="hidden" name="time_return" value="{{time_return}}" />
       {% endif %}
 
+      
       <input type="hidden" value="{{recorrido}}" name="recorrido" />
       <input type="hidden" name="date" value="{{date}}" />
       <input type="hidden" name="time" value="{{time}}" />
@@ -95,8 +96,15 @@
     {% endif %}
 
     <!-- Auto estandar -->
+    {% if recorrido == "ida" %}
+     <form method="POST" action="{% url 'check' %}">
 
-    <form method="POST" action="{% url 'check' %}">
+      {% else %}
+
+      <form method="POST" action="{% url 'retorno' %}">
+        <input type="hidden" name="store" value="{{store}}" />
+    {% endif %}
+   
       {% csrf_token %}
       <div class="box-art">
         <div class="car-n">

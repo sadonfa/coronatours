@@ -146,7 +146,7 @@
             <div class="box-det-des">
               <h3 class="sub-title-3">Desde</h3>
               <span
-                id="start"
+                id="start_ret"
                 onchange="calcRoute();"
                 name="start_of_route"
                 value="{{start_of_route_return}}"
@@ -156,7 +156,7 @@
 
               <h3 class="sub-title-3">Hasta</h3>
               <span
-                id="end"
+                id="end_ret"
                 onchange="calcRoute();"
                 name="end_of_route"
                 value="{{end_of_route__return}}"
@@ -165,11 +165,11 @@
             </div>
             <div class="box-det-des">
               <h3 class="sub-title-3">Distancia</h3>
-              <span id="distancia-d"></span>
+              <span id="distancia_ret"></span>
             </div>
             <div class="box-det-des">
               <h3 class="sub-title-3">Duracion</h3>
-              <span id="duracion-d"></span>
+              <span id="duracion_ret"></span>
             </div>
           </div>
           <form method="POST" action="{% url 'transporte' %}">
@@ -210,15 +210,17 @@
       </div>
 
             {% endif %}
-
       <div id="maps_reserve">
         <!-- Con este div se esta invocando el mapa, si este div no se muestra un mapa -->
 
         <div id="map"></div>
+        
         {% if idayvuelta %}
         <div id="map"></div>
+        <div id="map2"></div>
         {% endif %}
       </div> 
+   
     </div>
 
     {% endblock %}

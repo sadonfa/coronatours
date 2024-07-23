@@ -103,6 +103,9 @@ def transporte(request):
         store = request.POST['store']
         recorrido = request.POST['recorrido']
 
+        print("Informacion de distancia" + store)
+        print("inf --> " + distance + " -- " + duration)
+
         if recorrido == "idayvuelta":
             det_retorno = {
                     "date": request.POST['date_return'],
@@ -193,3 +196,58 @@ def transporte(request):
         })
     else:
         return HttpResponse("No se guardo ninguna informacion vuelva a <a href='/inicio'>Inicio</a> ")
+
+
+def trans_returno(request):
+    store = request.POST['store']
+    transports = Vehiculos.objects.all()
+    st_distancia = int(store)*10**-3
+    kilometros = int(round(st_distancia))
+
+    if int(kilometros) in range(1, 12):
+            print(f"correcto son {kilometros}km")
+            valor_trayecto = {
+                'compartido': 15000,  # multiplicar por personas
+                'standar': 45000,  # locale.currency(45000, grouping=True),
+                'mini_van': 85000,  # locale.currency(85000, grouping=True),
+                # locale.currency(100000, grouping=True),
+                'van_standar': 100000,
+                'micro_bus': 140000,  # locale.currency(120000, grouping=True),
+                'buseta': 170000,  # locale.currency(170000, grouping=True),
+                'bus': 200000,  # locale.currency(200000, grouping=True),
+                'SUV': 150000,  # locale.currency(150000, grouping=True),
+            }
+    elif int(kilometros) in range(13, 30):
+            print(f"correcto son {kilometros}km")
+            valor_trayecto = {
+                'compartido': 25000,
+                'standar': 60000,  # locale.currency(60000, grouping=True),
+                'mini_van': 100000,  # locale.currency(100000, grouping=True),
+                # locale.currency(120000, grouping=True),
+                'van_standar': 140000,
+                'micro_bus': 180000,  # locale.currency(150000, grouping=True),
+                'buseta': 190000,  # locale.currency(190000, grouping=True),
+                'bus': 260000,  # locale.currency(260000, grouping=True),
+                'SUV': 180000,  # locale.currency(180000, grouping=True),
+            }
+    elif int(kilometros) in range(31, 58):
+            print(f"correcto son {kilometros}km")
+            valor_trayecto = {
+                'compartido': 15000,  # locale.currency(10000, grouping=True),
+                'standar': 250000,  # locale.currency(190000, grouping=True),
+                'mini_van': 400000,  # locale.currency(280000,  grouping=True),
+                # locale.currency(400000, grouping=True),
+                'van_standar': 500000,
+                'micro_bus': 600000,  # locale.currency(480000, grouping=True),
+                'buseta': 650000,  # locale.currency(530000, grouping=True),
+                'bus': 750000,  # locale.currency(600000, grouping=True),
+                'SUV': 550000  # locale.currency(500000, grouping=True),
+            }
+    else:
+            print("Incorrecto")
+
+    return render(request, "trans_retorno.html", {
+        "title": "Transporte de retorno",
+        'transports': transports,
+         'v_trayecto': valor_trayecto,
+    })

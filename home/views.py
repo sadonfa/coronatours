@@ -38,7 +38,7 @@ def send_email(mail, ve_name, ve_value):
 
 def home(request):
     title='Inicio'
-    return render(request, 'index.html', {
+    return render(request, 'home.html', {
         'title': title
     })
 

@@ -2,9 +2,15 @@ function initMap() {
   // --- <<<<<<<< --- Definiendo Variables --- >>>>>>>> ---
   let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
+
+  let directionsServiceRet = new google.maps.DirectionsService();
+  let directionsRendererRet = new google.maps.DirectionsRenderer();
+
   let center = new google.maps.LatLng(10.39698, - 75.50265)
   let start = document.getElementById("start");
   let end = document.getElementById("end");
+  let start_ret = document.getElementById("start_ret");
+  let end_ret = document.getElementById("end_ret");
 
 
   // --- <<<<<<<< --- Cree un cuadro delimitador con lados a ~150 km de distancia del punto central --- >>>>>>>> ---
@@ -73,6 +79,7 @@ function initMap() {
     mapTypeControl: false,
   });
 
+
   // --- <<<<<<<< --- Autocompletador de lugares para el buscador --- >>>>>>>> ---
 
   autocomplete_a.bindTo("bounds", map);
@@ -98,6 +105,18 @@ function initMap() {
     showSteps(response)
   });
 
+  directionsRendererRet.setMap(map2);
+  const request_ret = {
+    origin: start_ret.innerHTML,
+    destination: end_ret.innerHTML,
+    travelMode: 'DRIVING',
+  };
+
+  directionsServiceRet.route(request_ret, responseRet => {
+    directionsRendererRet.setDirections(response);
+    showStepsRet(responseRet)
+  });
+
 };
 
 function showSteps(directionResult) {
@@ -109,6 +128,8 @@ function showSteps(directionResult) {
   const d_distancia = document.getElementById("distancia-d").innerHTML = distance.text;
   const d_duracion = document.getElementById("duracion-d").innerHTML = duration.text;
   // element.innerHTML = dista
+
+
 
   if (typeof (Storage) !== "undefined") {
     localStorage.setItem("distancia", dista);
@@ -125,3 +146,33 @@ function showSteps(directionResult) {
   console.log(durat);
 }
 
+
+
+function showStepsRet(directionResult) {
+  const myRoute = directionResult.routes[0].legs[0];
+  let distance = myRoute.distance
+  let duration = myRoute.duration
+  let dista = document.getElementById("distanceIdRet").innerHTML = distance.value;
+  let durat = document.getElementById("durationIdRet").value = duration.value;
+  const d_distancia = document.getElementById("distancia_ret").innerHTML = distance.text;
+  const d_duracion = document.getElementById("duracion_ret").innerHTML = duration.text;
+  // element.innerHTML = dista
+
+  console.log(dista)
+  console.log(distance)
+  console.log(d_distancia)
+  
+  if (typeof (Storage) !== "undefined") {
+    localStorage.setItem("distancia", dista);
+
+  } else {
+    console.log("LocalStorage no soportado en este navegador")
+  }
+
+  const ti = localStorage.getItem("distancia");
+  const test = document.getElementById("v-store").value = ti;
+  console.log(test);
+  console.log(distance);
+  console.log(dista);
+  console.log(durat);
+}

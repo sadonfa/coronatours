@@ -172,7 +172,7 @@
               >
               <input
                 type="text"
-                id="start_b2"
+                id="start_a"
                 name="start_of_route_return"
                 class="form_reserve"
                 required
@@ -185,7 +185,7 @@
               >
               <input
                 type="text"
-                id="end_b2"
+                id="end_a"
                 name="end_of_route_return"
                 class="form_reserve"
                 required
@@ -216,10 +216,10 @@
               {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
             </div>
           </div>
-          {% comment %}
-          <input type="hidden" id="distanceId" value="" name="distance" />
+
+          <input type="hidden" id="distanceIdRet" value="" name="distance" />
           <input type="hidden" name="duration" id="durationId" value="" />
-          {% endcomment %}
+
           <input type="hidden" name="viaje" value="idayvuelta" />
           <input type="submit" class="btn" value="Realizar Reserva" />
         </form>
