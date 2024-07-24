@@ -32,7 +32,7 @@ article {
   flex-basis: 38%;
   flex-grow: 1;
   margin: 10px;
-  height: 230px;
+  height: 220px;
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -120,4 +120,99 @@ article .info p {
   margin-top: 15px;
   font-family: "Montserrat";
   font-size: 14px;
+}
+
+@media screen and (max-width: 640px) {
+  article h1 {
+    font-size: 35px;
+  }
+
+  .nav {
+    height: 120px;
+  }
+
+  article .info {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  article h1 {
+    font-size: 30px;
+  }
+
+  article .info {
+    margin-right: 30px;
+  }
+
+  article .info p {
+    font-size: 14px;
+  }
+
+  .men-vip .info,
+  .men-labor .info {
+    margin-left: 250px !important;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 582px) {
+  article h1 {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .men-vip .info,
+  .men-labor .info {
+    margin-left: 220px !important;
+    text-align: right;
+  }
+
+  .nav {
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .men-vip .info,
+  .men-labor .info {
+    margin-left: 210px !important;
+    text-align: right;
+  }
+
+  article h1 {
+    font-size: 20px;
+  }
+
+  article .info p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .men-vip .info,
+  .men-labor .info {
+    margin-left: 200px !important;
+    text-align: right;
+  }
+  article {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .men-vip .info,
+  .men-labor .info {
+    margin-left: 180px !important;
+    text-align: right;
+  }
+
+  article .info p {
+    font-size: 10px;
+  }
+
+  .footer {
+    margin-bottom: 30px;
+  }
 }
