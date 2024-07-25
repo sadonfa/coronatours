@@ -19,3 +19,17 @@
     font-size: 40px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .form-anuncio {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+  }
+
+  .boxMap {
+    background: #fff;
+    width: 90%;
+  }
+}
