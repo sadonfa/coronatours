@@ -88,6 +88,82 @@
     margin-top: 50px;
     width: 60%;
   }
+
+  .det-resesrva {
+    width: 80%;
+    padding: 50px 50px;
+  }
+
+  .c-map {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menu_flotante {
+    width: 80%;
+    order: 2;
+  }
+
+  #maps_reserve {
+    width: 80%;
+    order: 1;
+  }
+
+  .box-art {
+    width: 88%;
+  }
+
+  .c-title {
+    font-size: 14px;
+  }
+
+  .c-val {
+    font-size: 20px;
+  }
+
+  .sub-title-2 {
+    text-align: center;
+  }
+
+  .box-form-booking {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .box-form-one,
+  .box-form-mult,
+  .box-form-item {
+    width: 90%;
+    margin-top: 17px;
+  }
+
+  .box-form-booking input,
+  .box-form input {
+    margin-bottom: 25px;
+  }
+
+  #box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #box h1 {
+    margin-bottom: 35px;
+  }
+  .form-booking {
+    width: 90%;
+  }
+
+  .box-form-booking {
+    margin-bottom: 0px;
+  }
+
+  .cont-det-booking {
+    width: 80%;
+    border-radius: 5px;
+  }
 }
 
 @media screen and (max-width: 540px) {

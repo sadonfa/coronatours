@@ -763,15 +763,17 @@ hr {
 } */
 
 .cont-det-booking {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   width: 40%;
   margin: 0px auto;
   margin-top: 25px;
   box-shadow: 0px 0px 5px #333;
-  padding-left: 24px;
   padding-top: 25px;
-  padding-bottom: 15px;
+  padding-bottom: 80px;
 }
 
 .cont-det-booking h2 {
