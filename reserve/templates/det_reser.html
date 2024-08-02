@@ -7,7 +7,7 @@
   
 
       {% if recorrido == "ida" %}
-      <div class="menu_flotante">
+      {% comment %} <div class="menu_flotante"> {% endcomment %}
       <div class="det-resesrva">
         <h2 class="sub-title-2">DETALLE DEL VIAJE</h2>
   
@@ -78,9 +78,9 @@
           />
         </div>
       </form>
-    </div></div>
+    </div>
         {% elif recorrido == "idayvuelta" %}
-        <div class="menu_flotante_doble ">
+        {% comment %} <div class="menu_flotante_doble "> {% endcomment %}
         <div class="det-resesrva">
           <h2 class="sub-title-2">DETALLE DEL VIAJE - IDA</h2>
 
@@ -137,7 +137,7 @@
         </div>
       </div>
     </div>
-    <div class="menu_flotante_doble ">
+    {% comment %} <div class="menu_flotante_doble "> {% endcomment %}
       <div class="det-resesrva">
         <h2 class="sub-title-2">DETALLE DEL VIAJE - VUELTA</h2>
        
