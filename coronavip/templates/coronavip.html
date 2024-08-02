@@ -1,0 +1,286 @@
+{% extends 'layouts/layout.html' %} {% load static %} {% block title %}{{title}}
+{% endblock %} {% block content %}
+
+<div class="hd-title">
+  <div class="bg-transp"></div>
+  <img
+    src="{% static 'img/Traslados-desde-los-aeropuertos.jpg' %}"
+    alt="Toures Cartagena"
+  />
+  <h2>Reserva en línea</h2>
+</div>
+
+<div class="content-map">
+  <div class="form-anuncio">
+    <div class="boxMap">
+      <form action="index.php" method="post" class="select_form">
+        Seleccione rutas:
+        <select id="status" name="status" onChange="mostrar(this.value);">
+          <option value="ida">Ida</option>
+          <option value="idayvuelta">Ida y vuelta</option>
+          <option value="puntoapunto">Punto a Punto</option>
+        </select>
+      </form>
+
+      <div id="ida">
+        <div class="ida">
+          <form method="POST" action="{% url 'detail_vip' %}">
+            {% csrf_token %}
+
+            <div class="box-form">
+              <div class="d-cont">
+                <label class="label_reserve" for="start_of_route"
+                  >Elije la ubicación de partida</label
+                >
+                <input
+                  type="text"
+                  id="start_a"
+                  name="start_of_route"
+                  class="form_reserve"
+                  required
+                />
+              </div>
+
+              <div class="d-cont">
+                <label class="label_reserve" for="end_of_route"
+                  >Elije un destino</label
+                >
+                <input
+                  type="text"
+                  id="end_a"
+                  name="end_of_route"
+                  class="form_reserve"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="box-form-date">
+              <div class="d-box">
+                <label class="label_reserve" for="date"
+                  >Fecha de Recogida</label
+                >
+                <input type="date" name="date" class="form_reserve" required />
+              </div>
+              <div class="d-box">
+                <label class="label_reserve" for="time"
+                  >Hora de Recogida (Ida)</label
+                >
+                <input type="time" name="time" class="form_reserve" required />
+                {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
+              </div>
+            </div>
+            <input type="hidden" name="viaje" value="ida" />
+            <input type="hidden" id="distanceId" value="" name="distance" />
+            <input type="hidden" name="duration" id="durationId" value="" />
+            <input type="submit" class="btn" value="Realizar Reserva" />
+          </form>
+        </div>
+      </div>
+
+      {% comment %} IDA Y VUELTA {% endcomment %}
+
+      <div id="idayvuelta" style="display: none">
+        <h3>Datos de Ida</h3>
+
+        <form method="POST" action="{% url 'reserve_detail' %}">
+          {% csrf_token %}
+
+          <datalist id="bookmark_list">
+            <!-- Este bucle invoca el listado de los destinos -->
+            {% for destino in destination %}
+            <option value="{{destino.value}}">{{destino.title}}</option>
+            {% endfor %}
+          </datalist>
+
+          <div class="box-form">
+            <div class="d-cont">
+              <label class="label_reserve" for="start_of_route"
+                >Elije la ubicación de partida</label
+              >
+              <input
+                type="text"
+                id="start_b"
+                name="start_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
+
+            <div class="d-cont">
+              <label class="label_reserve" for="end_of_route"
+                >Elije un destino</label
+              >
+              <input
+                type="text"
+                id="end_b"
+                name="end_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="box-form">
+            <div class="d-box">
+              <label class="label_reserve" for="date">Fecha de Recogida</label>
+              <input type="date" name="date" class="form_reserve" required />
+            </div>
+            <div class="d-box">
+              <label class="label_reserve" for="time"
+                >Hora de Recogida (Ida)</label
+              >
+              <input type="time" name="time" class="form_reserve" required />
+              {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
+            </div>
+          </div>
+          <input type="hidden" id="distanceId" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+
+          <h3>Datos de Regreso</h3>
+          <datalist id="bookmark_list">
+            <!-- Este bucle invoca el listado de los destinos -->
+            {% for destino in destination %}
+            <option value="{{destino.value}}">{{destino.title}}</option>
+            {% endfor %}
+          </datalist>
+
+          <div class="box-form">
+            <div class="d-cont">
+              <label class="label_reserve" for="start_of_route"
+                >Elije la ubicación de partida</label
+              >
+              <input
+                type="text"
+                id="start_a"
+                name="start_of_route_return"
+                class="form_reserve"
+                required
+              />
+            </div>
+
+            <div class="d-cont">
+              <label class="label_reserve" for="end_of_route"
+                >Elije un destino</label
+              >
+              <input
+                type="text"
+                id="end_a"
+                name="end_of_route_return"
+                class="form_reserve"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="box-form">
+            <div class="d-box">
+              <label class="label_reserve" for="date">Fecha de Recogida</label>
+              <input
+                type="date"
+                name="date_return"
+                class="form_reserve"
+                required
+              />
+            </div>
+            <div class="d-box">
+              <label class="label_reserve" for="time"
+                >Hora de Recogida (Ida)</label
+              >
+              <input
+                type="time"
+                name="time_return"
+                class="form_reserve"
+                required
+              />
+            </div>
+          </div>
+
+          <input type="hidden" id="distanceIdRet" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+
+          <input type="hidden" name="viaje" value="idayvuelta" />
+          <input type="submit" class="btn" value="Realizar Reserva" />
+        </form>
+      </div>
+
+      <div id="puntoapunto" style="display: none">
+        <h2>punto a punto ...</h2>
+        <form method="POST" action="{% url 'reserve_detail' %}">
+          {% csrf_token %}
+
+          <datalist id="bookmark_list">
+            <!-- Este bucle invoca el listado de los destinos -->
+            {% for destino in destination %}
+            <option value="{{destino.value}}">{{destino.title}}</option>
+            {% endfor %}
+          </datalist>
+
+          <div class="box-form">
+            <div class="d-cont">
+              <label class="label_reserve" for="start_of_route"
+                >Elije la ubicación de partida</label
+              >
+              <input
+                type="text"
+                id="start_c"
+                name="start_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
+
+            <div class="d-cont">
+              <label class="label_reserve" for="end_of_route"
+                >Elije un destino</label
+              >
+              <input
+                type="text"
+                id="end_c"
+                name="end_of_route"
+                class="form_reserve"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="box-form">
+            <div class="d-box">
+              <label class="label_reserve" for="date">Fecha de Recogida</label>
+              <input type="date" name="date" class="form_reserve" required />
+            </div>
+            <div class="d-box">
+              <label class="label_reserve" for="time"
+                >Hora de Recogida (Ida)</label
+              >
+              <input type="time" name="time" class="form_reserve" required />
+            </div>
+          </div>
+          <input type="hidden" name="viaje" value="puntoapunto" />
+          <input type="hidden" id="distanceId" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+          <input type="submit" class="btn" value="Realizar Reserva" />
+        </form>
+      </div>
+    </div>
+
+    <div class="anuncio">
+      <img
+        src="{% static 'img/ServicioPersonalizado.png' %}"
+        alt="Servicio Personalizado"
+      />
+    </div>
+  </div>
+
+  <div class="info-map">
+    <p class="parrafo">
+      Nuestro proceso de reserva en línea le guiará en 3 pasos para seleccionar
+      sus detalles de recogida, vehículo y numero de pasajeros. A continuación,
+      podrá revisar su selección y su solicitud será enviada directamente a
+      nuestro sistema.<br /><br />
+    </p>
+    <img src=" {% static 'img/PhotoCollage.png'%}" alt="Collage Vehiculos" />
+  </div>
+</div>
+
+{% endblock %}

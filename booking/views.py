@@ -110,7 +110,7 @@ def check(request, id=False):
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
                     cash = int(request.POST['value']) + 20000
                     print("Se esta enviando este, hora nocturna ")
-                    print(cash)
+                    print("este es el valor --> " + cash)
                 else:
                     cash = request.POST['value']
                     print("Se esta enviando este, hora diurna ")
@@ -184,7 +184,7 @@ def check(request, id=False):
         opcion = "tour"
 
 
-    print(cash)
+    print("este es el valor --> " + cash)
 
     return render(request, 'check.html', {
         'title': 'Informacion de reserva',
