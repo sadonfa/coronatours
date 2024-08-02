@@ -92,7 +92,6 @@
   .det-resesrva {
     width: 80%;
     padding: 50px 50px;
-    display: none;
   }
 
   .c-map {
@@ -103,6 +102,7 @@
 
   .menu_flotante {
     width: 80%;
+    margin-top: 520px;
     order: 2;
   }
 
