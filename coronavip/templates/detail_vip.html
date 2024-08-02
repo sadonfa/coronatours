@@ -3,14 +3,13 @@
 
 <div class="c-map">
   <!-- Este es el menu para los vehiculos -->
-  
-  
 
-      {% if recorrido == "ida" %}
-      <div class="menu_flotante">
-      <div class="det-resesrva">
-        <h2 class="sub-title-2">DETALLE DEL VIAJE</h2>
-  
+  {% if recorrido == "ida" %} {% comment %}
+  <div class="menu_flotante">
+    {% endcomment %}
+    <div class="det-resesrva">
+      <h2 class="sub-title-2">DETALLE DEL VIAJE</h2>
+
       <div class="detail-v">
         <div class="box-det">
           <h3 class="sub-title-3">Fecha de recogida</h3>
@@ -54,16 +53,8 @@
 
       <form method="POST" action="{% url 'trans_vip' %}">
         {% csrf_token %}
-        <input
-          type="hidden"
-          value="{{start_of_route}}"
-          name="start_of_route"
-        />
-        <input
-          type="hidden"
-          value="{{end_of_route}}"
-          name="end_of_route"
-        />
+        <input type="hidden" value="{{start_of_route}}" name="start_of_route" />
+        <input type="hidden" value="{{end_of_route}}" name="end_of_route" />
         <input type="hidden" value="{{recorrido}}" name="recorrido" />
         <input type="hidden" value="{{date}}" name="date" />
         <input type="hidden" value="{{time}}" name="time" />
@@ -72,19 +63,15 @@
         <input type="hidden" name="store" id="v-store" value="" />
         <div class="box-btns">
           <a href="{% url 'reserve' %}" class="btn-white"> Modificar </a>
-          <input
-            type="submit"
-            class="btn"
-            value="Escoge transporte"
-          />
+          <input type="submit" class="btn" value="Escoge transporte" />
         </div>
       </form>
-
-    </div></div>
-        {% elif recorrido == "idayvuelta" %}
-        <div class="menu_flotante_doble ">
-        <div class="det-resesrva">
-          <h2 class="sub-title-2">DETALLE DEL VIAJE - IDA</h2>
+    </div>
+    {% elif recorrido == "idayvuelta" %} {% comment %}
+    <div class="menu_flotante_doble">
+      {% endcomment %}
+      <div class="det-resesrva">
+        <h2 class="sub-title-2">DETALLE DEL VIAJE - IDA</h2>
 
         <div class="detail-v">
           <div class="box-det">
@@ -125,108 +112,101 @@
             <h3 class="sub-title-3">Duracion</h3>
             <span id="duracion-d"></span>
           </div>
-
-
-        </div> 
+        </div>
         <div class="test">
           <label for="">Ida y vuelta</label>
           <input class="seleccion" type="checkbox" />
         </div>
       </div>
     </div>
-    <div class="menu_flotante_doble ">
+    <div class="menu_flotante_doble">
       <div class="det-resesrva">
         <h2 class="sub-title-2">DETALLE DEL VIAJE - VUELTA</h2>
-       
-          <div class="detail-v">
-            <div class="box-det">
-              <h3 class="sub-title-3">Fecha de recogida</h3>
-              <p>{{ date_return }}</p>
-            </div>
 
-            <div class="box-det">
-              <h3 class="sub-title-3">Hora de recogida</h3>
-              <p>{{ time_return }}</p>
-            </div>
-
-            <div class="box-det-des">
-              <h3 class="sub-title-3">Desde</h3>
-              <span
-                id="start_ret"
-                onchange="calcRoute();"
-                name="start_of_route"
-                value="{{start_of_route_return}}"
-                >{{start_of_route_return}}</span
-              >
-              <hr />
-
-              <h3 class="sub-title-3">Hasta</h3>
-              <span
-                id="end_ret"
-                onchange="calcRoute();"
-                name="end_of_route"
-                value="{{end_of_route__return}}"
-                >{{end_of_route__return}}</span
-              >
-            </div>
-            <div class="box-det-des">
-              <h3 class="sub-title-3">Distancia</h3>
-              <span id="distancia_ret"></span>
-            </div>
-            <div class="box-det-des">
-              <h3 class="sub-title-3">Duracion</h3>
-              <span id="duracion_ret"></span>
-            </div>
+        <div class="detail-v">
+          <div class="box-det">
+            <h3 class="sub-title-3">Fecha de recogida</h3>
+            <p>{{ date_return }}</p>
           </div>
-          <form method="POST" action="{% url 'trans_vip' %}">
-            {% csrf_token %}
-            <input
-              type="hidden"
-              value="{{start_of_route}}"
-              name="start_of_route"
-            />
-            <input
-              type="hidden"
-              value="{{end_of_route}}"
-              name="end_of_route"
-            />
-            <input type="hidden" value="{{start_of_route_return}}" name="start_of_route_return" />
-            <input type="hidden" value="{{end_of_route__return}}" name="end_of_route__return" />
-            <input type="hidden" value="{{date_return}}" name="date_return" />
-            <input type="hidden" value="{{time_return}}" name="time_return" />
-            <input type="hidden" value="{{recorrido}}" name="recorrido" />
-            <input type="hidden" value="{{date}}" name="date" />
-            <input type="hidden" value="{{time}}" name="time" />
-            <input type="hidden" id="distanceId" value="" name="distance" />
-            <input type="hidden" name="duration" id="durationId" value="" />
-            <input type="hidden" name="store" id="v-store" value="" />
-            <div class="box-btns">
-              <a href="{% url 'reserve' %}" class="btn-white"> Modificar </a>
-              <input
-                type="submit"
-                class="btn"
-                value="Escoge transporte"
-              />
-              
-            </div>
-            
-          </form>
 
+          <div class="box-det">
+            <h3 class="sub-title-3">Hora de recogida</h3>
+            <p>{{ time_return }}</p>
+          </div>
+
+          <div class="box-det-des">
+            <h3 class="sub-title-3">Desde</h3>
+            <span
+              id="start_ret"
+              onchange="calcRoute();"
+              name="start_of_route"
+              value="{{start_of_route_return}}"
+              >{{start_of_route_return}}</span
+            >
+            <hr />
+
+            <h3 class="sub-title-3">Hasta</h3>
+            <span
+              id="end_ret"
+              onchange="calcRoute();"
+              name="end_of_route"
+              value="{{end_of_route__return}}"
+              >{{end_of_route__return}}</span
+            >
+          </div>
+          <div class="box-det-des">
+            <h3 class="sub-title-3">Distancia</h3>
+            <span id="distancia_ret"></span>
+          </div>
+          <div class="box-det-des">
+            <h3 class="sub-title-3">Duracion</h3>
+            <span id="duracion_ret"></span>
+          </div>
         </div>
+        <form method="POST" action="{% url 'trans_vip' %}">
+          {% csrf_token %}
+          <input
+            type="hidden"
+            value="{{start_of_route}}"
+            name="start_of_route"
+          />
+          <input type="hidden" value="{{end_of_route}}" name="end_of_route" />
+          <input
+            type="hidden"
+            value="{{start_of_route_return}}"
+            name="start_of_route_return"
+          />
+          <input
+            type="hidden"
+            value="{{end_of_route__return}}"
+            name="end_of_route__return"
+          />
+          <input type="hidden" value="{{date_return}}" name="date_return" />
+          <input type="hidden" value="{{time_return}}" name="time_return" />
+          <input type="hidden" value="{{recorrido}}" name="recorrido" />
+          <input type="hidden" value="{{date}}" name="date" />
+          <input type="hidden" value="{{time}}" name="time" />
+          <input type="hidden" id="distanceId" value="" name="distance" />
+          <input type="hidden" name="duration" id="durationId" value="" />
+          <input type="hidden" name="store" id="v-store" value="" />
+          <div class="box-btns">
+            <a href="{% url 'reserve' %}" class="btn-white"> Modificar </a>
+            <input type="submit" class="btn" value="Escoge transporte" />
+          </div>
+        </form>
       </div>
 
-            {% endif %}
+      {% endif %}
       <div id="maps_reserve">
         <!-- Con este div se esta invocando el mapa, si este div no se muestra un mapa -->
 
         <div id="map"></div>
-        
+
         {% if idayvuelta %}
         <div id="map"></div>
         <div id="map2"></div>
         {% endif %}
-      </div> 
-   
+      </div>
     </div>
 
     {% endblock %}
