@@ -10,88 +10,81 @@ def coronavip(request):
 
 def detail_vip(request):
 
-    start_of_route = request.POST['start_of_route']
-    end_of_route = request.POST['end_of_route']
-    date = request.POST['date']
-    time = request.POST['time']
-    start_of_route__return = request.POST['start_of_route']
-    end_of_route__return = request.POST['end_of_route']
-    date_return = request.POST['date']
-    time_return = request.POST['time']
-    # duration = request.POST['duration']
-    viaje = request.POST['viaje']
+    if request.method == 'POST':
+        # >>>>>>>--- comente unas variables por aqui ---<<<<<<<
+        viaje = request.POST['viaje']
+        print(viaje)
+        if viaje == "ida":  
+            trayecto = {
+                'start':  request.POST['start_of_route'],
+                'end':  request.POST['end_of_route'],
+                'date':  request.POST['date'],
+                'time':  request.POST['time'] ,
+                'distance':  request.POST['distance'] ,
+                'duration':  request.POST['duration'] ,
+            }   
 
-    if viaje == "ida":        
-        start_of_route = request.POST['start_of_route']
-        end_of_route = request.POST['end_of_route']
-        date = request.POST['date']
-        time = request.POST['time']
-            
         
-    elif viaje == "idayvuelta":
-        start_of_route = request.POST['start_of_route']
-        end_of_route = request.POST['end_of_route']
-        date = request.POST['date']
-        time = request.POST['time']
-        start_of_route__return = request.POST['start_of_route_return']
-        end_of_route__return = request.POST['end_of_route_return']
-        date_return = request.POST['date_return']
-        time_return = request.POST['time_return']
+    
+        elif viaje == "idayvuelta":
+            trayecto = {
+                'start': request.POST['start_of_route'],
+                'end':  request.POST['end_of_route'],
+                'date':  request.POST['date'],
+                'time':  request.POST['time'],
+                'start_ret':  request.POST['start_of_route_return'],
+                'end_ret':  request.POST['end_of_route_return'],
+                'date_ret': request.POST['date_return'],
+                'time_ret': request.POST['time_return'],
+            }   
 
+    print(trayecto)
 
     return render(request, 'detail_vip.html', {
-        'title': 'Detalles Transporte VIP',
-        'start_of_route': start_of_route,
-        'end_of_route': end_of_route,
-        'date': date,
-        'time': time,        
-        'start_of_route_return':  start_of_route__return,
-        'end_of_route__return' : end_of_route__return,
-        'date_return': date_return,
-        'time_return': time_return,
-        'recorrido': viaje
+        'title': 'Detalles Reservas',
+        'trayecto': trayecto,
+        'recorrido': viaje,
     })
 
 def transvip(request):
        
-    vehiculosvip = VehiculosVip.objects.all()
-    store = request.POST['store']
-    st_distancia = int(store)*10**-3
-    kilometros = int(round(st_distancia))
-
-    start_of_route = request.POST['start_of_route']
-    end_of_route = request.POST['end_of_route']
-
-    date = request.POST['date']
-    time_tran = request.POST['time']
-    distance = request.POST['distance']
-    duration = request.POST['duration']
+    vehiculosvip = VehiculosVip.objects.all()[1:]
     recorrido = request.POST['recorrido']
+    v_trayecto_dos = ""
 
 
-    if recorrido == "idayvuelta":
-            det_retorno = {
-                    "date": request.POST['date_return'],
-                    "time": request.POST['time_return'],   
-                    "start_of_route": request.POST['start_of_route_return'],
-                    "end_of_route": request.POST['end_of_route__return'],
-                }
-    else:
-        det_retorno = ""
-
-    if recorrido == "idayvuelta" :
-            time_return = request.POST['time_return']
-    else:
-            time_return = 0
 
     def Convert(string):
-            li = list(string.split(":"))
-            return li
+        li = list(string.split(":"))
+        return li
 
-    list_time = Convert(time_tran)
-    hours = int(list_time[0])
+    if recorrido == "ida":
+        dat_trayecto = {
+            'start' : request.POST['start_of_route'],
+            'end' : request.POST['end_of_route'],
+            'date' : request.POST['date'],
+            'time' : request.POST['time'],
+            'distance' : request.POST['distance'],
+            'duration' : request.POST['duration'],  
+            }
+        
 
-    if int(kilometros) in range(1, 12):
+        list_time = Convert(request.POST['time'])
+        hours = int(list_time[0])
+
+        print("esta es la hora" + str(hours))
+
+        st_distancia = int(request.POST['distance'])*10**-3
+        kilometros = int(round(st_distancia))
+
+        print(kilometros)
+
+        st_duracion = int(request.POST['duration'])/60
+        dura = int(round(st_duracion))
+        print(dura)
+
+        
+        if int(kilometros) in range(1, 12):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
                 'vehiculo_lujo': 220000,  # multiplicar por personas
@@ -100,7 +93,7 @@ def transvip(request):
                 'mini_van_lujo': 250000,
                 'van_lujo': 300000,  # locale.currency(150000, grouping=True),
             }
-    elif int(kilometros) in range(13, 30):
+        elif int(kilometros) in range(13, 30):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
                 'vehiculo_lujo': 250000,
@@ -109,7 +102,7 @@ def transvip(request):
                 'mini_van_lujo': 300000,
                 'van_lujo': 350000,  # locale.currency(180000, grouping=True),
             }
-    elif int(kilometros) in range(31, 58):
+        elif int(kilometros) in range(31, 58):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
                 'vehiculo_lujo': 1100000,  # locale.currency(10000, grouping=True),
@@ -118,25 +111,117 @@ def transvip(request):
                 'mini_van_lujo': 1200000, # locale.currency(400000, grouping=True),               
                 'van_lujo': 1400000  # locale.currency(500000, grouping=True),
             }
-    else:
+        else:
             print("Incorrecto")
 
 
+    else:
+        dat_trayecto = {
+            'date' : request.POST['date'],
+            'time' : request.POST['time'],
+            "date_ret": request.POST['date_return'],
+            "time_ret": request.POST['time_return'],   
+            'start' : request.POST['start_of_route'],
+            'end' : request.POST['end_of_route'],
+            "start_r": request.POST['start_of_route_return'],
+            "end_r": request.POST['end_of_route_return'],
+            'distance' : request.POST['distance'],
+            'duration' : request.POST['duration'],  
+            'distance_ret' : request.POST['distance_ret'],
+            'duration_ret' : request.POST['duration_ret'],
+        }
+
+        list_time = Convert(request.POST['time'])
+        hours = int(list_time[0])
+
+        st_distancia = int(request.POST['distance'])*10**-3
+        kilometros = int(round(st_distancia))
+
+        print(f"kilometro {kilometros}km")
+
+        st_duracion = int(request.POST['duration'])/60
+        dura = int(round(st_duracion))
+        print(dura)
+
+        rt_distance = int(request.POST['distance_ret'])*10**-3
+        kilm = int(round(rt_distance))
+        print(f"kilometros de retorno son {kilm}km")
+
+        rt_duracion = int(request.POST['duration_ret'])/60
+        dura_rt = int(round(rt_duracion))
+        print(dura_rt)
+
+       
+        if int(kilometros) in range(1, 12):
+            print(f"correcto son {kilometros}km")
+            valor_trayecto = {
+                'vehiculo_lujo': 220000,  # multiplicar por personas
+                'camioneta': 230000,  # locale.currency(45000, grouping=True),
+                'lujo': 250000,  # locale.currency(85000, grouping=True),
+                'mini_van_lujo': 250000,
+                'van_lujo': 300000,  # locale.currency(150000, grouping=True),
+            }
+        elif int(kilometros) in range(13, 30):
+            print(f"correcto son {kilometros}km")
+            valor_trayecto = {
+                'vehiculo_lujo': 250000,
+                'camioneta': 260000,  # locale.currency(60000, grouping=True),
+                'lujo': 300000,  # locale.currency(100000, grouping=True),
+                'mini_van_lujo': 300000,
+                'van_lujo': 350000,  # locale.currency(180000, grouping=True),
+            }
+        elif int(kilometros) in range(31, 58):
+            print(f"correcto son {kilometros}km")
+            valor_trayecto = {
+                'vehiculo_lujo': 1100000,  # locale.currency(10000, grouping=True),
+                'camioneta': 1100000,  # locale.currency(190000, grouping=True),
+                'lujo': 1300000,  # locale.currency(280000,  grouping=True),               
+                'mini_van_lujo': 1200000, # locale.currency(400000, grouping=True),               
+                'van_lujo': 1400000  # locale.currency(500000, grouping=True),
+            }
+        else:
+            print("Incorrecto")
+
+        if int(kilm) in range(1, 12):
+            print(f"correcto son {kilm}km segunda ruta")
+            v_trayecto_dos = {
+                'vehiculo_lujo': 220000,  # multiplicar por personas
+                'camioneta': 230000,  # locale.currency(45000, grouping=True),
+                'lujo': 250000,  # locale.currency(85000, grouping=True),
+                'mini_van_lujo': 250000,
+                'van_lujo': 300000,  # locale.currency(150000, grouping=True),
+            }
+        elif int(kilm) in range(13, 30):
+            print(f"correcto son {kilm}km")
+            v_trayecto_dos = {
+                'vehiculo_lujo': 250000,
+                'camioneta': 260000,  # locale.currency(60000, grouping=True),
+                'lujo': 300000,  # locale.currency(100000, grouping=True),
+                'mini_van_lujo': 300000,
+                'van_lujo': 350000,  # locale.currency(180000, grouping=True),
+            }
+        elif int(kilm) in range(31, 58):
+            print(f"correcto son {kilm}km")
+            v_trayecto_dos = {
+               'vehiculo_lujo': 1100000,  # locale.currency(10000, grouping=True),
+                'camioneta': 1100000,  # locale.currency(190000, grouping=True),
+                'lujo': 1300000,  # locale.currency(280000,  grouping=True),               
+                'mini_van_lujo': 1200000, # locale.currency(400000, grouping=True),               
+                'van_lujo': 1400000  # locale.currency(500000, grouping=True),
+            }
+        else:
+            print("Incorrecto_2")
+           
 
     return render(request, "transvip.html", {
         'title': 'transporte vip',
         'vehiculosvip': vehiculosvip,
 
+        'dat_trayecto': dat_trayecto,
         'v_trayecto': valor_trayecto,
-        'start_of_route': start_of_route,
-        'end_of_route': end_of_route,
-        "distance": distance,
-        "duration": duration,
-        'date': date,
+        'v_trayecto_dos': v_trayecto_dos,
         'time': hours,
-        'store': store,
         'kilometros': kilometros,
         'recorrido': recorrido,
-        'time_return': time_return,
-        'det_retorno': det_retorno
+
     })
