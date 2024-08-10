@@ -1,8 +1,15 @@
-#map {
+/* #map,
+#mapret {
   float: none;
   height: 100%;
   width: 100%;
-}
+} */
+
+/* #mapret {
+  margin: 20px auto;
+  width: 40%;
+  height: 500px;
+} */
 
 #contentMap {
   float: left;
@@ -18,7 +25,10 @@
 
 #maps_reserve {
   /* border: 1px solid yellow; */
-  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
   height: 500px;
   margin-bottom: 25px;
   /* margin: 1%; */
@@ -165,7 +175,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 10px 18px;
   box-shadow: 0px 0px 7px #bbbbbb;
 }
 
@@ -333,24 +343,20 @@
   padding: 50px 40px;
 }
 
-.det-resesrva .sub-title-2 {
-  color: white;
-  text-transform: uppercase;
-  font-size: 20px;
-}
-
-.det-resesrva .sub-title-3 {
+.sub-title-3 {
   color: white;
   /* text-transform: uppercase; */
+  font-family: "Montserrat Bold";
   font-size: 15px;
   margin-bottom: 5px;
+  text-transform: capitalize;
 }
 
 .detail-v {
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
   width: 100%;
+  margin-top: 30px;
 }
 
 .box-det-des,

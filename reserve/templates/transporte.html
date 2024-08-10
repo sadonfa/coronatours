@@ -1,623 +1,327 @@
-{% extends 'layouts/layout.html' %} 
+{% extends 'layouts/layout.html' %}
 {% load humanize %}
-{% block title %} {{title}} {% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
-<datalist id="bookmark_list_start">
-  <option>{{start_of_route}}</option>
-</datalist>
-<datalist id="bookmark_list_end">
-  <option>{{end_of_route}}</option>
-</datalist>
-
+  <datalist id="bookmark_list_start">
+    <option>{{ start_of_route }}</option>
+  </datalist>
+  <datalist id="bookmark_list_end">
+    <option>{{ end_of_route }}</option>
+  </datalist>
+  {% comment %}
 <div class="c-map">
+  {% endcomment %}
   <!-- Este es el menu para los vehiculos -->
+  {% comment %}
   <div class="menu_flotante">
-    <h2 class="sub-title-2">Seleccione su vehiculo</h2>
-
-    <!-- Auto Compartido -->
-
-    {% if time > 7 and time < 19 and kilometros < 31 %}
-
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.7.name}} </label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.7.name}}"
-          />
-
-          <label class="c-val" for="value"
-            >$ {{ v_trayecto.compartido|intcomma }} COP</label
-          >
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.compartido }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.7.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            <select name="comp-cantidad" id="">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-            </select>
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.7.image.url}}" alt="{{ transports.7.name }}" />
-        </div>
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-
-      
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.0.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-    {% endif %}
-
-    <!-- Auto estandar -->
-    {% if recorrido == "ida" %}
-     <form method="POST" action="{% url 'check' %}">
-
-      {% else %}
-
-      <form method="POST" action="{% url 'retorno' %}">
-        <input type="hidden" name="store" value="{{store}}" />
-    {% endif %}
-   
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.1.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.1.name}}"
-          />
-
-          <label class="c-val" for="value"
-            >$ {{ v_trayecto.standar|intcomma }} COP</label
-          >
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.standar }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.1.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.1.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.1.image.url}}" alt="{{ transports.1.name }}" />
-        </div>
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.1.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-
-    <!-- Mini Van -->
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.3.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.3.name}}"
-          />
-
-          <label class="c-val" for="value"
-            >$ {{ v_trayecto.mini_van|intcomma }} COP
-          </label>
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.mini_van }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.3.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.3.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.3.image.url}}" alt="{{ transports.3.name }}" />
-        </div>
-
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.3.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-
-    <!-- Van estandar -->
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.2.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.2.name}}"
-          />
-
-          <label class="c-val" for="value"
-            >$ {{ v_trayecto.van_standar|intcomma }} COP</label
-          >
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.van_standar }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.2.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.2.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.2.image.url}}" alt="{{ transports.2.name }}" />
-        </div>
-
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.2.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-
-    <!-- Micro Bus -->
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.0.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.0.name}}"
-          />
-
-          <label class="c-val" for="value"
-            >$ {{ v_trayecto.micro_bus|intcomma }} COP</label
-          >
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.micro_bus }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.0.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.0.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.0.image.url}}" alt="{{ transports.0.name }}" />
-        </div>
-
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.0.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-
-    <!-- Buseta -->
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.4.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.4.name}}"
-          />
-
-          <label class="c-val" for="value">$ {{ v_trayecto.buseta|intcomma }} COP</label>
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.buseta }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.4.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.4.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.4.image.url}}" alt="{{ transports.4.name }}" />
-        </div>
-
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.4.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-
-    <!-- Bus -->
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.5.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.5.name}}"
-          />
-
-          <label class="c-val" for="value">$ {{ v_trayecto.bus|intcomma }} COP</label>
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.bus }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.5.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.5.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.5.image.url}}" alt="{{ transports.5.name }}" />
-        </div>
-
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.5.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-
-    <!-- SUV -->
-    <form method="POST" action="{% url 'check' %}">
-      {% csrf_token %}
-      <div class="box-art">
-        <div class="car-n">
-          <label class="c-title" for="name">{{transports.6.name}}</label>
-          <input
-            type="hidden"
-            class="c-title"
-            id="name"
-            name="name"
-            value="{{transports.6.name}}"
-          />
-
-          <label class="c-val" for="value">$ {{ v_trayecto.SUV|intcomma }} COP</label>
-          <input
-            type="hidden"
-            class="c-val"
-            id="value"
-            name="value"
-            value="{{ v_trayecto.SUV }}"
-          />
-        </div>
-        <div class="car-d">
-          <p>
-            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-            {{transports.6.amount_luggage}}
-          </p>
-          <p>
-            <i class="fa-sharp fa-solid fa-person"></i>
-            {{transports.6.Number_passengers}}
-          </p>
-        </div>
-        <div class="car-i">
-          <img src="{{transports.6.image.url}}" alt="{{ transports.6.name }}" />
-        </div>
-
-        <input
-          type="submit"
-          onclick="hizoClick()"
-          class="btn"
-          value="Reservar"
-        />
-      </div>
-      {% if time_return %}
-      <input type="hidden" name="time_return" value="{{time_return}}" />
-      {% endif %}
-      <input type="hidden" value="{{recorrido}}" name="recorrido" />
-      <input type="hidden" name="date" value="{{date}}" />
-
-      <input type="hidden" name="time" value="{{time}}" />
-      <input type="hidden" name="id" value="{{transports.6.id }}" />
-      <input type="hidden" name="origen" value="{{start_of_route}}" />
-      <input type="hidden" name="destino" value="{{end_of_route}}" />
-    </form>
-    
-  </div>
-
-  <div id="maps_reserve">
-    <!-- Con este div se esta invocando el mapa, si este div no se muestra un mapa -->
-
-    <div id="map"></div>
-
-    {% if recorrido == "ida" %}
-    
-    <div class="separador"></div>
-    <div class="det-resesrva">
-      <h3 class="sub-title-3">Detalles de viaje</h3>
-      <div class="detail-v">
-        <div class="box-det">
-          <h3 class="sub-title-3">Fecha de recogida</h3>
-          {{ date }}
-        </div>
-        <div class="box-det">
-          <h3 class="sub-title-3">Hora de recogida</h3>
-          {{ time }}
-        </div>
-        <div class="box-det-des">
-          <h3 class="sub-title-3">ruta</h3>
-          <span id="start" onchange="calcRoute();" value="{{start_of_route}}"
-            >{{start_of_route}}</span
-          >
-          <hr />
-          <span id="end" onchange="calcRoute();" value="{{end_of_route}}"
-            >{{end_of_route}}</span
-          >
-        </div>
-        <div class="box-det-des">
-          <h3 class="sub-title-3">Distancia</h3>
-          <span id="distancia-d"></span>
-        </div>
-        <div class="box-det-des">
-          <h3 class="sub-title-3">Duracion</h3>
-          <span id="duracion-d"></span>
-        </div>
-      </div>
-    </div>
-    
-    {% else %}
-    <div class="separador"></div>
-    <div class="det-resesrva">
-      <h3 class="sub-title-3">Detalles de viaje</h3>
-      <div class="detail-v">
-        <div class="box-det">
-          <h3 class="sub-title-3">Fecha de recogida</h3>
-          {{ date }}
-        </div>
-        <div class="box-det">
-          <h3 class="sub-title-3">Hora de recogida</h3>
-          {{ time }}
-        </div>
-        <div class="box-det-des">
-          <h3 class="sub-title-3">ruta</h3>
-          <span id="start" onchange="calcRoute();" value="{{start_of_route}}"
-            >{{start_of_route}}</span
-          >
-          <hr />
-          <span id="end" onchange="calcRoute();" value="{{end_of_route}}"
-            >{{end_of_route}}</span
-          >
-        </div>
-        <div class="box-det-des">
-          <h3 class="sub-title-3">Distancia</h3>
-          <span id="distancia-d"></span>
-        </div>
-        <div class="box-det-des">
-          <h3 class="sub-title-3">Duracion</h3>
-          <span id="duracion-d"></span>
-        </div>
-      </div>
-    </div>
-    
-      <div class="det-resesrva">
-        <h3 class="sub-title-3">Detalles de viaje 2</h3>
-        <div class="detail-v">
-          <div class="box-det">
-            <h3 class="sub-title-3">Fecha de recogida</h3>
-            {{ det_retorno.date }}
+  {% endcomment %}
+  <div class="select-vehiculos">
+    <div class="vehiculos">
+      <h2 class="title-2">Seleccione su vehiculo</h2>
+      <!-- Auto Compartido -->
+      {% if time > 7 and time < 19 and kilometros < 31 %}
+        <form method="POST" action="{% url 'check' %}">
+          {% csrf_token %}
+          <div class="box-art">
+            <div class="car-n">
+              <label class="c-title" for="name">{{ compartido.0.name }}</label>
+              <input type="hidden"
+                     class="c-title"
+                     id="name"
+                     name="name"
+                     value="{{ compartido.0.name }}" />
+              <label class="c-val" for="value">$ {{ v_trayecto.compartido|intcomma }} COP</label>
+              <input type="hidden"
+                     class="c-val"
+                     id="value"
+                     name="value"
+                     value="{{ v_trayecto.compartido }}" />
+            </div>
+            <div class="car-d">
+              <p>
+                <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
+                {{ compartido.0.amount_luggage }}
+              </p>
+              <p>
+                <i class="fa-sharp fa-solid fa-person"></i>
+                <select name="comp-cantidad" id="">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                </select>
+              </p>
+            </div>
+            <div class="car-i">
+              <img src="{{ compartido.0.image.url }}" alt="{{ compartido.0.name }}" />
+            </div>
+            <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
           </div>
-          <div class="box-det">
-            <h3 class="sub-title-3">Hora de recogida</h3>
-            {{ det_retorno.time }}
+          {% if time_return %}<input type="hidden" name="time_return" value="{{ time_return }}" />{% endif %}
+          <input type="hidden" value="{{ recorrido }}" name="recorrido" />
+          <input type="hidden" name="date" value="{{ date }}" />
+          <input type="hidden" name="time" value="{{ time }}" />
+          <input type="hidden" name="id" value="{{ transports.0.id }}" />
+          <input type="hidden" name="origen" value="{{ start_of_route }}" />
+          <input type="hidden" name="destino" value="{{ end_of_route }}" />
+          <input type="hidden" name="distance_ret" value="{{ det_retorno.distance }}" />
+          <input type="hidden" name="duration_ret" value="{{ duration_ret }}" />
+        </form>
+      {% endif %}
+      <!-- Auto estandar -->
+      {% for vehiculo in transports %}
+        <form method="POST" action="{% url 'check' %}">
+          {% csrf_token %}
+          <div class="box-art">
+            <div class="car-n">
+              <label class="c-title" for="name">{{ vehiculo.name }}</label>
+              <input type="hidden"
+                     class="c-title"
+                     id="name"
+                     name="name"
+                     value="{{ vehiculo.name }}" />
+              {% comment %} <label class="c-val" for="value">$ {{ v_trayecto.standar|intcomma }} COP</label>
+              <input type="hidden"
+                     class="c-val"
+                     id="value"
+                     name="value"
+                     value="{{ v_trayecto.standar }}" /> {% endcomment %}
+              {% if vehiculo.tipo == 'compartido' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.compartido|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.compartido }}" />
+                <input type="hidden"
+                       class="c-val"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.compartido }}" />
+              {% elif vehiculo.tipo == 'standar' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.standar|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.standar }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.standar }}" />
+              {% elif vehiculo.tipo == 'mini_van' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.mini_van|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.mini_van }}" />
+                <input type="hidden"
+                       class="c-val"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.mini_van }}" />
+              {% elif vehiculo.tipo == 'van_standar' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.van_standar|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.van_standar }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.van_standar }}" />
+              {% elif vehiculo.tipo == 'micro_bus' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.micro_bus|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.micro_bus }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.micro_bus }}" />
+              {% elif vehiculo.tipo == 'buseta' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.buseta|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.buseta }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.buseta }}" />
+              {% elif vehiculo.tipo == 'bus' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.bus|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.bus }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.bus }}" />
+              {% elif vehiculo.tipo == 'SUV' %}
+                <label class="c-val" for="value">$ {{ v_trayecto.SUV|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.SUV }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.SUV }}" />
+              {% endif %}
+            </div>
+            <div class="car-d">
+              <p>
+                <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
+                {{ vehiculo.amount_luggage }}
+              </p>
+              <p>
+                <i class="fa-sharp fa-solid fa-person"></i>
+                {{ vehiculo.Number_passengers }}
+              </p>
+            </div>
+            <div class="car-i">
+              <img src="{{ vehiculo.image.url }}" alt="{{ vehiculo.name }}" />
+            </div>
+            <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
+          </div>
+          {% if dat_trayecto.time_ret %}
+            <input type="hidden" name="time_return" value="{{ dat_trayecto.time_ret }}" />
+          {% endif %}
+          <input type="hidden" value="{{ recorrido }}" name="recorrido" />
+          <input type="hidden" name="date" value="{{ date }}" />
+          <input type="hidden" name="time" value="{{ time }}" />
+          <input type="hidden" name="id" value="{{ vehiculo.id }}" />
+          <input type="hidden" name="origen" value="{{ start_of_route }}" />
+          <input type="hidden" name="destino" value="{{ end_of_route }}" />
+        </form>
+      {% endfor %}
+    </div>
+    <div class="map-info">
+      <!-- Con este div se esta invocando el mapa, si este div no se muestra un mapa -->
+      {% if recorrido == "ida" %}
+        <h3 class="title-2">Detalles de viaje</h3>
+        <div id="map"></div>
+        <div id="mapret" style="display:none"></div>
+        <div class="info-viaje">
+          <div class="detail-v">
+            <div class="box-det">
+              <h3 class="sub-title-3">Fecha de recogida</h3>
+              {{ dat_trayecto.date }}
+            </div>
+            <div class="box-det">
+              <h3 class="sub-title-3">Hora de recogida</h3>
+              {{ dat_trayecto.time }}
+            </div>
           </div>
           <div class="box-det-des">
             <h3 class="sub-title-3">ruta</h3>
-            <span id="start" onchange="calcRoute();" value="{{start_of_route}}"
-              >{{det_retorno.start_of_route}}</span
-            >
+            <span id="start" onchange="calcRoute();" value="{{ dat_trayecto.start }}">{{ dat_trayecto.start }}</span>
             <hr />
-            <span id="end" onchange="calcRoute();" value="{{end_of_route}}"
-              >{{end_of_route}}</span
-            >
+            <span id="end" onchange="calcRoute();" value="{{ dat_trayecto.end }}">{{ dat_trayecto.end }}</span>
+          </div>
+          <div class="detail-v">
+            <div class="box-det-des">
+              <h3 class="sub-title-3">Distancia</h3>
+              <span id="distancia-d">{{ dat_trayecto.distance }}</span>
+            </div>
+            <div class="box-det-des">
+              <h3 class="sub-title-3">Duracion</h3>
+              <span id="duracion-d">{{ dat_trayecto.duration }}</span>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <h3 class="title-2">Detalles de viaje</h3>
+        <div id="map"></div>
+        <div class="info-viaje">
+          <div class="detail-v">
+            <div class="box-det">
+              <h3 class="sub-title-3">Fecha de recogida</h3>
+              {{ dat_trayecto.date }}
+            </div>
+            <div class="box-det">
+              <h3 class="sub-title-3">Hora de recogida</h3>
+              {{ dat_trayecto.time }}
+            </div>
           </div>
           <div class="box-det-des">
-            <h3 class="sub-title-3">Distancia</h3>
-            <span id="distancia-d"></span>
+            <h3 class="sub-title-3">ruta</h3>
+            <span id="start" onchange="calcRoute();" value="{{ dat_trayecto.start }}">{{ dat_trayecto.start }}</span>
+            <hr />
+            <span id="end" onchange="calcRoute();" value="{{ dat_trayecto.end }}">{{ dat_trayecto.end }}</span>
+          </div>
+          <div class="detail-v">
+            <div class="box-det-des">
+              <h3 class="sub-title-3">Distancia</h3>
+              <span id="distancia-d">{{ dat_trayecto.distance }} km</span>
+            </div>
+            <div class="box-det-des">
+              <h3 class="sub-title-3">Duracion</h3>
+              <span id="duracion-d">{{ dat_trayecto.duration }} min</span>
+            </div>
+          </div>
+        </div>
+        <h3 class="title-2">Detalles de viaje 2</h3>
+        <div id="mapret"></div>
+        <div class="info-viaje">
+          <div class="detail-v">
+            <div class="box-det">
+              <h3 class="sub-title-3">Fecha de recogida</h3>
+              {{ dat_trayecto.date_ret }}
+            </div>
+            <div class="box-det">
+              <h3 class="sub-title-3">Hora de recogida</h3>
+              {{ dat_trayecto.time_ret }}
+            </div>
           </div>
           <div class="box-det-des">
-            <h3 class="sub-title-3">Duracion</h3>
-            <span id="duracion-d"></span>
+            <h3 class="sub-title-3">ruta</h3>
+            <span id="start_ret"
+                  onchange="calcRoute();"
+                  value="{{ dat_trayecto.start_r }}">{{ dat_trayecto.start_r }}</span>
+            <hr />
+            <span id="end_ret" onchange="calcRoute();" value="{{ dat_trayecto.end_r }}">{{ dat_trayecto.end_r }}</span>
+          </div>
+          <div class="detail-v">
+            <div class="box-det-des">
+              <h3 class="sub-title-3">Distancia</h3>
+              <span id="distanciadb">{{ dat_trayecto.distance_ret }} km</span>
+            </div>
+            <div class="box-det-des">
+              <h3 class="sub-title-3">Duracion</h3>
+              <span id="duraciondb">{{ dat_trayecto.duration_ret }} min</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  
-  {% endif %} 
+    {% endif %}
+  </div>
+{% endblock %}
 </div>
-  {% endblock %}
 </div>

@@ -18,6 +18,7 @@ class VehiculosVip(models.Model):
     class Meta:
         verbose_name="Vehiculo VIP"
         verbose_name_plural="Vehiculos VIP"
+        ordering=['order']
 
     def __str__(self):
         return self.name

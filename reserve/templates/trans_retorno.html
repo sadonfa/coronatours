@@ -1,61 +1,107 @@
 {% extends 'layouts/layout.html' %} {% block title %} {{title}} {% endblock %}
 {% block content %} {% load humanize %}
-<!-- Auto estandar -->
-{% if recorrido == "ida" %}
-<form method="POST" action="{% url 'check' %}">
-  {% else %}
 
-  <form method="POST" action="{% url 'home' %}">
-    {% endif %} {% csrf_token %}
-    <div class="box-art">
-      <div class="car-n">
-        <label class="c-title" for="name">{{transports.1.name}}</label>
-        <input
-          type="hidden"
-          class="c-title"
-          id="name"
-          name="name"
-          value="{{transports.1.name}}"
-        />
+<div class="select-vehiculos">
+  <div class="vehiculos">
+    {% for vehiculo in transports %}
 
-        <label class="c-val" for="value"
-          >$ {{ v_trayecto.standar|intcomma }} COP</label
-        >
+    <form method="POST" action="{% url 'check' %}">
+      <div class="box-art">
+        <div class="car-n">
+          <label class="c-title" for="name">{{vehiculo.name}}</label>
+          <input
+            type="hidden"
+            class="c-title"
+            id="name"
+            name="name"
+            value="{{vehiculo.name}}"
+          />
+
+          <label class="c-val" for="value"
+            >$ {{ v_trayecto.standar|intcomma }} COP</label
+          >
+          <input
+            type="hidden"
+            class="c-val"
+            id="value"
+            name="value"
+            value="{{ v_trayecto.standar }}"
+          />
+        </div>
+        <div class="car-d">
+          <p>
+            <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
+            {{vehiculo.amount_luggage}}
+          </p>
+          <p>
+            <i class="fa-sharp fa-solid fa-person"></i>
+            {{vehiculo.Number_passengers}}
+          </p>
+        </div>
+        <div class="car-i">
+          <img src="{{vehiculo.image.url}}" alt="{{vehiculo.name }}" />
+        </div>
         <input
-          type="hidden"
-          class="c-val"
-          id="value"
-          name="value"
-          value="{{ v_trayecto.standar }}"
+          type="submit"
+          onclick="hizoClick()"
+          class="btn"
+          value="Reservar"
         />
       </div>
-      <div class="car-d">
-        <p>
-          <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-          {{transports.1.amount_luggage}}
-        </p>
-        <p>
-          <i class="fa-sharp fa-solid fa-person"></i>
-          {{transports.1.Number_passengers}}
-        </p>
+
+      {% if time_return %}
+      <input type="hidden" name="time_return" value="{{time_return}}" />
+      {% endif %}
+
+      <input type="hidden" value="{{recorrido}}" name="recorrido" />
+      <input type="hidden" name="date" value="{{date}}" />
+      <input type="hidden" name="time" value="{{time}}" />
+      <input type="hidden" name="id" value="{{vehiculo.id }}" />
+      <input type="hidden" name="origen" value="{{start_of_route}}" />
+      <input type="hidden" name="destino" value="{{end_of_route}}" />
+    </form>
+
+    {% endfor %}
+  </div>
+
+  <div class="map-info">
+    <div id="mapret"></div>
+
+    <div class="info-viaje">
+      <h3 class="sub-title-3">Detalles de viaje 2</h3>
+      <div class="detail-v">
+        <div class="box-det">
+          <h3 class="sub-title-3">Fecha de recogida</h3>
+          {{ det_retorno.date }}
+        </div>
+        <div class="box-det">
+          <h3 class="sub-title-3">Hora de recogida</h3>
+          {{ det_retorno.time }}
+        </div>
+        <div class="box-det-des">
+          <h3 class="sub-title-3">ruta</h3>
+          <span
+            id="start_ret"
+            onchange="calcRoute();"
+            value="{{det_return.start}}"
+            >{{det_return.start}}</span
+          >
+          <hr />
+          <span id="end_ret" onchange="calcRoute();" value="{{det_return.end}}"
+            >{{det_return.end}}</span
+          >
+        </div>
+        <div class="box-det-des">
+          <h3 class="sub-title-3">Distancia</h3>
+          <span id="distanciadb">{{det_return.distance}} km</span>
+        </div>
+        <div class="box-det-des">
+          <h3 class="sub-title-3">Duracion</h3>
+          <span id="duraciondb">{{det_return.duration}} min</span>
+        </div>
       </div>
-      <div class="car-i">
-        <img src="{{transports.1.image.url}}" alt="{{ transports.1.name }}" />
-      </div>
-      <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
     </div>
+  </div>
+</div>
 
-    {% if time_return %}
-    <input type="hidden" name="time_return" value="{{time_return}}" />
-    {% endif %}
-
-    <input type="hidden" value="{{recorrido}}" name="recorrido" />
-    <input type="hidden" name="date" value="{{date}}" />
-    <input type="hidden" name="time" value="{{time}}" />
-    <input type="hidden" name="id" value="{{transports.1.id }}" />
-    <input type="hidden" name="origen" value="{{start_of_route}}" />
-    <input type="hidden" name="destino" value="{{end_of_route}}" />
-  </form>
-
-  {% endblock %}
-</form>
+{% endblock %}

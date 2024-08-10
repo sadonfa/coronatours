@@ -1,29 +1,26 @@
-{% extends 'layouts/layout.html' %} {% block title %} {{ title }} {% endblock %}
-{% load humanize %} {% block content %}
-
-<h1>{{ title }}</h1>
-
-{% if opcion != transporte %}
-<form
-  class="form-booking"
-  action="{% url 'detail_booking' det_booking.origen %}"
-  method="post"
->
-  {% else %}
-  <form
-    class="form-booking"
-    action="{% url 'detail_booking' det_booking.id %}"
-    method="post"
-  >
-    {% endif %} {% csrf_token %}
+{% extends "layouts/layout.html" %}
+{% block title %}
+  {{ title }}
+{% endblock title %}
+{% load humanize %}
+{% block content %}
+  <h1>{{ title }}</h1>
+  {% comment %} {% if opcion != transporte %}
+    <form class="form-booking" action="#" method="post">
+{% else %} {% endcomment %}
+  <form class="form-booking"
+        action="{% url 'detail_booking' det_booking.id %}"
+        method="post">
+    {% comment %} {% endif %} {% endcomment %}
+    {% csrf_token %}
     <div class="box-form-booking">
       <div class="box-form-item">
-        <label class="sub-title-3" for="">nombres</label>
-        <input type="text" name="name" id="" />
+        <label class="sub-title-3">nombres</label>
+        <input type="text" name="name" />
       </div>
       <div class="box-form-item">
-        <label class="sub-title-3" for="">apellidos</label>
-        <input type="text" name="lastname" id="" />
+        <label class="sub-title-3">apellidos</label>
+        <input type="text" name="lastname" />
       </div>
     </div>
     <div class="box-form-booking">
@@ -31,141 +28,103 @@
         <label class="sub-title-3" for="">telefono</label>
         <input id="phone" type="tel" name="phone" />
       </div>
-
       <div class="box-form-item">
-        <label class="sub-title-3" for="">correo</label>
-        <input type="email" name="mail" id="" />
+        <label class="sub-title-3">correo</label>
+        <input type="email" name="mail" />
       </div>
     </div>
     <div class="box-form-booking">
       <div class="box-form-item">
-        <label class="sub-title-3" for="">Nacionalidad</label>
-        <input type="text" name="contry" id="" />
+        <label class="sub-title-3">Nacionalidad</label>
+        <input type="text" name="contry" />
       </div>
       <div class="box-form-item">
-        <label class="sub-title-3" for="">ciudad de origen</label>
-        <input type="text" name="city" id="" />
+        <label class="sub-title-3">ciudad de origen</label>
+        <input type="text" name="city" />
       </div>
     </div>
-
     {% if opcion != transporte %}
-
-    <input type="hidden" name="date" value="{{ det_booking.date }}" readonly />
-    <input type="hidden" name="time" value="{{ det_booking.time }}" readonly />
-    <input type="hidden" name="id" value="{{det_booking.id }}" readonly />
-    <input
-      type="hidden"
-      name="origen"
-      value="{{ det_booking.origen }}"
-      readonly
-    />
-    <input
-      type="hidden"
-      name="destino"
-      value="{{ det_booking.destino }}"
-      readonly
-    />
-    <input type="hidden" name="opcion" value="{{ opcion }}" readonly />
-
-    <div class="box-form-booking">
-      <div class="box-form-item">
-        <label class="sub-title-3" for=""> Aerolinea </label>
-        <input type="text" name="aerolinea" />
+      <input type="hidden" name="date" value="{{ det_booking.date }}" readonly />
+      <input type="hidden" name="time" value="{{ det_booking.time }}" readonly />
+      <input type="hidden" name="id" value="{{ det_booking.id }}" readonly />
+      <input type="hidden" name="origen" value="{{ det_booking.origen }}" readonly />
+      <input type="hidden"
+             name="destino"
+             value="{{ det_booking.destino }}"
+             readonly />
+      <input type="hidden" name="opcion" value="{{ opcion }}" readonly />
+      <div class="box-form-booking">
+        <div class="box-form-item">
+          <label class="sub-title-3" for="">Aerolinea</label>
+          <input type="text" name="aerolinea" />
+        </div>
+        <div class="box-form-item">
+          <label class="sub-title-3" for="">Numero de vuelo</label>
+          <input type="text" name="nvuelo" />
+        </div>
       </div>
-      <div class="box-form-item">
-        <label class="sub-title-3" for="">Numero de vuelo </label>
-        <input type="text" name="nvuelo" />
+      <div class="box-form-booking">
+        <div class="box-form-item">
+          <label class="sub-title-3" for="">Vehiculo</label>
+          <input type="text" name="tour" value="{{ det_booking.name }}" readonly />
+        </div>
+        {% if recorrido == 'ida' %}
+          <div class="box-form-item">
+            <label class="sub-title-3" for="">valor</label>
+            <input type="hidden" name="cash" value="{{ cash|safe }}" />
+            <input type="text" value="$ {{ cash|intcomma }} COP" readonly />
+            <input type="hidden" name="hotel" value="transporte" />
+          </div>
+        {% else %}
+          <div class="box-form-item">
+            <label class="sub-title-3" for="">valor total: ida y vuelta</label>
+            <input type="hidden" name="cash" value="{{ cash|safe }}" readonly />
+            <input type="text" value="$ {{ cash|intcomma }} COP" readonly />
+            <input type="hidden" name="hotel" value="transporte" />
+          </div>
+        {% endif %}
       </div>
-    </div>
-
-    <div class="box-form-booking">
-      <div class="box-form-item">
-        <label class="sub-title-3" for=""> Vehiculo </label>
-        <input
-          type="text"
-          name="tour"
-          value="{{ det_booking.name }}"
-          readonly
-        />
-      </div>
-
-      {% if recorrido == 'ida' %}
-
-      <div class="box-form-item">
-        <label class="sub-title-3" for=""> valor </label>
-        <input type="hidden" name="cash" value="{{ cash|safe }}" />
-        <input type="text" value="$ {{ cash|intcomma }} COP" readonly />
-        <input type="hidden" name="hotel" value="transporte" />
-      </div>
-
-      {% else %}
-      <div class="box-form-item">
-        <label class="sub-title-3" for=""> valor total: ida y vuelta </label>
-        <input type="hidden" name="cash" value="{{ cash|safe }}" readonly />
-        <input type="text" value="$ {{ cash|intcomma }} COP" readonly />
-        <input type="hidden" name="hotel" value="transporte" />
-      </div>
-
-      {% endif %}
-    </div>
-
     {% else %}
-
-    <div class="box-form-booking">
-      <div class="box-form-one">
-        <label class="sub-title-3" for="">hotel </label>
-        <input type="text" name="hotel" id="" />
+      <div class="box-form-booking">
+        <div class="box-form-one">
+          <label class="sub-title-3">hotel</label>
+          <input type="text" name="hotel" />
+        </div>
       </div>
-    </div>
-
-    <div class="box-form-booking">
-      <div class="box-form-item">
-        <label class="sub-title-3" for="">Tour </label>
-        <input
-          type="text"
-          name="tour"
-          value="{{ det_booking.name }}"
-          readonly
-        />
+      <div class="box-form-booking">
+        <div class="box-form-item">
+          <label class="sub-title-3">Tour</label>
+          <input type="text" name="tour" value="{{ det_booking.name }}" readonly />
+        </div>
+        <div class="box-form-item">
+          <label class="sub-title-3">valor Por persona</label>
+          <input type="number"
+                 name="cash"
+                 value="{{ det_booking.cash|safe }}"
+                 readonly />
+        </div>
       </div>
-      <div class="box-form-item">
-        <label class="sub-title-3" for="">valor Por persona</label>
-        <input
-          type="number"
-          name="cash"
-          value="{{ det_booking.cash|safe }}"
-          readonly
-        />
-      </div>
-    </div>
-
     {% endif %}
-
     <div class="box-form-last">
       {% if det_booking.name != "Van Compartida" %}
-      <div class="box-form-mult">
-        <label class="sub-title-3" for="">cantidad adultos</label>
-        <select name="adults" id="">
-          {% for passenger in passengers_list %}
-          <option value="{{passenger}}">{{ passenger }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      {% endif %} {% comment %}
+        <div class="box-form-mult">
+          <label class="sub-title-3" for="">cantidad adultos</label>
+          <select name="adults">
+            {% for passenger in passengers_list %}<option value="{{ passenger }}">{{ passenger }}</option>{% endfor %}
+          </select>
+        </div>
+      {% endif %}
+      {% comment %}
       <div class="box-form-mult">
         <label class="sub-title-3" for="">cantidad de niños </label>
 
         <select name="childre" id="">
-          {% for passenger in passengers_list %}
-          <option value="{{passenger}}">{{ passenger }}</option>
-          {% endfor %}
+          {% for passenger in passengers_list %}<option value="{{passenger}}">{{ passenger }}</option>{% endfor %}
         </select>
       </div>
       {% endcomment %}
       <input type="submit" class="btn" value="Continuar" />
     </div>
   </form>
-
-  {% endblock %}
+{% endblock content %}
 </form>

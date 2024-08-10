@@ -9,12 +9,15 @@ from .models import Booking
 def check(request, id=False):
     d_reserve = Reserver.objects.all()
     transport = Vehiculos.objects.get(id=request.POST['id'])
-    # transport = Vehiculos.objects.all()
-    if request.POST['recorrido'] == "idayvuelta":
+    viaje = request.POST['recorrido']
+    
+
+    if viaje == "idayvuelta":
         hora_ret =  request.POST['time_return']
+        cash_ret = int(request.POST['value_d'])
     else:
         hora_ret = 0
-    # print(transport.Number_passengers)
+
     passengers_list = []
     range_passengers = transport.Number_passengers + 1
 
@@ -56,7 +59,7 @@ def check(request, id=False):
                 cash = int(can_comp) * int(cash)
 
         else:
-            print("no es compartido")
+            # no es compartido
             if request.POST['recorrido'] == "ida":
                 det_booking = {
                     "name": request.POST['name'],
@@ -89,6 +92,8 @@ def check(request, id=False):
                     print("hora dividido" + hora_val)
 
                 else:
+                    
+
                     v_time = str(det_booking['time'])
                     # print(tim)
                     segmentar = list(v_time)
@@ -110,11 +115,12 @@ def check(request, id=False):
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
                     cash = int(request.POST['value']) + 20000
                     print("Se esta enviando este, hora nocturna ")
-                    print("este es el valor --> " + cash)
+                    print( cash)
                 else:
                     cash = request.POST['value']
                     print("Se esta enviando este, hora diurna ")
             else:
+                #idayvuelta
                 det_booking = {
                     "name": request.POST['name'],
                     "origen": request.POST['origen'],
@@ -126,9 +132,10 @@ def check(request, id=False):
                     "opcion": "transporte"
                 }
                 opcion = "transporte"
-                cash = int(request.POST['value']) * 2
-                print("Este es la hora actual" + str(det_booking['time']))
+                cash = int(request.POST['value']) + int(request.POST['value_d'])
+                print("Este es la hora actual --> " + str(det_booking['time']))
                 
+                print( "este es el valor de la segunda ruta " + request.POST['value_d'] )
 
                 #realizo arreglo de hora
                 t = list(det_booking['time'])
@@ -167,15 +174,15 @@ def check(request, id=False):
            
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6) :
                     if int(hora_regreso) in range(21, 24) or int(hora_regreso) in range(0, 6):
-                        cash = (int(request.POST['value']) * 2) + 40000
+                        cash = (int(request.POST['value']) + cash_ret) + 40000
                         print("Se esta enviando este, hora nocturna ")
                         print(cash)
                     else:
-                        cash = (int(request.POST['value']) * 2) + 20000
+                        cash = (int(request.POST['value']) + cash_ret) + 20000
                         print("Se esta enviando este, hora nocturna ")
                         print(cash)
                 else:
-                    cash = int(request.POST['value']) * 2
+                    cash = int(request.POST['value']) + cash_ret
                     print("Se esta enviando este, hora diurna ")
 
     else:
@@ -184,7 +191,7 @@ def check(request, id=False):
         opcion = "tour"
 
 
-    print("este es el valor --> " + cash)
+    print("este es el valor --> " + str(cash))
 
     return render(request, 'check.html', {
         'title': 'Informacion de reserva',

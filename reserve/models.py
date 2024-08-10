@@ -109,6 +109,7 @@ class Vehiculos(models.Model):
     class Meta:
         verbose_name="Vehiculo"
         verbose_name_plural="Vehiculos"
+        ordering=['order']
 
     def __str__(self):
         return self.name

@@ -165,6 +165,42 @@
     width: 80%;
     border-radius: 5px;
   }
+  .dato-map {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dato-map #map,
+  .dato-map .info-render {
+    width: 80%;
+  }
+
+  .dato-map #map {
+    order: -1;
+  }
+
+  .select-vehiculos {
+    flex-direction: column;
+    align-items: center;
+  }
+  .vehiculos,
+  .map-info {
+    width: 80%;
+  }
+
+  .map-info {
+    order: -1;
+  }
+
+  .datos-ruta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .datos-ruta .info-render {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 540px) {
