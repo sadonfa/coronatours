@@ -216,7 +216,6 @@ def transvip(request):
     return render(request, "transvip.html", {
         'title': 'transporte vip',
         'vehiculosvip': vehiculosvip,
-
         'dat_trayecto': dat_trayecto,
         'v_trayecto': valor_trayecto,
         'v_trayecto_dos': v_trayecto_dos,

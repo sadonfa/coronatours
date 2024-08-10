@@ -30,6 +30,11 @@
                        id="value"
                        name="value"
                        value="{{ v_trayecto.vehiculo_lujo }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.vehiculo_lujo }}" />
               {% elif vehiculo.tipo == 'camioneta' %}
                 <label class="c-val" for="value">$ {{ v_trayecto.camioneta|intcomma }} COP</label>
                 <input type="hidden"
@@ -37,6 +42,11 @@
                        id="value"
                        name="value"
                        value="{{ v_trayecto.camioneta }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.camioneta }}" />
               {% elif vehiculo.tipo == 'lujo' %}
                 <label class="c-val" for="value">$ {{ v_trayecto.lujo|intcomma }} COP</label>
                 <input type="hidden"
@@ -44,6 +54,11 @@
                        id="value"
                        name="value"
                        value="{{ v_trayecto.lujo }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.lujo }}" />
               {% elif vehiculo.tipo == 'mini_van_lujo' %}
                 <label class="c-val" for="value">$ {{ v_trayecto.mini_van_lujo|intcomma }} COP</label>
                 <input type="hidden"
@@ -51,6 +66,11 @@
                        id="value"
                        name="value"
                        value="{{ v_trayecto.mini_van_lujo }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.mini_van_lujo }}" />
               {% elif vehiculo.tipo == 'van_lujo' %}
                 <label class="c-val" for="value">$ {{ v_trayecto.van_lujo|intcomma }} COP</label>
                 <input type="hidden"
@@ -58,6 +78,11 @@
                        id="value"
                        name="value"
                        value="{{ v_trayecto.van_lujo }}" />
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value_d"
+                       value="{{ v_trayecto_dos.van_lujo }}" />
               {% endif %}
             </div>
             <div class="car-d">
