@@ -181,18 +181,6 @@
                        id="value"
                        name="value_d"
                        value="{{ v_trayecto_dos.bus }}" />
-              {% elif vehiculo.tipo == 'SUV' %}
-                <label class="c-val" for="value">$ {{ v_trayecto.SUV|intcomma }} COP</label>
-                <input type="hidden"
-                       class="c-val"
-                       id="value"
-                       name="value"
-                       value="{{ v_trayecto.SUV }}" />
-                <input type="hidden"
-                       class="c-val"
-                       id="value"
-                       name="value_d"
-                       value="{{ v_trayecto_dos.SUV }}" />
               {% endif %}
             </div>
             <div class="car-d">
