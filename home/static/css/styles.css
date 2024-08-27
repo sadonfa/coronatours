@@ -841,3 +841,32 @@ hr {
 .test .seleccion:checked ~ .vuelta {
   display: block;
 }
+
+
+.info-anuncio{
+  display: block;
+  margin: 0px auto;
+  margin-top: 55px;
+  width: 90%;
+  text-align: center;
+  /* border: 2px solid red; */
+}
+
+.info-anuncio p{
+
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 30px 25px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-style: italic;
+  width: 60%;
+  border: 1px solid #a3a3a3a3;
+  border-radius: 40px;
+  box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+}
+
+.info-anuncio img{
+  width: 100%;
+}

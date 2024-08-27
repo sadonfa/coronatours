@@ -180,7 +180,6 @@ def transporte(request):
                 'SUV': 150000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilometros) in range(13, 30):
-            print(f"correcto son {kilometros}km")
             valor_trayecto = {
                 'compartido': 25000,
                 'standar': 60000,  # locale.currency(60000, grouping=True),
@@ -193,7 +192,6 @@ def transporte(request):
                 'SUV': 180000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilometros) in range(31, 58):
-            print(f"correcto son {kilometros}km")
             valor_trayecto = {
                 'compartido': 15000,  # locale.currency(10000, grouping=True),
                 'standar': 250000,  # locale.currency(190000, grouping=True),
@@ -209,7 +207,6 @@ def transporte(request):
             print("Incorrecto")
 
         if int(kilm) in range(1, 12):
-            print(f"correcto son {kilm}km segunda ruta")
             v_trayecto_dos = {
                 'compartido': 15000,  # multiplicar por personas
                 'standar': 45000,  # locale.currency(45000, grouping=True),
@@ -222,7 +219,6 @@ def transporte(request):
                 'SUV': 150000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilm) in range(13, 30):
-            print(f"correcto son {kilm}km")
             v_trayecto_dos = {
                 'compartido': 25000,
                 'standar': 60000,  # locale.currency(60000, grouping=True),
@@ -235,7 +231,6 @@ def transporte(request):
                 'SUV': 180000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilm) in range(31, 58):
-            print(f"correcto son {kilm}km")
             v_trayecto_dos = {
                 'compartido': 15000,  # locale.currency(10000, grouping=True),
                 'standar': 250000,  # locale.currency(190000, grouping=True),
@@ -249,6 +244,23 @@ def transporte(request):
             }
         else:
             print("Incorrecto_2")
+
+
+    # print(f"informacion para nocturno: \n {dat_trayecto['time']} " )
+
+    # def Convert(string):
+    #     li = list(string.split(":"))
+    #     return li
+
+    # list_time = Convert(dat_trayecto['time'])
+    # hours = int(list_time[0])
+
+    # print(f"hora formateada {hours}")
+
+    # if hours > 21 or hours < 7:
+    #      print(f"hora nocturna, la hora es {hours} el valor del trayecto seria {valor_trayecto}")
+    # else:
+    #      print(f"hora diurna, la hora es {hours} el valor del trayecto seria {valor_trayecto}")
            
 
     return render(request, 'transporte.html', {

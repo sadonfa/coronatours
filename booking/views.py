@@ -12,11 +12,11 @@ def check(request, id=False):
     viaje = request.POST['recorrido']
     
 
-    if viaje == "idayvuelta":
-        hora_ret =  request.POST['time_return']
-        cash_ret = int(request.POST['value_d'])
-    else:
-        hora_ret = 0
+    # if viaje == "idayvuelta":
+    #     hora_ret =  request.POST['time_return']
+    #     cash_ret = int(request.POST['value_d'])
+    # else:
+    #     hora_ret = 0
 
     passengers_list = []
     range_passengers = transport.Number_passengers + 1
@@ -110,7 +110,7 @@ def check(request, id=False):
                 
                 # v_time = "0"+ str(det_booking['time'])
                 
-                
+                print(v_time)
 
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
                     cash = int(request.POST['value']) + 20000
@@ -118,7 +118,7 @@ def check(request, id=False):
                     print( cash)
                 else:
                     cash = request.POST['value']
-                    print("Se esta enviando este, hora diurna ")
+                    # print("Se esta enviando este, hora diurna ")
             else:
                 #idayvuelta
                 det_booking = {
@@ -127,63 +127,59 @@ def check(request, id=False):
                     "destino": request.POST['destino'],
                     "date": request.POST['date'],
                     "time": request.POST['time'],
+                    "time_r": request.POST['time_return'],
                     "id": request.POST['id'],
                     "cash" : request.POST['value'],
                     "opcion": "transporte"
                 }
                 opcion = "transporte"
+                # print(int(request.POST['value_d']))
                 cash = int(request.POST['value']) + int(request.POST['value_d'])
-                print("Este es la hora actual --> " + str(det_booking['time']))
+                # print("Este es la hora actual --> " + str(det_booking['time']))
+                # print("Este es la hora actual --> " + str(det_booking['time_r']))
                 
-                print( "este es el valor de la segunda ruta " + request.POST['value_d'] )
+                # print( "este es el valor de la segunda ruta " + request.POST['value_d'] )
 
-                #realizo arreglo de hora
-                t = list(det_booking['time'])
-                # print(len(t))
-                if len(t) == 1:
-                    v_time = "0" + str(det_booking['time'])
-                    # print(tim)
-                    segmentar = list(v_time)
 
-                    print(set(segmentar))
+                def Convert(string):
+                    li = list(string.split(":"))
+                    return li
 
-                    if set(segmentar) == range(1, 9):
-                        segmen = segmentar.insert('0')
-                        print(segmen)
+                list_time = Convert(det_booking['time'])
+                hours = int(list_time[0])
 
-                    hora_val = segmentar[0] + segmentar[1]
-                    print("hora dividido" + hora_val)
+                list_time = Convert(det_booking['time_r'])
+                hours_r = int(list_time[0])
 
-                else:
-                    v_time = str(det_booking['time'])
-                    # print(tim)
-                    segmentar = list(v_time)
+                # print(f"\n\n--------------------------------------")
+                # print(f"hora formateada ida {hours}")
+                # print(f"hora formateada retorno {hours_r}")
+                # print(f"--------------------------------------\n\n")
 
-                    print(set(segmentar))
-
-                    if set(segmentar) == range(1, 9):
-                        segmen = segmentar.insert('0')
-                        print(segmen)
-
-                # segmentar = list(det_booking['time'])
-                print(segmentar)
-                hora_val = segmentar[0] + segmentar[1]
-                segm = list(hora_ret)
-                hora_regreso = segm[0]  + segm[1]
-
+            
            
-                if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6) :
-                    if int(hora_regreso) in range(21, 24) or int(hora_regreso) in range(0, 6):
-                        cash = (int(request.POST['value']) + cash_ret) + 40000
-                        print("Se esta enviando este, hora nocturna ")
-                        print(cash)
+                if int(hours) in range(21, 24) or int(hours) in range(0, 6) :
+
+                    if int(hours_r) in range(21, 24) or int(hours_r) in range(0, 6):
+                        cash += 40000
+                        # print(f"Se esta enviando este, hora nocturna {cash} ")
+
                     else:
-                        cash = (int(request.POST['value']) + cash_ret) + 20000
-                        print("Se esta enviando este, hora nocturna ")
-                        print(cash)
+                        cash += 20000
+                        # print(f"Se esta enviando este, hora nocturna {cash}")
+
+                elif int(hours_r) in range(21, 24) or int(hours_r) in range(0, 6) : 
+                    if int(hours) in range(21, 24) or int(hours) in range(0, 6):
+                        cash += 40000
+                        # print(f"Se esta enviando este, hora nocturna {cash} ")
+
+                    else:
+                        cash += 20000
+                        # print(f"Se esta enviando este, hora nocturna {cash}")
+
                 else:
-                    cash = int(request.POST['value']) + cash_ret
-                    print("Se esta enviando este, hora diurna ")
+                    # cash += 40000 
+                    print("no hay valor ")
 
     else:
         det_booking = get_object_or_404(Tours, pk=id)
