@@ -5,7 +5,7 @@ from .models import VehiculosVip
 
 class VehiculosVipAdmin(admin.ModelAdmin):
     readonly_fields = ('user', 'created_at', 'update_at')
-    list_display = ('name', 'user', 'created_at')
+    list_display = ('name', 'order', 'created_at')
     ordering = ['order']
         
     def save_model(self, request, obj, form, change):

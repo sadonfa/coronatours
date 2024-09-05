@@ -246,23 +246,6 @@ def transporte(request):
             print("Incorrecto_2")
 
 
-    # print(f"informacion para nocturno: \n {dat_trayecto['time']} " )
-
-    # def Convert(string):
-    #     li = list(string.split(":"))
-    #     return li
-
-    # list_time = Convert(dat_trayecto['time'])
-    # hours = int(list_time[0])
-
-    # print(f"hora formateada {hours}")
-
-    # if hours > 21 or hours < 7:
-    #      print(f"hora nocturna, la hora es {hours} el valor del trayecto seria {valor_trayecto}")
-    # else:
-    #      print(f"hora diurna, la hora es {hours} el valor del trayecto seria {valor_trayecto}")
-           
-
     return render(request, 'transporte.html', {
         'title': 'Transporte',
         'transports': transports,

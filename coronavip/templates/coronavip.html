@@ -1,161 +1,185 @@
-{% extends 'layouts/layout.html' %}
+{% extends 'layouts/base.html' %}
 {% load static %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-  <div class="hd-title">
-    <div class="bg-transp"></div>
-    <img src="{% static 'img/Traslados-desde-los-aeropuertos.jpg' %}"
-         alt="Toures Cartagena" />
-    <h2>Reserva en línea</h2>
-  </div>
-  <div class="content-map">
-    <div class="form-anuncio">
-      <div class="boxMap">
-        <form action="#" method="post" class="select_form">
-          Seleccione rutas:
-          <select id="status" name="status" onChange="mostrar(this.value);">
-            <option value="ida">Ida</option>
-            <option value="idayvuelta">Ida y vuelta</option>
-          </select>
-        </form>
-        <!-- IDA -->
-        <div id="ida">
-          <div class="ida">
+  <div class="dark__coronavip">
+    <header class="coronavip__header"
+            style="background-image: url({% static 'img/Traslados-desde-los-aeropuertos.jpg' %})">
+      <div class="header__overlay"></div>
+      <div class="header__title-box">
+        <h2 class="header__title">Reserva en línea</h2>
+      </div>
+    </header>
+    <div class="coronavip__container">
+      <div class="coronavip__form">
+        <div class="form__content">
+          <form action="#" method="post" class="form__select">
+            <label class="form__label">Seleccione rutas:</label>
+            <select class="form__ruta"
+                    id="status"
+                    name="status"
+                    onChange="mostrar(this.value);">
+              <option class="form__option" value="ida">Ida</option>
+              <option class="form__option" value="idayvuelta">Ida y vuelta</option>
+            </select>
+          </form>
+          <!-- IDA -->
+          <div id="ida" class="ida">
             <form method="post" action="{% url 'detail_vip' %}">
               {% csrf_token %}
-              <div class="box-form">
-                {% comment %} Le Coloque id a los dos inputs donde se definia la
-                ruta {% endcomment %}
-                <div class="d-cont">
-                  <label class="label_reserve" for="start_of_route">Elije la ubicación de partida</label>
+              <div class="form__box">
+                <!-- Le Coloque id a los dos inputs donde se definia la ruta -->
+                <div class="form__cont">
+                  <label class="form__label" for="start_of_route">Elije la ubicación de partida</label>
                   <input type="text"
                          id="start_a"
                          name="start_of_route"
-                         class="form_reserve"
+                         class="form__input"
                          required />
                 </div>
-                <div class="d-cont">
-                  <label class="label_reserve" for="end_of_route">Elije un destino</label>
+                <div class="form__cont">
+                  <label class="form__label" for="end_of_route">Elije un destino</label>
                   <input type="text"
                          id="end_a"
                          name="end_of_route"
-                         class="form_reserve"
+                         class="form__input"
                          required />
                 </div>
               </div>
               <div class="box-form-date">
-                <div class="d-box">
-                  <label class="label_reserve">Fecha de Recogida</label>
-                  <input type="date" name="date" class="form_reserve" required />
+                <div class="form__cont">
+                  <label class="form__label">Fecha de Recogida</label>
+                  <input type="date" name="date" class="form__input" required />
                 </div>
-                <div class="d-box">
-                  <label class="label_reserve">Hora de Recogida (Ida)</label>
-                  <input type="time" name="time" class="form_reserve" required />
+                <div class="form__cont">
+                  <label class="form__label">Hora de Recogida (Ida)</label>
+                  <input type="time" name="time" class="form__input" required />
                 </div>
               </div>
               <input type="hidden" name="viaje" value="ida" />
               <input type="hidden" name="distance" id="distanceId" value="" />
               <input type="hidden" name="duration" id="durationId" value="" />
-              <input type="submit" class="btn" value="Realizar Reserva" />
+              <input type="submit" class="form__button" value="Realizar Reserva" />
+            </form>
+          </div>
+          <!-- IDA Y VUELTA -->
+          <div id="idayvuelta" style="display:none">
+            <h3 class="form__subtitle">Datos de Ida</h3>
+            <form method="post" action="{% url 'detail_vip' %}">
+              {% csrf_token %}
+              <datalist id="bookmark_list">
+                <!-- Este bucle invoca el listado de los destinos -->
+                {% for destino in destination %}<option value="{{ destino.value }}">{{ destino.title }}</option>{% endfor %}
+              </datalist>
+              <div class="form__box">
+                {% comment %} Le Coloque id a los dos inputs donde se definia la
+                ruta {% endcomment %}
+                <div class="form__cont">
+                  <label class="form__label" for="start_of_route">Elije la ubicación de partida</label>
+                  <input type="text"
+                         id="start_b1"
+                         name="start_of_route"
+                         class="form__input"
+                         required />
+                </div>
+                <div class="form__cont">
+                  <label class="form__label" for="end_of_route">Elije un destino</label>
+                  <input type="text"
+                         id="end_b1"
+                         name="end_of_route"
+                         class="form__input"
+                         required />
+                </div>
+              </div>
+              <div class="box-form-date">
+                <div class="form__cont">
+                  <label class="form__label" for="date">Fecha de Recogida</label>
+                  <input type="date" name="date" class="form__input" required />
+                </div>
+                <div class="form__cont">
+                  <label class="form__label" for="time">Hora de Recogida (Ida)</label>
+                  <input type="time" name="time" class="form__input" required />
+                  {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
+                </div>
+              </div>
+              <input type="hidden" id="distanceId" value="" name="distance" />
+              <input type="hidden" name="duration" id="durationId" value="" />
+              <h3 class="form__subtitle">Datos de Regreso</h3>
+              <div class="form__box">
+                {% comment %} Le Coloque id a los dos inputs donde se definia la
+                ruta {% endcomment %}
+                <div class="form__cont">
+                  <label class="form__label" for="start_of_route">Elije la ubicación de partida</label>
+                  <input type="text"
+                         id="start_b"
+                         name="start_of_route_return"
+                         class="form__input"
+                         required />
+                </div>
+                <div class="form__cont">
+                  <label class="form__label" for="end_of_route">Elije un destino</label>
+                  <input type="text"
+                         id="end_b"
+                         name="end_of_route_return"
+                         class="form__input"
+                         required />
+                </div>
+              </div>
+              <div class="box-form-date">
+                <div class="form__cont">
+                  <label class="form__label" for="date">Fecha de Recogida</label>
+                  <input type="date" name="date_return" class="form__input" required />
+                </div>
+                <div class="form__cont">
+                  <label class="form__label" for="time">Hora de Recogida (Ida)</label>
+                  <input type="time" name="time_return" class="form__input" required />
+                  {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
+                </div>
+              </div>
+              <input type="hidden" id="distanceIdRet" value="" name="distance" />
+              <input type="hidden" name="duration" id="durationId" value="" />
+              <input type="hidden" name="viaje" value="idayvuelta" />
+              <input type="submit" class="form__button" value="Realizar Reserva" />
             </form>
           </div>
         </div>
-        <!-- IDA Y VUELTA -->
-        <div id="idayvuelta" style="display:none">
-          <h3>Datos de Ida</h3>
-          <form method="post" action="{% url 'detail_vip' %}">
-            {% csrf_token %}
-            <datalist id="bookmark_list">
-              <!-- Este bucle invoca el listado de los destinos -->
-              {% for destino in destination %}<option value="{{ destino.value }}">{{ destino.title }}</option>{% endfor %}
-            </datalist>
-            <div class="box-form">
-              {% comment %} Le Coloque id a los dos inputs donde se definia la
-              ruta {% endcomment %}
-              <div class="d-cont">
-                <label class="label_reserve" for="start_of_route">Elije la ubicación de partida</label>
-                <input type="text"
-                       id="start_b1"
-                       name="start_of_route"
-                       class="form_reserve"
-                       required />
-              </div>
-              <div class="d-cont">
-                <label class="label_reserve" for="end_of_route">Elije un destino</label>
-                <input type="text"
-                       id="end_b1"
-                       name="end_of_route"
-                       class="form_reserve"
-                       required />
-              </div>
-            </div>
-            <div class="box-form">
-              <div class="d-box">
-                <label class="label_reserve" for="date">Fecha de Recogida</label>
-                <input type="date" name="date" class="form_reserve" required />
-              </div>
-              <div class="d-box">
-                <label class="label_reserve" for="time">Hora de Recogida (Ida)</label>
-                <input type="time" name="time" class="form_reserve" required />
-                {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
-              </div>
-            </div>
-            <input type="hidden" id="distanceId" value="" name="distance" />
-            <input type="hidden" name="duration" id="durationId" value="" />
-            <h3>Datos de Regreso</h3>
-            <div class="box-form">
-              {% comment %} Le Coloque id a los dos inputs donde se definia la
-              ruta {% endcomment %}
-              <div class="d-cont">
-                <label class="label_reserve" for="start_of_route">Elije la ubicación de partida</label>
-                <input type="text"
-                       id="start_b"
-                       name="start_of_route_return"
-                       class="form_reserve"
-                       required />
-              </div>
-              <div class="d-cont">
-                <label class="label_reserve" for="end_of_route">Elije un destino</label>
-                <input type="text"
-                       id="end_b"
-                       name="end_of_route_return"
-                       class="form_reserve"
-                       required />
-              </div>
-            </div>
-            <div class="box-form">
-              <div class="d-box">
-                <label class="label_reserve" for="date">Fecha de Recogida</label>
-                <input type="date" name="date_return" class="form_reserve" required />
-              </div>
-              <div class="d-box">
-                <label class="label_reserve" for="time">Hora de Recogida (Ida)</label>
-                <input type="time" name="time_return" class="form_reserve" required />
-                {% comment %} <span>*Formato 24 horas</span> {% endcomment %}
-              </div>
-            </div>
-            <input type="hidden" id="distanceIdRet" value="" name="distance" />
-            <input type="hidden" name="duration" id="durationId" value="" />
-            <input type="hidden" name="viaje" value="idayvuelta" />
-            <input type="submit" class="btn" value="Realizar Reserva" />
-          </form>
+        <div class="form__anuncio">
+          <h1 class="form__title">
+            servico <span class="title__color">personalizado</span>
+          </h1>
+          <p class="form__text">Contactarnos para cualquier duda o cotización que tengas.</p>
+          <img src="{% static 'img/carro-deportivo.png' %}"
+               class="anuncio__imagen"
+               alt="Carro" />
+          <p class="form__text">
+            Corona VIP esta a tu disposición para apoyarte en lo qué necesites
+            Para mas información:
+          </p>
+          <h3 class="anuncio__title">Linea de atención</h3>
+          <span class="anuncio__option">
+            <i class="fa-solid fa-phone"></i> (+57)  324 297 9859
+          </span>
+          <span class="anuncio__option">
+            <i class="info-cont__icon fa-solid fa-envelope"></i>
+            reservas@coronatours.com.co
+          </span>
+          <span class="anuncio__option">
+            <i class="info-cont__icon fa-solid fa-envelope"></i>
+            coronaserviciosvip@gmail.com
+          </span>
+          {% comment %} <img src="{% static 'img/ServicioEspecial.png' %}" alt="Servicio Especial" /> {% endcomment %}
         </div>
       </div>
-      <div class="anuncio">
-        <img src="{% static 'img/ServicioEspecial.png' %}"
-             alt="Servicio Especial" />
+      <div class="coronavip__info">
+        <p class="info__parrafo">
+          Nuestro proceso de reserva en línea le guiará en 3 pasos para seleccionar
+          sus detalles de recogida, vehículo y numero de pasajeros. A continuación,
+          podrá revisar su selección y su solicitud será enviada directamente a
+          nuestro sistema.
+        </p>
+        <hr class="info__barra">
+        <img src=" {% static 'img/PhotoCollage.png' %}" alt="Collage Vehiculos" />
       </div>
-    </div>
-    <div class="info-anuncio">
-      <p class="parrafo">
-        Nuestro proceso de reserva en línea le guiará en 3 pasos para seleccionar
-        sus detalles de recogida, vehículo y numero de pasajeros. A continuación,
-        podrá revisar su selección y su solicitud será enviada directamente a
-        nuestro sistema.
-        <br />
-        <br />
-      </p>
-      <img src=" {% static 'img/PhotoCollage.png' %}" alt="Collage Vehiculos" />
     </div>
   </div>
 {% endblock %}

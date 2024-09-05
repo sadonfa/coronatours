@@ -1,4 +1,4 @@
-{% extends 'layouts/layout.html' %}
+{% extends 'layouts/base.html' %}
 {% load humanize %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
@@ -8,21 +8,17 @@
   <datalist id="bookmark_list_end">
     <option>{{ end_of_route }}</option>
   </datalist>
-  <div class="select-vehiculos">
+  <div class="dark__vehiculos">
     <!-- Este es el menu para los vehiculos -->
-    <div class="vehiculos">
-      <h2 class="title-2">Seleccione su vehiculo</h2>
+    <div class="vehiculos__content">
+      <h2 class="vehiculos__title">Seleccione su vehiculo</h2>
       {% for vehiculo in vehiculosvip %}
-        <form method="POST" action="{% url 'check' %}">
+        <form method="POST" action="{% url 'check' %}" class="vehiculos__vehiculo">
           {% csrf_token %}
-          <div class="box-art">
-            <div class="car-n">
-              <label class="c-title" for="name">{{ vehiculo.name }}</label>
-              <input type="hidden"
-                     class="c-title"
-                     id="name"
-                     name="name"
-                     value="{{ vehiculo.name }}" />
+          <div class="vehiculo__box">
+            <div class="vehiculo__car-n">
+              <label class="vehiculo__subtitle" for="name">{{ vehiculo.name }}</label>
+              <input type="hidden" id="name" name="name" value="{{ vehiculo.name }}" />
               {% if vehiculo.tipo == 'vehiculo_lujo' %}
                 <label class="c-val" for="value">$ {{ v_trayecto.vehiculo_lujo|intcomma }} COP</label>
                 <input type="hidden"
@@ -85,7 +81,7 @@
                        value="{{ v_trayecto_dos.van_lujo }}" />
               {% endif %}
             </div>
-            <div class="car-d">
+            <div class="vehiculo__car-d">
               <p>
                 <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
                 {{ vehiculo.amount_luggage }}
@@ -95,8 +91,10 @@
                 {{ vehiculo.Number_passengers }}
               </p>
             </div>
-            <div class="car-i">
-              <img src="{{ vehiculo.image.url }}" alt="{{ vehiculo.name }}" />
+            <div class="vehiculo__car-i">
+              <img src="{{ vehiculo.image.url }}"
+                   alt="{{ vehiculo.name }}"
+                   class="vehiculo__image" />
             </div>
             <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
           </div>
@@ -112,10 +110,10 @@
         </form>
       {% endfor %}
     </div>
-    <div class="map-info">
+    <div class="vehiculos__info">
       <!-- Con este div se esta invocando el mapa, si este div no se muestra un mapa -->
       {% if recorrido == "ida" %}
-        <h3 class="title-2">Detalles de viaje</h3>
+        <h3 class="vehiculos__title">Detalles de viaje</h3>
         <div id="map"></div>
         <div id="mapret" style="display:none"></div>
         <div class="info-viaje">

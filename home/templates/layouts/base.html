@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            {% block title %}{% endblock %}
+        | Corona Tours</title>
+        <!-- Estilos generales de la pagina -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/vehiculos.css' %}" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/coronavip.css' %}" />
+        <link rel="shortcut icon"
+              type="image/png"
+              href="{% static 'img/logo.png' %}" />
+        <!-- Estilos generales del mapa -->
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/styles_maps.css' %}" />
+        <!-- Estilos Fuentes -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}" />
+        <!-- Estilos Responsive -->
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/responsive.css' %}" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/gallery.css' %}" />
+        <!-- Estilos Botones -->
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/botones.css' %}" />
+        <!-- FONTAWESOME -->
+        <link rel="stylesheet"
+              href="{% static 'fontawesome/css/fontawesome.css' %}" />
+        <link rel="stylesheet" href="{% static 'fontawesome/css/brands.css' %}" />
+        <link rel="stylesheet" href="{% static 'fontawesome/css/solid.css' %}" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+        <script src="{% static 'JavaScript/script.js' %}"></script>
+        <script src="{% static 'JavaScript/jquery.js' %}"></script>
+        {% comment %} LLAMADO DE SCRIPT DE WOMPI {% endcomment %}
+        <script type="text/javascript" src="https://checkout.wompi.co/widget.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    </head>
+    <body>
+        <div class="dark">
+            <div class="dark__info-cont">
+                <div class="info-cont__detail">
+                    <span class="info-cont__option">
+                        <i class="info-cont__icon fa-solid fa-phone"></i> (+57) 316 2203 798 </span>
+                    <span class="info-cont__option">
+                        <i class="info-cont__icon fa-solid fa-phone"></i> (+57) 301 6275 445 </span>
+                    <span class="info-cont__option">
+                        <i class="info-cont__icon fa-solid fa-envelope"></i> reservas@coronatours.com.co
+                    </span>
+                </div>
+                <div class="info-cont__redes">
+                    <i class="info-cont__icon fa-brands fa-square-instagram"></i>
+                    <i class="info-cont__icon fa-brands fa-square-facebook"></i>
+                    <i class="info-cont__icon fa-brands fa-square-whatsapp"></i>
+                </div>
+            </div>
+            <header class="dark__header">
+                <!-- Encabezado -->
+                <!-- Logo-->
+                <div class="header__logotipo">
+                    <!-- logo -->
+                    <img src="{% static 'img/logo.png' %}" class="header__image" />
+                </div>
+                <!-- Barra de navegacion -->
+                <nav class="header__menu">
+                    <ul class="menu__list">
+                        <li class="menu__option">
+                            <a class="menu__link" href="{% url 'home' %}">Inicio</a>
+                        </li>
+                        <li class="menu__option">
+                            <a class="menu__link" href="{% url 'about' %} ">Nosotros</a>
+                        </li>
+                        <li class="menu__option">
+                            <a class="menu__link" href="{% url 'reserve' %}">transportes</a>
+                        </li>
+                        <li class="menu__option">
+                            <a class="menu__link" href="{% url 'tours' %}">Actividades</a>
+                        </li>
+                        <li class="menu__option">
+                            <a class="menu__link" href="{% url 'contact' %} ">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <!-- Contenido -->
+            <div class="dark__content">
+                {% block content %}{% endblock %}
+            </div>
+            <!-- Pie de Pagina -->
+            <footer class="dark__footer">
+                CoronaTour | Creado por &copy; <a href="gegova.com.co">gegova.com.co</a>
+            </footer>
+        </div>
+        <!-- Invocado JavaScript -->
+        <script async
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2fdd628K7OXK4_ojjL-n0J5aXdry-z1g&loading=async&callback=initMap&libraries=places"></script>
+        <script type="text/javascript" src="{% static 'JavaScript/google_maps.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/enlaces.js' %}"></script>
+        <script>
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+
+      const info = document.querySelector(".alert-info");
+
+      function process(event) {
+        event.preventDefault();
+
+        const phoneNumber = phoneInput.getNumber();
+
+        info.style.display = "";
+        info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+      }
+        </script>
+    </body>
+</html>

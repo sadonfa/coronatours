@@ -19,67 +19,69 @@
     <div class="vehiculos">
       <h2 class="title-2">Seleccione su vehiculo</h2>
       <!-- Auto Compartido -->
-      {% if time > 7 and time < 19 and kilometros < 31 %}
-        <form method="POST" action="{% url 'check' %}">
-          {% csrf_token %}
-          <div class="box-art">
-            <div class="car-n">
-              <label class="c-title" for="name">{{ compartido.0.name }}</label>
-              <input type="hidden"
-                     class="c-title"
-                     id="name"
-                     name="name"
-                     value="{{ compartido.0.name }}" />
-              <label class="c-val" for="value">$ {{ v_trayecto.compartido|intcomma }} COP</label>
-              <input type="hidden"
-                     class="c-val"
-                     id="value"
-                     name="value"
-                     value="{{ v_trayecto.compartido }}" />
+      {% if recorrido != 'idayvuelta' %}
+        {% if time > 7 and time < 19 and kilometros < 31 %}
+          <form method="POST" action="{% url 'check' %}">
+            {% csrf_token %}
+            <div class="box-art">
+              <div class="car-n">
+                <label class="c-title" for="name">{{ compartido.0.name }}</label>
+                <input type="hidden"
+                       class="c-title"
+                       id="name"
+                       name="name"
+                       value="{{ compartido.0.name }}" />
+                <label class="c-val" for="value">$ {{ v_trayecto.compartido|intcomma }} COP</label>
+                <input type="hidden"
+                       class="c-val"
+                       id="value"
+                       name="value"
+                       value="{{ v_trayecto.compartido }}" />
+              </div>
+              <div class="car-d">
+                <p>
+                  <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
+                  {{ compartido.0.amount_luggage }}
+                </p>
+                <p>
+                  <i class="fa-sharp fa-solid fa-person"></i>
+                  <select name="comp-cantidad" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                  </select>
+                </p>
+              </div>
+              <div class="car-i">
+                <img src="{{ compartido.0.image.url }}" alt="{{ compartido.0.name }}" />
+              </div>
+              <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
             </div>
-            <div class="car-d">
-              <p>
-                <i class="fa-sharp fa-solid fa-suitcase-rolling"></i>
-                {{ compartido.0.amount_luggage }}
-              </p>
-              <p>
-                <i class="fa-sharp fa-solid fa-person"></i>
-                <select name="comp-cantidad" id="">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                </select>
-              </p>
-            </div>
-            <div class="car-i">
-              <img src="{{ compartido.0.image.url }}" alt="{{ compartido.0.name }}" />
-            </div>
-            <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
-          </div>
-          {% if time_return %}<input type="hidden" name="time_return" value="{{ time_return }}" />{% endif %}
-          <input type="hidden" value="{{ recorrido }}" name="recorrido" />
-          <input type="hidden" name="date" value="{{ date }}" />
-          <input type="hidden" name="time" value="{{ time }}" />
-          <input type="hidden" name="id" value="{{ transports.0.id }}" />
-          <input type="hidden" name="origen" value="{{ start_of_route }}" />
-          <input type="hidden" name="destino" value="{{ end_of_route }}" />
-          <input type="hidden" name="distance_ret" value="{{ det_retorno.distance }}" />
-          <input type="hidden" name="duration_ret" value="{{ duration_ret }}" />
-        </form>
+            {% if time_return %}<input type="hidden" name="time_return" value="{{ time_return }}" />{% endif %}
+            <input type="hidden" value="{{ recorrido }}" name="recorrido" />
+            <input type="hidden" name="date" value="{{ date }}" />
+            <input type="hidden" name="time" value="{{ time }}" />
+            <input type="hidden" name="id" value="{{ transports.0.id }}" />
+            <input type="hidden" name="origen" value="{{ start_of_route }}" />
+            <input type="hidden" name="destino" value="{{ end_of_route }}" />
+            <input type="hidden" name="distance_ret" value="{{ det_retorno.distance }}" />
+            <input type="hidden" name="duration_ret" value="{{ duration_ret }}" />
+          </form>
+        {% endif %}
       {% endif %}
       <!-- Auto estandar -->
       {% for vehiculo in transports %}

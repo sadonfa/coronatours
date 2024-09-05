@@ -1,0 +1,491 @@
+:root {
+  --color-background: #121212;
+  --color-primary: #cb7a00;
+  --color-secundary: #dddddd;
+  --color-text: #ffffff;
+  --color-text-dark: #222;
+
+  --color-border: #333;
+  --color-sombra: #464545;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  width: 100%;
+  font-family: "Montserrat";
+  font-size: 1.5rem;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "LeagueSpartan Bold";
+  color: var(--color-primary);
+}
+
+.dark {
+  position: relative;
+  width: 100%;
+}
+
+.dark__info-cont {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 5rem;
+  background-color: var(--color-primary);
+}
+
+.info-cont__detail {
+  width: 60%;
+}
+
+.info-cont__option {
+  margin-right: 3rem;
+  line-height: 1.4rem;
+  font-size: 1.4rem;
+}
+
+.info-cont__redes {
+  width: 20%;
+  text-align: right;
+}
+
+.info-cont__icon {
+  margin-right: 1rem;
+  font-size: 2rem;
+}
+
+.dark__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 9rem;
+  padding: 0.5rem 5rem;
+  background-color: var(--color-background);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.32);
+  box-shadow: 0 1rem 1.5rem rgba(255, 255, 255, 0.22);
+}
+
+.header__logotipo {
+  width: 30%;
+  height: 100%;
+}
+
+.header__image {
+  height: 100%;
+}
+
+nav,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu__option {
+  display: block;
+}
+
+.menu__link {
+  display: block;
+  padding: 0 2rem;
+  color: var(--color-text);
+  transition: all 300ms ease-in-out;
+  /* border: 1px solid red; */
+}
+
+.menu__link:hover {
+  color: var(--color-primary);
+  font-weight: 800;
+  border: none;
+}
+
+.dark__content {
+  width: 100%;
+  height: auto;
+}
+
+/* PAGINA CORONAVIP */
+
+.dark__coronavip {
+  width: 100%;
+}
+
+.coronavip__header {
+  position: relative;
+  width: 100%;
+  height: 20rem;
+  /* margin-bottom: 5rem; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.header__overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  filter: grayscale(100%);
+}
+
+.header__title-box {
+  position: absolute;
+}
+
+.header__title {
+  color: var(--color-text);
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.coronavip__container {
+  width: 100%;
+}
+
+.coronavip__form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  min-height: 100%;
+  border-bottom: 1px solid var(--color-sombra);
+}
+
+.form__content {
+  width: 50%;
+  min-height: 100%;
+  padding: 9rem 6rem;
+}
+
+.form__select {
+  margin-bottom: 3rem;
+}
+
+.form__label {
+  margin-bottom: 0.7rem;
+  font-family: "LeagueSpartan Bold";
+  font-size: 1.3rem;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.form__box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__cont {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.form__input,
+.form__ruta {
+  outline: none;
+  background-color: transparent !important;
+  padding: 0.8rem 2rem;
+  color: var(--color-text);
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  border-bottom: 0.2rem solid var(--color-primary) !important;
+}
+
+.form__input {
+  width: 90%;
+}
+
+.form__input[type="date"]::-webkit-calendar-picker-indicator,
+.form__input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  /* border-radius: 4px;
+  margin-right: 2px; */
+  opacity: 0.9;
+  filter: invert(0.9);
+}
+
+.form__input::placeholder {
+  color: var(--color-secundary);
+}
+
+.form__option {
+  font-size: 1.4rem;
+  color: var(--color-secundary);
+  background-color: var(--color-sombra);
+}
+
+.form__subtitle {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.form__button {
+  margin-top: 5rem;
+  padding: 1.3rem 3rem;
+  border: 2px solid var(--color-border);
+  border-radius: 5rem;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  font-family: "Montserrat Bold";
+  text-transform: uppercase;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  transition: all 200ms ease-out;
+}
+
+.form__button:hover {
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ANUNCIO */
+.form__anuncio {
+  width: 50%;
+  min-height: 100%;
+  background-color: var(--color-primary);
+  background-image: url("../img/fondo.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 7rem 5rem;
+}
+
+.form__title {
+  display: inline;
+  position: relative;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--color-text);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.form__title::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: -25px;
+  width: 50px;
+  height: 30px;
+  background-image: -webkit-repeating-radial-gradient(
+    center center,
+    var(--color-secundary),
+    var(--color-secundary) 1px,
+    transparent 0px,
+    transparent 100%
+  );
+  background-size: 6px 6px;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.title__color {
+  color: var(--color-background);
+}
+
+.form__text {
+  display: block;
+  width: 80%;
+  margin: 2rem auto;
+  font-size: 1.6rem;
+  font-family: "Montserrat Light";
+  color: var(--color-text);
+}
+
+.anuncio__title {
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  color: var(--color-background);
+}
+
+.anuncio__imagen {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.anuncio__option {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* INFORMACION */
+
+.coronavip__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info__barra {
+  width: 40%;
+  margin: 3rem auto;
+  border-color: var(--color-primary);
+}
+
+.info__parrafo {
+  display: block;
+  width: 60%;
+  margin: 0rem auto;
+  margin-top: 7rem;
+  text-align: center;
+  font-size: 1.7rem;
+  font-family: "Montserrat Light";
+}
+
+/* FOOTER */
+
+.dark__footer {
+  background-color: var(--color-background);
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-sombra);
+}
+
+/* PAGINA DETAILS */
+
+.dark__vehiculos,
+.dark__detail {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 5rem;
+  padding-bottom: 8rem;
+}
+
+.detail__render {
+  width: 40%;
+}
+
+.detail__title {
+  display: block;
+  width: 40%;
+  padding-bottom: 0.7rem;
+  color: var(--color-primary);
+  font-size: 2rem;
+  font-family: "LeagueSpartan Bold";
+  font-weight: bold;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.detail__buttons {
+  width: 100%;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.buttons__option {
+  margin-right: 5rem;
+}
+
+.detail__maps {
+  width: 40%;
+}
+
+.maps__map {
+  height: 35rem;
+}
+
+/* CONTENIDO VEHICULOS */
+
+.dark__vehiculos {
+  align-items: flex-start;
+}
+
+.vehiculos__content {
+  width: 50%;
+}
+
+.vehiculos__title {
+  margin-bottom: 2.5rem;
+  color: var(--color-text);
+  font-size: 1.8rem;
+  font-family: "LeagueSpartan Bold";
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.vehiculos__info {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vehiculos__vehiculo {
+  width: 100%;
+  margin-bottom: 3rem;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 1rem var(--color-sombra);
+  border-radius: 2rem;
+}
+
+.vehiculo__box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+}
+
+.vehiculo__car-n {
+  display: flex;
+  flex-direction: column;
+}
+
+.vehiculo__car-n,
+.vehiculo__car-i,
+.vehiculo__car-d {
+  margin: 0 0.5rem;
+}
+
+.vehiculo__subtitle {
+  font-size: 1.6rem;
+  color: var(--color-text);
+  text-transform: capitalize;
+}
+
+.vehiculo__car-i {
+  width: 35%;
+  /* border: 1px solid red; */
+}
+
+.vehiculo__image {
+  width: 100%;
+}
+
+.vehiculo__car-d {
+  width: 10%;
+}
+
+.vehiculo__car-n {
+  width: 35%;
+}

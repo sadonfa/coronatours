@@ -1,12 +1,12 @@
-{% extends 'layouts/layout.html' %}
+{% extends 'layouts/base.html' %}
 {% block title %}
   {{ title }}
 {% endblock title %}
 {% block content %}
   {% if recorrido == "ida" %}
-    <div class="dato-map">
-      <div class="info-render">
-        <h2 class="sub-title-2">DETALLE DEL VIAJE</h2>
+    <section class="dark__detail">
+      <div class="detail__render">
+        <h2 class="detail__title">DETALLE DEL VIAJE</h2>
         <div class="detail-v">
           <div class="box-det">
             <h3 class="sub-title-3">Fecha de recogida</h3>
@@ -49,15 +49,17 @@
           <input type="hidden" id="distanceId"  name="distance" />
           <input type="hidden" id="durationId" name="duration" />
           <input type="hidden" value="{{ recorrido }}" name="recorrido" />
-          <div class="box-btns">
-            <a href="{% url 'coronavip' %}" class="btn-white">Modificar</a>
-            <input type="submit" class="btn" value="Escoge transporte" />
+          <div class="detail__buttons">
+            <a href="javascript:history.back()" class="btn-white buttons__option">Modificar</a>
+            <input type="submit" class="buttons__option btn" value="Escoge transporte" />
           </div>
         </form>
       </div>
-      <div id="map"></div>
-      <div id="mapret" style="display:none"></div>
-    </div>
+      <div class="detail__maps">
+        <div id="map" class="maps__map"></div>
+        <div id="mapret" style="display:none"></div>
+      </div>
+    </section>
   {% elif recorrido == "idayvuelta" %}
     <div class="info-reserva">
       <div class="datos-ruta">
@@ -157,7 +159,7 @@
       <input type="hidden" id="durationIdRet" name="duration_ret" />
       <input type="hidden" value="{{ recorrido }}" name="recorrido" />
       <div class="box-btns">
-        <a href="{% url 'coronavip' %}" class="btn-white">Modificar</a>
+        <a href="javascript:history.back()" class="btn-white">Modificar</a>
         <input type="submit" class="btn" value="Escoge transporte" />
       </div>
     </form>
