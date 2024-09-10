@@ -62,7 +62,7 @@ h6 {
 }
 
 .info-cont__icon {
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   font-size: 2rem;
 }
 
@@ -171,7 +171,7 @@ li {
 }
 
 .form__content {
-  width: 50%;
+  width: 45%;
   min-height: 100%;
   padding: 9rem 6rem;
 }
@@ -263,14 +263,14 @@ li {
 
 /* ANUNCIO */
 .form__anuncio {
-  width: 50%;
+  width: 55%;
   min-height: 100%;
   background-color: var(--color-primary);
-  background-image: url("../img/fondo.png");
+  background-image: url("../img/servicio_vip_full.jpeg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  text-align: center;
+
   padding: 7rem 5rem;
 }
 
@@ -305,16 +305,22 @@ li {
 }
 
 .title__color {
-  color: var(--color-background);
+  color: var(--color-primary);
 }
 
 .form__text {
   display: block;
-  width: 80%;
-  margin: 2rem auto;
-  font-size: 1.6rem;
-  font-family: "Montserrat Light";
+  width: 100%;
+  /* margin: 2rem auto; */
+  margin-top: 8rem;
+  padding-top: 1rem;
+  margin-bottom: 3rem;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: "Montserrat";
   color: var(--color-text);
+  /* border-top: 1px solid var(--color-primary); */
 }
 
 .anuncio__title {
@@ -332,7 +338,21 @@ li {
 
 .anuncio__option {
   display: block;
+  margin-right: 1rem;
   margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.anuncio__box-option {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 1rem;
+  /* filter: blur(0.4rem); */
+}
+
+.anuncio__box-one {
+  display: flex;
 }
 
 /* INFORMACION */
@@ -602,10 +622,12 @@ li {
   .dark__vehiculos {
     align-items: center;
   }
+
   .vehiculos__info {
     width: 90%;
     align-items: center;
   }
+
   .vehiculos__content {
     width: 90%;
   }
