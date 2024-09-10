@@ -9,7 +9,7 @@ class VehiculosVip(models.Model):
     #value_tour = models.ManyToManyField(Zone,  verbose_name="Valor de viaje")
     Number_passengers = models.IntegerField(default=0, verbose_name="Cantidad de pasajeros")
     amount_luggage = models.IntegerField(default=0, verbose_name="Cantidad de equipaje")
-    image = models.ImageField(default='null', verbose_name= 'Imagen', upload_to='articles')
+    image = models.ImageField(default='null', verbose_name= 'Imagen', upload_to='vehiculos_vip')
     order = models.IntegerField(default=0, verbose_name="Orden")
     user = models.ForeignKey(User, editable=False, verbose_name="Usuario", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")

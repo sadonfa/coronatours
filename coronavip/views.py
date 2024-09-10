@@ -48,11 +48,11 @@ def detail_vip(request):
 
 def transvip(request):
        
-    vehiculosvip = VehiculosVip.objects.all()[1:]
+    vehiculosvip = VehiculosVip.objects.all()
     recorrido = request.POST['recorrido']
     v_trayecto_dos = ""
 
-
+    # print(vehiculosvip)
 
     def Convert(string):
         li = list(string.split(":"))
@@ -72,16 +72,16 @@ def transvip(request):
         list_time = Convert(request.POST['time'])
         hours = int(list_time[0])
 
-        print("esta es la hora" + str(hours))
+        # print("esta es la hora" + str(hours))
 
         st_distancia = int(request.POST['distance'])*10**-3
         kilometros = int(round(st_distancia))
 
-        print(kilometros)
+        # print(kilometros)
 
         st_duracion = int(request.POST['duration'])/60
         dura = int(round(st_duracion))
-        print(dura)
+        # print(dura)
 
         
         if int(kilometros) in range(1, 12):
