@@ -107,3 +107,14 @@
 .info-render .box-btns {
   width: 70%;
 }
+
+.sub-title {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-right: 1rem;
+  /* border: 1px solid red; */
+  text-align: right;
+  color: #cb7a00;
+  font-style: italic;
+  font-size: 0.8rem;
+}
