@@ -19,7 +19,7 @@
     <div class="vehiculos">
       <h2 class="title-2">Seleccione su vehiculo</h2>
       <!-- Auto Compartido -->
-      {% if recorrido != 'idayvuelta' %}
+      {% comment %} {% if recorrido != 'idayvuelta' %} {% endcomment %}
         {% if time > 7 and time < 19 and kilometros < 31 %}
           <form method="POST" action="{% url 'check' %}">
             {% csrf_token %}
@@ -82,7 +82,7 @@
             <input type="hidden" name="duration_ret" value="{{ duration_ret }}" />
           </form>
         {% endif %}
-      {% endif %}
+      {% comment %} {% endif %} {% endcomment %}
       <!-- Auto estandar -->
       {% for vehiculo in transports %}
         <form method="POST" action="{% url 'check' %}">
