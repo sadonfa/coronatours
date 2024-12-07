@@ -9,7 +9,8 @@ function initMap() {
   let directionsServiceIda = new google.maps.DirectionsService();
   let directionsRendererIda = new google.maps.DirectionsRenderer();
 
-  let center = new google.maps.LatLng(10.39698, -75.50265);
+  // let center = new google.maps.LatLng(10.39698, -75.50265);
+  const center = { lat: 10.39698, lng: -75.50265 };
 
   let start = document.getElementById("start");
   let end = document.getElementById("end");
@@ -22,10 +23,10 @@ function initMap() {
 
   // --- <<<<<<<< --- Cree un cuadro delimitador con lados a ~150 km de distancia del punto central --- >>>>>>>> ---
   const defaultBounds = {
-    north: center.lat + 0.15,
-    south: center.lat - 0.15,
-    east: center.lng + 0.15,
-    west: center.lng - 0.15,
+    north: center.lat + 0.1,
+    south: center.lat - 0.1,
+    east: center.lng + 0.1,
+    west: center.lng - 0.1,
   };
 
   const start_a = document.getElementById("start_a");
@@ -41,7 +42,7 @@ function initMap() {
     bounds: defaultBounds,
     componentRestrictions: { country: "co" },
     fields: ["address_components", "geometry", "icon", "name"],
-    strictBounds: false,
+    strictBounds: true,
   };
 
   const autocomplete_a = new google.maps.places.Autocomplete(start_a, options);
