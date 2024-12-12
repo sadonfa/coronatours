@@ -196,6 +196,7 @@ def check(request, id=False):
         'cash': cash,
         'opcion': opcion,
         'transports': transport,
+        'can_comp': can_comp,
         'passengers_list': passengers_list,
         'recorrido': request.POST['recorrido']
 
@@ -222,7 +223,7 @@ def det_booking(request, opc):
         aerolinea = request.POST['aerolinea']
         nvuelo = request.POST['nvuelo']
 
-        print ("\nesta es la informacion de cash -> " + cash + "\n" )
+        # print ("\nesta es la informacion de cash -> " + cash + "\n" ) 
         # if request.POST['hotel'] != "transporte":
         #     hotel  = request.POST['hotel']
         # print(opcion)
@@ -250,7 +251,7 @@ def det_booking(request, opc):
 
     booking.save()
 
-    print(opcion)
+    # print(opcion)
 
     # if option == "transporte":
     #     opcion = "transporte"
