@@ -26,7 +26,8 @@ def check(request, id=False):
 
     if id == False and request.method == 'POST':
         # det_booking = get_object_or_404(Reserver, pk=id)
-
+        can_comp = 0
+        
         if request.POST['name'] == "Van Compartida":
             print("Es compartido ")
             if request.POST['recorrido'] == "ida":
@@ -251,7 +252,7 @@ def det_booking(request, opc):
 
     booking.save()
 
-    # print(opcion)
+    # print(opcion) 
 
     # if option == "transporte":
     #     opcion = "transporte"
