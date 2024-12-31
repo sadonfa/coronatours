@@ -1,14 +1,20 @@
 from django.shortcuts import render,  get_object_or_404
 from .models import Reserver, Vehiculos
 import locale
+from datetime import datetime, timedelta
 
 
 # ----- Create your views here. -----
 
 
 def reserve(request):
+    
+    ahora = datetime.today() + timedelta(days=1)
+    tomorrow = datetime.strftime(ahora, "%Y-%m-%d")  
+
     return render(request, 'reserve.html', {
         'title': 'Reservas',
+        'fecha': tomorrow
     })
 
 
@@ -71,21 +77,17 @@ def transporte(request):
             'duration' : request.POST['duration'],  
             }
         
-
+        print("hora -> " + dat_trayecto['time'])
+        print("fecha -> " + request.POST['date'])
+        
         list_time = Convert(request.POST['time'])
         hours = int(list_time[0])
-
-        print("esta es la hora" + str(hours))
 
         st_distancia = int(request.POST['distance'])*10**-3
         kilometros = int(round(st_distancia))
 
-        print(kilometros)
-
         st_duracion = int(request.POST['duration'])/60
         dura = int(round(st_duracion))
-        print(dura)
-
         
         if int(kilometros) in range(1, 12):
             
@@ -145,6 +147,8 @@ def transporte(request):
             'distance_ret' : request.POST['distance_ret'],
             'duration_ret' : request.POST['duration_ret'],
         }
+
+       
 
         list_time = Convert(request.POST['time'])
         hours = int(list_time[0])
@@ -252,7 +256,8 @@ def transporte(request):
         'dat_trayecto': dat_trayecto,
         'v_trayecto': valor_trayecto,
         'v_trayecto_dos': v_trayecto_dos,
-        'time': hours,
+        'time': dat_trayecto['time'],
+        'hours': hours,
         'kilometros': kilometros,
         'recorrido': recorrido,
         'compartido': compartido,

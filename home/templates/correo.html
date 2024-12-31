@@ -1,19 +1,192 @@
-<html>
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .cont-det-booking{
+                width: 85%;
+                margin: 0px auto;
+                padding-top: 25px;
+                padding-bottom: 80px;
+                border: 1px solid #333 ;
+                border-radius: 10px;  
+                text-align: center;
+                color: #333;
+                text-decoration: none ;
+            }
+            .cont-det-booking table {
+                width: 80%;
+                text-align: left;
+                align-items: center;
+                margin: 0px auto;
+                margin-top: 20px;
+                margin-bottom: 25px;
+                border: none;
+                color: #333333;
+              }
 
+            .cont-det-booking .det-division {
+                border: 0.5px solid #333;
+                padding-top: 1px;
+                background-color: #333;
+              }
+              .congratulations{
+                margin-bottom: 15px;
+              }
+              hr{
+                margin-top: 30px;
+                margin-bottom: 35px;
+              }
+        </style>
     </head>
     <body>
-        <h1>Hola Señor {{ fullname }}</h1>
-        <ul>
-            <p>
-                Acontinuacion le informamos los datos de su reserva
+        <div class="cont-det-booking">
+            <img src="https://coronatours.com.co/static/img/logo.png"
+                 alt="Coronatours" />
+            <h3>Reserva # {{ nbooking }}</h3>
+            {% if tour.data.status == "APPROVED" %}<p class="aproved">Aprobado</p>{% endif %}
+            <table>
+                <tr>
+                    <td>
+                        <span>Nombre:</span>
+                    </td>
+                    <td class="det-celda">{{ name }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Apellido:</span>
+                    </td>
+                    <td class="det-celda">{{ lastname }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Celular:</span>
+                    </td>
+                    <td class="det-celda">{{ phone }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Correo:</span>
+                    </td>
+                    <td class="det-celda">{{ correo }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Pais:</span>
+                    </td>
+                    <td class="det-celda">{{ contry }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Ciudad de origen:</span>
+                    </td>
+                    <td class="det-celda">{{ city }}</td>
+                </tr>
+                <tr>
+                    <td class="det-division"></td>
+                    <td class="det-division"></td>
+                </tr>
+                {% if opcion == 'transporte' %}
+                    <tr>
+                        <td>
+                            <span>Vehiculo:</span>
+                        </td>
+                        <td class="det-celda">{{ tour }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Origen:</span>
+                        </td>
+                        <td class="det-celda">{{ origen }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>destino:</span>
+                        </td>
+                        <td class="det-celda">{{ destino }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>fecha:</span>
+                        </td>
+                        <td class="det-celda">{{ checkin }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Hora:</span>
+                        </td>
+                        <td class="det-celda">{{ hora }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>
+                            <span>Hotel: {{ opcion }}</span>
+                        </td>
+                        <td class="det-celda">{{ hotel }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Tours:</span>
+                        </td>
+                        <td class="det-celda">{{ tour }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>
+                        <span>Cant Adultos:</span>
+                    </td>
+                    <td class="det-celda">{{ adults }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Cant Niños:</span>
+                    </td>
+                    <td class="det-celda">{{ childre }}</td>
+                </tr>
+                <tr>
+                    <td class="det-division"></td>
+                    <td class="det-division"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>valor adultos:</span>
+                    </td>
+                    <td class="det-celda">$ {{ cash|intcomma }} COP</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>valor Niños:</span>
+                    </td>
+                    <td class="det-celda"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>valor adicional:</span>
+                    </td>
+                    <td class="det-celda"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>valor Total:</span>
+                    </td>
+                    <td class="det-celda">$ {{ total|intcomma }} COP</td>
+                </tr>
+            </table>
+            <span class="congratulations">¡Gracias por su compra!</span>
+            <hr style="width: 50%;">
+            <p class="m-0 mbt">
+                <a href="#" style="color: #666666; text-decoration: none">Politicas de Privacidad -</a>
+                <a href="#"
+                   style="color: #666666;
+                          text-decoration: none;
+                          hover: #000000">Cookies -</a>
+                <a href="#"  style="color: #666666; text-decoration: none">Aviso Legal</a>
             </p>
-            <li> Su ruta inicia en : {{start}} </li>
-            <li> Su ruta termina en :{{end}} </li>
-            <li> Fecha y hora de recogida :{{date}} {{time}}</li>
-            <li> Vehiculo : {{ve_name}} </li>
-            <li> Valor : {{ve_value}} </li>
-
-        </ul>
+            <p style="color: #000000;">&copy; Coronatours 2024.</p>
+        </div>
     </body>
 </html>

@@ -1,22 +1,22 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from tours.models import Tours
 from reserve.models import Reserver, Vehiculos
+from django.urls import reverse
+from tours.models import Tours
 from .models import Booking
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from coronatours.settings import EMAIL_HOST_USER
+import hashlib
+import requests
+import json
 
 # Create your views here.
-
 
 def check(request, id=False):
     d_reserve = Reserver.objects.all()
     transport = Vehiculos.objects.get(id=request.POST['id'])
     viaje = request.POST['recorrido']
-    
-
-    # if viaje == "idayvuelta":
-    #     hora_ret =  request.POST['time_return']
-    #     cash_ret = int(request.POST['value_d'])
-    # else:
-    #     hora_ret = 0
 
     passengers_list = []
     range_passengers = transport.Number_passengers + 1
@@ -71,9 +71,14 @@ def check(request, id=False):
                     "id": request.POST['id'],
                     "cash" : request.POST['value'],
                     "opcion": "transporte"
-                }
+                }       
                 opcion = "transporte"
                 cash = request.POST['value']
+
+                print("Origen -> " + det_booking['origen'])
+                print("destino -> " + det_booking['destino'] )
+                print("hora -> " + det_booking['time'] )
+                print("fecha -> " + det_booking['date'] )
                 
                 #realizo arreglo de hora
                 t = list(det_booking['time'])
@@ -99,19 +104,15 @@ def check(request, id=False):
                     # print(tim)
                     segmentar = list(v_time)
 
-                    print(set(segmentar))
-
                     if set(segmentar) == range(1, 9):
                         segmen = segmentar.insert('0')
                         print(segmen)
 
                     hora_val = segmentar[0] + segmentar[1]
-                    print("hora dividido" + hora_val)
 
                 
                 # v_time = "0"+ str(det_booking['time'])
                 
-                print(v_time)
 
                 if int(hora_val) in range(21, 24) or int(hora_val) in range(0, 6):
                     cash = int(request.POST['value']) + 20000
@@ -188,8 +189,6 @@ def check(request, id=False):
         opcion = "tour"
 
 
-    print("este es el valor --> " + str(cash))
-
     return render(request, 'check.html', {
         'title': 'Informacion de reserva',
         'det_booking': det_booking,
@@ -203,10 +202,8 @@ def check(request, id=False):
 
     })
 
-
 def det_booking(request, opc):
 
-    print(opc)
     tour = Tours.objects.all()
 
     if request.method == 'POST':
@@ -223,11 +220,12 @@ def det_booking(request, opc):
         opcion = request.POST['opcion']
         aerolinea = request.POST['aerolinea']
         nvuelo = request.POST['nvuelo']
+        origen = request.POST['origen']
+        destino = request.POST['destino']
+        time = request.POST['time']
+        date = request.POST['date']
 
-        # print ("\nesta es la informacion de cash -> " + cash + "\n" ) 
-        # if request.POST['hotel'] != "transporte":
-        #     hotel  = request.POST['hotel']
-        # print(opcion)
+        
         if opcion == 'transporte':
             total = int(cash)
         else:
@@ -244,18 +242,17 @@ def det_booking(request, opc):
         cash=cash,
         tour=tour,
         adults=adults,
-        # childre=childre,
         total=total,
         air=aerolinea,
-        nair=nvuelo
+        nair=nvuelo,
+        checkin=date,
+        hora=time,
+        origen=origen,
+        destino=destino,
+        opcion=opcion
     )
 
     booking.save()
-
-    # print(opcion) 
-
-    # if option == "transporte":
-    #     opcion = "transporte"
 
     return render(request, 'det_booking.html', {
         'title': 'Detalles de Reserva',
@@ -264,9 +261,75 @@ def det_booking(request, opc):
         'opcion': opcion
     })
 
+def answer_booking(request, id=False):
+    
+    id_wompi = request.GET['id']
+    # tour = get_object_or_404(Tours, id=53)
 
-def answer_booking(request, id):
+    URL_API =  "https://sandbox.wompi.co/v1/transactions/" + id_wompi
+    # URL_API =  "https://production.wompi.co/v1/transactions/" + id_wompi
+
+    response = requests.get(URL_API)
+
+    if response.status_code == 200:
+          tour = response.json()
+          for t in tour:
+                print(t)
+    else:
+          tour = []
+
+  
+    id_booking = tour['data']['reference']
+    id_booking = id_booking.lstrip('0')
+    booking = Booking.objects.get(id=id_booking ) 
+
+    if response.status_code == 200:
+
+        subject = 'Nueva reserva de ' + booking.name 
+        template = render_to_string(
+            'correo.html',
+            context={
+                'nbooking': tour['data']['reference'],
+                'name': booking.name ,      
+                'correo': booking.mail,
+                'content': booking.name,
+                'lastname' : booking.lastname,
+                'phone' : booking.phone,
+                'contry' : booking.contry,
+                'city' : booking.city,
+                'cash' : booking.cash,
+                'tour' : booking.tour,
+                'checkin' : booking.checkin,
+                'hora': booking.hora,
+                'origen': booking.origen,
+                'destino': booking.destino, 
+                'hotel' : booking.hotel,
+                'adults' : booking.adults,
+                'childre' : booking.childre,
+                'total' : booking.total,
+                'opcion' : booking.opcion,
+                'method' : tour['data']['payment_method']['type'] ,
+                'card':tour['data']['payment_method']['extra']['name'] ,
+                'card_type': tour['data']['payment_method']['extra']['card_type'],
+                'data': tour['data']['finalized_at'],
+
+                },
+            )
+        
+
+        message = EmailMultiAlternatives(
+            subject, #Titulo
+            "This is an important message.",
+            EMAIL_HOST_USER, #Remitente
+            ["gegovaceo@gmail.com", booking.mail]) #Destinatario
+
+        message.attach_alternative(template, 'text/html')
+        message.send()  
+
     return render(request, 'respuesta.html', {
-        'tiitle': 'confirmacion de reserva',
-        'id': id
+        'title': 'confirmacion reserva',     
+        'id': tour['data']['reference'],
+        'tour': tour,
+        'booking': booking          
     })
+

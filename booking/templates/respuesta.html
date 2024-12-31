@@ -1,9 +1,119 @@
 {% extends 'layouts/layout.html' %}
+{% load humanize %}
 {% load static %}
-
-{% block title %} {{ title }} {% endblock %}
-
+{% block title %}
+    {{ title }}
+{% endblock title %}
 {% block content %}
-<h1>{{ title }} {{id}}</h1> 
-
-{% endblock %}
+    <div class="cont-det-booking">
+        <img src="{% static 'img/logo.png' %}" alt="Coronatours" />
+        <h3>Reserva # {{ id }}</h3>
+        {% if tour.data.status == "APPROVED" %}<p class="aproved">Aprobado</p>{% endif %}
+        <table>
+            <tr>
+                <td>
+                    <span>Nombre:</span>
+                </td>
+                <td class="det-celda">{{ booking.name }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Apellido:</span>
+                </td>
+                <td class="det-celda">{{ booking.lastname }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Celular:</span>
+                </td>
+                <td class="det-celda">{{ booking.phone }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Correo:</span>
+                </td>
+                <td class="det-celda">{{ booking.mail }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Pais:</span>
+                </td>
+                <td class="det-celda">{{ booking.contry }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Ciudad de origen:</span>
+                </td>
+                <td class="det-celda">{{ booking.city }}</td>
+            </tr>
+            {% if opcion == 'transporte' %}
+                <tr>
+                    <td>
+                        <span>transporte:</span>
+                    </td>
+                    <td class="det-celda">{{ booking.hotel }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Vehiculo:</span>
+                    </td>
+                    <td class="det-celda">{{ booking.tour }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>
+                        <span>Hotel: {{ opcion }}</span>
+                    </td>
+                    <td class="det-celda">{{ booking.hotel }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Tours:</span>
+                    </td>
+                    <td class="det-celda">{{ booking.tour }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td>
+                    <span>Cant Adultos:</span>
+                </td>
+                <td class="det-celda">{{ booking.adults }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Cant Niños:</span>
+                </td>
+                <td class="det-celda">{{ booking.childre }}</td>
+            </tr>
+            <tr>
+                <td class="det-division"></td>
+                <td class="det-division"></td>
+            </tr>
+            <tr>
+                <td>
+                    <span>valor adultos:</span>
+                </td>
+                <td class="det-celda">$ {{ booking.cash|intcomma }} COP</td>
+            </tr>
+            <tr>
+                <td>
+                    <span>valor Niños:</span>
+                </td>
+                <td class="det-celda"></td>
+            </tr>
+            <tr>
+                <td>
+                    <span>valor adicional:</span>
+                </td>
+                <td class="det-celda"></td>
+            </tr>
+            <tr>
+                <td>
+                    <span>valor Total:</span>
+                </td>
+                <td class="det-celda">$ {{ booking.total|intcomma }} COP</td>
+            </tr>
+        </table>
+        <span class="congratulations">¡Gracias por su compra!</span>
+    </div>
+{% endblock content %}

@@ -112,6 +112,7 @@
       </tr>
     </table>
     <!-- data-public-key="pub_test_g7FnpJvJYnwAsFW6wwPlwo5fTZSIjRKM" -->
+    <!--  data-public-key="pub_prod_9Q0j3Er5qtTcXx4X2cPd4b3wTFoyElX0" -->
     <form>
       <script src="https://checkout.wompi.co/widget.js"
               data-render="button"
@@ -119,7 +120,7 @@
               data-currency="COP"
               data-amount-in-cents="{{ booking.total }}00"
               data-reference="{{ booking.get_id_formateado }}"
-              data-redirect-url="http://localhost:8000/respuesta/"
+              data-redirect-url="https://coronatours.com.co/respuesta/"
               {%comment%}
               data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5"
               {%endcomment%}></script>

@@ -5,13 +5,9 @@
 {% load humanize %}
 {% block content %}
   <h1>{{ title }}</h1>
-  {% comment %} {% if opcion != transporte %}
-    <form class="form-booking" action="#" method="post">
-{% else %} {% endcomment %}
   <form class="form-booking"
         action="{% url 'detail_booking' det_booking.id %}"
         method="post">
-    {% comment %} {% endif %} {% endcomment %}
     {% csrf_token %}
     <div class="box-form-booking">
       <div class="box-form-item">
@@ -113,19 +109,10 @@
             {% for passenger in passengers_list %}<option value="{{ passenger }}">{{ passenger }}</option>{% endfor %}
           </select>
         </div>
+      {% else %}
+        <input type="hidden" name="adults" value="{{ can_comp }}">
       {% endif %}
-      {% comment %}
-      <div class="box-form-mult">
-        <label class="sub-title-3" for="">cantidad de niños </label>
-
-        <select name="childre" id="">
-          {% for passenger in passengers_list %}<option value="{{passenger}}">{{ passenger }}</option>{% endfor %}
-        </select>
-      </div>
-      {% endcomment %}
-      <input type="hidden" name="adults" value="{{ can_comp }}">
       <input type="submit" class="btn" value="Continuar" />
     </div>
   </form>
 {% endblock content %}
-</form>
