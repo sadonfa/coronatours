@@ -49,7 +49,11 @@
               <div class="box-form-date">
                 <div class="form__cont">
                   <label class="form__label">Fecha de Recogida</label>
-                  <input type="date" name="date" class="form__input" required />
+                  <input type="date"
+                         name="date"
+                         min='{{ fecha }}'
+                         class="form__input"
+                         required />
                 </div>
                 <div class="form__cont">
                   <label class="form__label">Hora de Recogida (Ida)</label>
@@ -94,7 +98,11 @@
               <div class="box-form-date">
                 <div class="form__cont">
                   <label class="form__label" for="date">Fecha de Recogida</label>
-                  <input type="date" name="date" class="form__input" required />
+                  <input type="date"
+                         name="date"
+                         min='{{ fecha }}'
+                         class="form__input"
+                         required />
                 </div>
                 <div class="form__cont">
                   <label class="form__label" for="time">Hora de Recogida (Ida)</label>

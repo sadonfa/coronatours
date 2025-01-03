@@ -99,7 +99,11 @@
             <div class="box-form">
               <div class="d-box">
                 <label class="label_reserve" for="date">Fecha de Recogida</label>
-                <input type="date" name="date" class="form_reserve" required />
+                <input type="date"
+                       name="date"
+                       min='{{ fecha }}'
+                       class="form_reserve"
+                       required />
               </div>
               <div class="d-box">
                 <label class="label_reserve" for="time">Hora de Recogida (Ida)</label>
@@ -133,7 +137,11 @@
             <div class="box-form">
               <div class="d-box">
                 <label class="label_reserve" for="date">Fecha de Recogida</label>
-                <input type="date" name="date_return" class="form_reserve" required />
+                <input type="date"
+                       name="date_return"
+                       min='{{ fecha }}'
+                       class="form_reserve"
+                       required />
               </div>
               <div class="d-box">
                 <label class="label_reserve" for="time">Hora de Recogida (Ida)</label>

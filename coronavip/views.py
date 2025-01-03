@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from .models import VehiculosVip
+from datetime import datetime, timedelta
 
 # Create your views here.
 
 def coronavip(request):
+
+    ahora = datetime.today() + timedelta(days=1)
+    tomorrow = datetime.strftime(ahora, "%Y-%m-%d")  
+
     return render(request, "coronavip.html", {
-        'title': 'corona vip'
+        'title': 'corona vip',
+        'fecha': tomorrow
     })
 
 def detail_vip(request):
