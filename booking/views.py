@@ -321,7 +321,7 @@ def answer_booking(request, id=False):
             subject, #Titulo
             "This is an important message.",
             EMAIL_HOST_USER, #Remitente
-            ["gegovaceo@gmail.com", booking.mail]) #Destinatario
+            ["reservas@coronatours.com.co", booking.mail]) #Destinatario
 
         message.attach_alternative(template, 'text/html')
         message.send()  
