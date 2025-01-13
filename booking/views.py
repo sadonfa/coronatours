@@ -35,7 +35,7 @@ def check(request, id=False):
                     "name": request.POST['name'],
                     "origen": request.POST['origen'],
                     "destino": request.POST['destino'],
-                    "date": request.POST['date'],
+                    "date":  request.POST['date'],
                     "time": request.POST['time'],
                     "id": request.POST['id'],
                     "opcion": "transporte"
@@ -44,6 +44,7 @@ def check(request, id=False):
                 can_comp = request.POST['comp-cantidad']
                 cash = request.POST['value']
                 cash = int(can_comp) * int(cash)
+                print("Fecha compartido -> " + det_booking['date'])
             else:
                 det_booking = {
                     "name": request.POST['name'],
@@ -74,14 +75,9 @@ def check(request, id=False):
                 }       
                 opcion = "transporte"
                 cash = request.POST['value']
-
-                print("Origen -> " + det_booking['origen'])
-                print("destino -> " + det_booking['destino'] )
-                print("hora -> " + det_booking['time'] )
-                print("fecha -> " + det_booking['date'] )
                 
                 #realizo arreglo de hora
-                t = list(det_booking['time'])
+                t = list(det_booking['time'])   
                 # print(len(t))
                 if len(t) == 1:
                     v_time = "0" + str(det_booking['time'])
@@ -225,7 +221,7 @@ def det_booking(request, opc):
         time = request.POST['time']
         date = request.POST['date']
 
-        
+
         if opcion == 'transporte':
             total = int(cash)
         else:
@@ -249,7 +245,7 @@ def det_booking(request, opc):
         hora=time,
         origen=origen,
         destino=destino,
-        opcion=opcion
+        opcion=opcion,
     )
 
     booking.save()
@@ -257,7 +253,7 @@ def det_booking(request, opc):
     return render(request, 'det_booking.html', {
         'title': 'Detalles de Reserva',
         'total': total,
-        'booking': booking,
+        'booking': booking,      
         'opcion': opcion
     })
 
@@ -306,6 +302,8 @@ def answer_booking(request, id=False):
                 'hotel' : booking.hotel,
                 'adults' : booking.adults,
                 'childre' : booking.childre,
+                'vuelo': booking.air,
+                'nvuelo': booking.nair ,
                 'total' : booking.total,
                 'opcion' : booking.opcion,
                 'method' : tour['data']['payment_method']['type'] ,

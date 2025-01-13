@@ -16,7 +16,7 @@ class Booking(models.Model):
     cash = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Valor", default=0)
     air = models.CharField(max_length=200, verbose_name="Aerolinea")
     nair = models.CharField(max_length=200, verbose_name="numero de vuelo")
-    checkin = models.DateField(default="2024-01-01", verbose_name="Checkin" )
+    checkin = models.DateField(default=0, verbose_name="Checkin" )
     # cash = MoneyField(max_digits=14, decimal_places=2, default_currency=None, default=0)
     tour = models.CharField(max_length=200, verbose_name="Tours")
     adults  = models.CharField(max_length=100, verbose_name="Adultos")

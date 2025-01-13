@@ -73,7 +73,7 @@
           </div>
           {% if time_return %}<input type="hidden" name="time_return" value="{{ time_return }}" />{% endif %}
           <input type="hidden" value="{{ recorrido }}" name="recorrido" />
-          <input type="hidden" name="date" value="{{ date }}" />
+          <input type="hidden" name="date" value="{{ dat_trayecto.date }}" />
           <input type="hidden" name="time" value="{{ time }}" />
           <input type="hidden" name="id" value="{{ transports.0.id }}" />
           <input type="hidden" name="origen" value="{{ start_of_route }}" />

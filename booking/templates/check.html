@@ -9,6 +9,15 @@
         action="{% url 'detail_booking' det_booking.id %}"
         method="post">
     {% csrf_token %}
+    <input type="hidden" name="date" value="{{ det_booking.date }}" readonly />
+    <input type="hidden" name="time" value="{{ det_booking.time }}" readonly />
+    <input type="hidden" name="id" value="{{ det_booking.id }}" readonly />
+    <input type="hidden" name="origen" value="{{ det_booking.origen }}" readonly />
+    <input type="hidden"
+           name="destino"
+           value="{{ det_booking.destino }}"
+           readonly />
+    <input type="hidden" name="opcion" value="{{ opcion }}" readonly />
     <div class="box-form-booking">
       <div class="box-form-item">
         <label class="sub-title-3">nombres</label>
@@ -40,15 +49,6 @@
       </div>
     </div>
     {% if opcion != transporte %}
-      <input type="hidden" name="date" value="{{ det_booking.date }}" readonly />
-      <input type="hidden" name="time" value="{{ det_booking.time }}" readonly />
-      <input type="hidden" name="id" value="{{ det_booking.id }}" readonly />
-      <input type="hidden" name="origen" value="{{ det_booking.origen }}" readonly />
-      <input type="hidden"
-             name="destino"
-             value="{{ det_booking.destino }}"
-             readonly />
-      <input type="hidden" name="opcion" value="{{ opcion }}" readonly />
       <div class="box-form-booking">
         <div class="box-form-item">
           <label class="sub-title-3" for="">Aerolinea</label>
