@@ -77,8 +77,6 @@ def transporte(request):
             'duration' : request.POST['duration'],  
             }
         
-        print("hora -> " + dat_trayecto['time'])
-        print("fecha -> " + request.POST['date'])
         
         list_time = Convert(request.POST['time'])
         hours = int(list_time[0])
@@ -156,19 +154,14 @@ def transporte(request):
         st_distancia = int(request.POST['distance'])*10**-3
         kilometros = int(round(st_distancia))
 
-        print(f"kilometro {kilometros}km")
-
         st_duracion = int(request.POST['duration'])/60
         dura = int(round(st_duracion))
-        print(dura)
 
         rt_distance = int(request.POST['distance_ret'])*10**-3
         kilm = int(round(rt_distance))
-        print(f"kilometros de retorno son {kilm}km")
 
         rt_duracion = int(request.POST['duration_ret'])/60
         dura_rt = int(round(rt_duracion))
-        print(dura_rt)
 
         if int(kilometros) in range(1, 12):
             
@@ -248,7 +241,9 @@ def transporte(request):
             }
         else:
             print("Incorrecto_2")
-
+            
+    print(recorrido)
+    print(dat_trayecto)
 
     return render(request, 'transporte.html', {
         'title': 'Transporte',

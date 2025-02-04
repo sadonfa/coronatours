@@ -38,7 +38,8 @@
 }
 
 .box-form-item,
-.box-form-item-m {
+.box-form-item-m,
+.box-form-item-one {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -51,23 +52,30 @@
   width: 33%;
 }
 
+.box-form-item-one {
+  width: 88%;
+}
+
 .box-form-item:focus {
   color: aqua;
 }
 
+.box-form-item-one label,
 .box-form-item label {
   font-family: "Montserrat Bold";
   font-size: 10px;
-  color: #bbb;
+  color: #333;
   margin-bottom: 5px;
   text-align: left;
   text-transform: capitalize;
 }
 
+.box-form-item-one label:focus,
 .box-form-item label:focus {
   color: aqua;
 }
 
+.box-form-item-one input,
 .box-form-item input,
 .box-form-item-m,
 .box-form-item-m select {
@@ -80,6 +88,7 @@
   width: 100%;
 }
 
+.box-form-item-one input:focus,
 .box-form-item input:focus {
   border-color: #ff8800;
   outline: none;
@@ -90,6 +99,7 @@ form input::placeholder {
   text-transform: capitalize;
 }
 
+.box-form-item-one :focus::-moz-placeholder,
 .box-form-item :focus::-moz-placeholder {
   /* / Firefox 19+  */
   color: #ff8800;
@@ -162,6 +172,8 @@ form input::placeholder {
   transition: all 300ms ease-in-out;
 }
 
+.box-form-item-one input:focus ~ label,
+.box-form-item-one input:not(:placeholder-shown) ~ label,
 .box-form-item input:focus ~ label,
 .box-form-item input:not(:placeholder-shown) ~ label,
 .box-form-item select:not(:placeholder-shown) ~ label {

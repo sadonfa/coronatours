@@ -15,12 +15,6 @@
       </tr>
       <tr>
         <td>
-          <span>Apellido:</span>
-        </td>
-        <td class="det-celda">{{ booking.lastname }}</td>
-      </tr>
-      <tr>
-        <td>
           <span>Celular:</span>
         </td>
         <td class="det-celda">{{ booking.phone }}</td>
@@ -32,24 +26,92 @@
         <td class="det-celda">{{ booking.mail }}</td>
       </tr>
       <tr>
-        <td>
-          <span>Pais:</span>
-        </td>
-        <td class="det-celda">{{ booking.contry }}</td>
+        <td class="det-division"></td>
+        <td class="det-division"></td>
       </tr>
       <tr>
         <td>
-          <span>Ciudad de origen:</span>
+          <span>Fecha de recogida:</span>
         </td>
-        <td class="det-celda">{{ booking.city }}</td>
+        <td class="det-celda">{{ booking.checkin }}</td>
       </tr>
-      {% if opcion == 'transporte' %}
+      <tr>
+        <td>
+          <span>Hora de recogida:</span>
+        </td>
+        <td class="det-celda">{{ booking.hora }}</td>
+      </tr>
+      <tr>
+        <td>
+          <span>Origen:</span>
+        </td>
+        <td class="det-celda">{{ booking.origen }}</td>
+      </tr>
+      <tr>
+        <td>
+          <span>Destino:</span>
+        </td>
+        <td class="det-celda">{{ booking.destino }}</td>
+      </tr>
+      <tr>
+        <td>
+          <span>Aerolinea:</span>
+        </td>
+        <td class="det-celda">{{ booking.air }}</td>
+      </tr>
+      <tr>
+        <td>
+          <span>Numero de vuelo:</span>
+        </td>
+        <td class="det-celda">{{ booking.nair }}</td>
+      </tr>
+      {% if recorrido == "idayvuelta" %}
+        <tr>
+          <td class="det-division"></td>
+          <td class="det-division"></td>
+        </tr>
         <tr>
           <td>
-            <span>transporte:</span>
+            <span>Fecha de recogida:</span>
           </td>
-          <td class="det-celda">{{ booking.hotel }}</td>
+          <td class="det-celda">{{ booking.date_ret }}</td>
         </tr>
+        <tr>
+          <td>
+            <span>Hora de recogida:</span>
+          </td>
+          <td class="det-celda">{{ booking.hora_ret }}</td>
+        </tr>
+        <tr>
+          <td>
+            <span>Origen Regreso:</span>
+          </td>
+          <td class="det-celda">{{ booking.origen_ret }}</td>
+        </tr>
+        <tr>
+          <td>
+            <span>Destino Regreso:</span>
+          </td>
+          <td class="det-celda">{{ booking.destino_ret }}</td>
+        </tr>
+        <tr>
+          <td>
+            <span>Aerolinea Regreso:</span>
+          </td>
+          <td class="det-celda">{{ booking.air_r }}</td>
+        </tr>
+        <tr>
+          <td>
+            <span>Numero de Vuelo Regreso:</span>
+          </td>
+          <td class="det-celda">{{ booking.nair_r }}</td>
+        </tr>
+      {% endif %}
+      <tr>
+        <td class="det-division"></td>
+        <td class="det-division"></td>
+      </tr>
+      {% if opcion == 'transporte' %}
         <tr>
           <td>
             <span>Vehiculo:</span>
@@ -77,12 +139,6 @@
         <td class="det-celda">{{ booking.adults }}</td>
       </tr>
       <tr>
-        <td>
-          <span>Cant Niños:</span>
-        </td>
-        <td class="det-celda">{{ booking.childre }}</td>
-      </tr>
-      <tr>
         <td class="det-division"></td>
         <td class="det-division"></td>
       </tr>
@@ -91,12 +147,6 @@
           <span>valor adultos:</span>
         </td>
         <td class="det-celda">$ {{ booking.cash|intcomma }} COP</td>
-      </tr>
-      <tr>
-        <td>
-          <span>valor Niños:</span>
-        </td>
-        <td class="det-celda"></td>
       </tr>
       <tr>
         <td>
@@ -121,9 +171,7 @@
               data-amount-in-cents="{{ booking.total }}00"
               data-reference="{{ booking.get_id_formateado }}"
               data-redirect-url="https://coronatours.com.co/respuesta/"
-              {%comment%}
-              data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5"
-              {%endcomment%}></script>
+              data-signature:integrity="37c8407747e595535433ef8f6a811d853cd943046624a0ec04662b17bbf33bf5"></script>
     </form>
     {% comment %} 00132
     vuelo 

@@ -772,6 +772,7 @@ hr {
   margin: 0px auto;
   margin-top: 25px;
   box-shadow: 0px 0px 5px #333;
+  padding: 40px;
   padding-top: 25px;
   padding-bottom: 80px;
 }
@@ -789,12 +790,15 @@ hr {
 }
 
 .cont-det-booking .det-division {
-  border: 1px solid #333;
-  padding-top: 1px;
+  /* border: 1px solid #333;   */
+  padding-top: 2px;
+  padding-bottom: 2px;
   background-color: #333;
 }
 
 .cont-det-booking .det-celda {
+  width: 70%;
+  padding: 3px;
   padding-left: 15px;
   /* border: 1px solid red; */
 }
@@ -842,8 +846,7 @@ hr {
   display: block;
 }
 
-
-.info-anuncio{
+.info-anuncio {
   display: block;
   margin: 0px auto;
   margin-top: 55px;
@@ -852,8 +855,7 @@ hr {
   /* border: 2px solid red; */
 }
 
-.info-anuncio p{
-
+.info-anuncio p {
   margin: 0 auto;
   margin-top: 15px;
   padding: 30px 25px;
@@ -867,6 +869,6 @@ hr {
   background-color: #fff;
 }
 
-.info-anuncio img{
+.info-anuncio img {
   width: 100%;
 }

@@ -37,14 +37,16 @@ def check(request, id=False):
                     "destino": request.POST['destino'],
                     "date":  request.POST['date'],
                     "time": request.POST['time'],
-                    "id": request.POST['id'],
-                    "opcion": "transporte"
+                    "id": request.POST['id'],                   
+                    "opcion": "transporte",
+                    "recorrido": request.POST['recorrido']
                 }
                 opcion = "transporte"
                 can_comp = request.POST['comp-cantidad']
                 cash = request.POST['value']
                 cash = int(can_comp) * int(cash)
-                print("Fecha compartido -> " + det_booking['date'])
+                
+                
             else:
                 det_booking = {
                     "name": request.POST['name'],
@@ -52,8 +54,13 @@ def check(request, id=False):
                     "destino": request.POST['destino'],
                     "date": request.POST['date'],
                     "time": request.POST['time'],
-                    "id": request.POST['id'],
-                    "opcion": "transporte"
+                    "origen_ret": request.POST['origen_ret'],
+                    "destino_ret": request.POST['destino_ret'],
+                    "date_ret": request.POST['date_return'],
+                    "time_ret": request.POST['time_return'],
+                    "id": request.POST['id'],                    
+                    "opcion": "transporte",
+                    "recorrido": request.POST['recorrido']
                 }
                 opcion = "transporte"
                 can_comp = request.POST['comp-cantidad']
@@ -71,7 +78,8 @@ def check(request, id=False):
                     "time": request.POST['time'],
                     "id": request.POST['id'],
                     "cash" : request.POST['value'],
-                    "opcion": "transporte"
+                    "opcion": "transporte",
+                    "recorrido": request.POST['recorrido']
                 }       
                 opcion = "transporte"
                 cash = request.POST['value']
@@ -125,12 +133,18 @@ def check(request, id=False):
                     "destino": request.POST['destino'],
                     "date": request.POST['date'],
                     "time": request.POST['time'],
-                    "time_r": request.POST['time_return'],
+                    "time_r": request.POST['time_ret'],
                     "id": request.POST['id'],
                     "cash" : request.POST['value'],
-                    "opcion": "transporte"
+                    "origen_ret": request.POST['origen_ret'],
+                    "destino_ret": request.POST['destino_ret'],
+                    "date_ret": request.POST['date_ret'],
+                    "time_ret": request.POST['time_ret'],
+                    "opcion": "transporte",
+                    "recorrido": request.POST['recorrido']
                 }
                 opcion = "transporte"
+               
                 # print(int(request.POST['value_d']))
                 cash = int(request.POST['value']) + int(request.POST['value_d'])
                 # print("Este es la hora actual --> " + str(det_booking['time']))
@@ -185,6 +199,7 @@ def check(request, id=False):
         opcion = "tour"
 
 
+
     return render(request, 'check.html', {
         'title': 'Informacion de reserva',
         'det_booking': det_booking,
@@ -204,57 +219,77 @@ def det_booking(request, opc):
 
     if request.method == 'POST':
         name = request.POST['name']
-        lastname = request.POST['lastname']
         phone = request.POST['phone']
-        mail = request.POST['mail']
-        contry = request.POST['contry']
-        city = request.POST['city']
+        mail = request.POST['mail']  
         cash = request.POST['cash']
         tour = request.POST['tour']
         adults = request.POST['adults']
-        # childre = request.POST['childre']
         opcion = request.POST['opcion']
         aerolinea = request.POST['aerolinea']
         nvuelo = request.POST['nvuelo']
+
         origen = request.POST['origen']
         destino = request.POST['destino']
         time = request.POST['time']
         date = request.POST['date']
-
-
+        recorrido = request.POST['recorrido']
+        
         if opcion == 'transporte':
             total = int(cash)
+        else:   
+            total = int(adults) * int(cash)        
+
+
+        if recorrido == 'ida':
+            air_r="None"
+            nair_r="None"                             
+            origen_ret="None"
+            destino_ret="None"
+            date_ret="2021-01-01"
+            hora_ret="00:00"
         else:
-            total = int(adults) * int(cash)
+            air_r=request.POST['aerolinea_r']
+            nair_r=request.POST['nvuelo_r']                            
+            origen_ret=request.POST['origen_ret']
+            destino_ret=request.POST['destino_ret']
+            date_ret=request.POST['date_ret']
+            hora_ret=request.POST['time_ret']   
 
-    booking = Booking(
-        name=name,
-        lastname=lastname,
-        phone=phone,
-        mail=mail,
-        contry=contry,
-        city=city,
-        # hotel  = hotel,
-        cash=cash,
-        tour=tour,
-        adults=adults,
-        total=total,
-        air=aerolinea,
-        nair=nvuelo,
-        checkin=date,
-        hora=time,
-        origen=origen,
-        destino=destino,
-        opcion=opcion,
-    )
 
-    booking.save()
+        booking = Booking(
+            name=name,
+            phone=phone,
+            mail=mail,
+            cash=cash,
+            tour=tour,
+            adults=adults, 
+            air=aerolinea,
+            nair=nvuelo,
+            air_r=air_r,            
+            nair_r=nair_r,                  
+            origen=origen,
+            destino=destino,
+            checkin=date,
+            hora=time,                
+            origen_ret=origen_ret,
+            destino_ret=destino_ret,
+            date_ret=date_ret,
+            hora_ret=hora_ret,
+            opcion=opcion,
+            recorrido=recorrido,
+            total=total,   
+        )
+
+       
+        booking.save()
+    
 
     return render(request, 'det_booking.html', {
         'title': 'Detalles de Reserva',
         'total': total,
         'booking': booking,      
-        'opcion': opcion
+        'opcion': opcion,
+        'recorrido': recorrido
     })
 
 def answer_booking(request, id=False):
@@ -262,7 +297,7 @@ def answer_booking(request, id=False):
     id_wompi = request.GET['id']
     # tour = get_object_or_404(Tours, id=53)
 
-    # URL_API =  "https://sandbox.wompi.co/v1/transactions/" + id_wompi
+    #URL_API =  "https://sandbox.wompi.co/v1/transactions/" + id_wompi
     URL_API =  "https://production.wompi.co/v1/transactions/" + id_wompi
 
     response = requests.get(URL_API)
@@ -286,34 +321,35 @@ def answer_booking(request, id=False):
             'correo.html',
             context={
                 'nbooking': tour['data']['reference'],
-                'name': booking.name ,      
+                'name': booking.name,      
                 'correo': booking.mail,
                 'content': booking.name,
-                'lastname' : booking.lastname,
                 'phone' : booking.phone,
-                'contry' : booking.contry,
-                'city' : booking.city,
                 'cash' : booking.cash,
                 'tour' : booking.tour,
                 'checkin' : booking.checkin,
                 'hora': booking.hora,
                 'origen': booking.origen,
                 'destino': booking.destino, 
-                'hotel' : booking.hotel,
+                "origen_ret":booking.origen_ret,
+                "destino_ret":booking.destino_ret,
+                "date_ret":booking.date_ret,
+                "hora_ret":booking.hora_ret,
                 'adults' : booking.adults,
-                'childre' : booking.childre,
                 'vuelo': booking.air,
                 'nvuelo': booking.nair ,
+                'vuelo_r': booking.air_r,
+                'nvuelo_r': booking.nair_r,
                 'total' : booking.total,
                 'opcion' : booking.opcion,
+                'recorrido': booking.recorrido,
                 'method' : tour['data']['payment_method']['type'] ,
                 'card':tour['data']['payment_method']['extra']['name'] ,
                 'card_type': tour['data']['payment_method']['extra']['card_type'],
                 'data': tour['data']['finalized_at'],
 
                 },
-            )
-        
+            )        
 
         message = EmailMultiAlternatives(
             subject, #Titulo

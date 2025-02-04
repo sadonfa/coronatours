@@ -1,6 +1,8 @@
 {% extends 'layouts/layout.html' %}
 {% load humanize %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}
+  {{ title }}
+{% endblock title %}
 {% block content %}
   <datalist id="bookmark_list_start">
     <option>{{ start_of_route }}</option>
@@ -8,13 +10,6 @@
   <datalist id="bookmark_list_end">
     <option>{{ end_of_route }}</option>
   </datalist>
-  {% comment %}
-<div class="c-map">
-  {% endcomment %}
-  <!-- Este es el menu para los vehiculos -->
-  {% comment %}
-  <div class="menu_flotante">
-  {% endcomment %}
   <div class="select-vehiculos">
     <div class="vehiculos">
       <h2 class="title-2">Seleccione su vehiculo</h2>
@@ -45,7 +40,7 @@
               </p>
               <p>
                 <i class="fa-sharp fa-solid fa-person"></i>
-                <select name="comp-cantidad" id="">
+                <select name="comp-cantidad">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -71,19 +66,27 @@
             </div>
             <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
           </div>
-          {% if time_return %}<input type="hidden" name="time_return" value="{{ time_return }}" />{% endif %}
           <input type="hidden" value="{{ recorrido }}" name="recorrido" />
           <input type="hidden" name="date" value="{{ dat_trayecto.date }}" />
           <input type="hidden" name="time" value="{{ time }}" />
           <input type="hidden" name="id" value="{{ transports.0.id }}" />
-          <input type="hidden" name="origen" value="{{ start_of_route }}" />
-          <input type="hidden" name="destino" value="{{ end_of_route }}" />
-          <input type="hidden" name="distance_ret" value="{{ det_retorno.distance }}" />
-          <input type="hidden" name="duration_ret" value="{{ duration_ret }}" />
+          <input type="hidden" name="origen" value="{{ dat_trayecto.start }}" />
+          <input type="hidden" name="destino" value="{{ dat_trayecto.end }}" />
+          {% if recorrido == 'idayvuelta' %}
+            <input type="hidden" name="origen_ret" value="{{ dat_trayecto.start_r }}" />
+            <input type="hidden" name="destino_ret" value="{{ dat_trayecto.end_r }}" />
+            <input type="hidden" name="date_return" value="{{ dat_trayecto.date_ret }}" />
+            <input type="hidden" name="time_return" value="{{ dat_trayecto.time_ret }}" />
+            <input type="hidden"
+                   name="distance_ret"
+                   value="{{ dat_trayecto.distance_ret }}" />
+            <input type="hidden"
+                   name="duration_ret"
+                   value="{{ dat_trayecto.duration_ret }}" />
+          {% endif %}
         </form>
       {% endif %}
       {% comment %} {% endif %} {% endcomment %}
-      <!-- Auto estandar -->
       {% for vehiculo in transports %}
         <form method="POST" action="{% url 'check' %}">
           {% csrf_token %}
@@ -200,8 +203,17 @@
             </div>
             <input type="submit" onclick="hizoClick()" class="btn" value="Reservar" />
           </div>
-          {% if dat_trayecto.time_ret %}
-            <input type="hidden" name="time_return" value="{{ dat_trayecto.time_ret }}" />
+          {% if recorrido == 'idayvuelta' %}
+            <input type="hidden" name="origen_ret" value="{{ dat_trayecto.start_r }}" />
+            <input type="hidden" name="destino_ret" value="{{ dat_trayecto.end_r }}" />
+            <input type="hidden" name="date_ret" value="{{ dat_trayecto.date_ret }}" />
+            <input type="hidden" name="time_ret" value="{{ dat_trayecto.time_ret }}" />
+            <input type="hidden"
+                   name="distance_ret"
+                   value="{{ dat_trayecto.distance_ret }}" />
+            <input type="hidden"
+                   name="duration_ret"
+                   value="{{ dat_trayecto.duration_ret }}" />
           {% endif %}
           <input type="hidden" value="{{ recorrido }}" name="recorrido" />
           <input type="hidden" name="date" value="{{ dat_trayecto.date }}" />
@@ -310,9 +322,7 @@
             </div>
           </div>
         </div>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
-{% endblock %}
-</div>
-</div>
+{% endblock content %}
