@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <!-- Estilos Fuentes -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'fontawesome/css/fontawesome.css' %}" />
+        <link rel="stylesheet" href="{% static 'fontawesome/css/brands.css' %}" />
+        <link rel="stylesheet" href="{% static 'fontawesome/css/solid.css' %}" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="suspend">
+            <img src="{% static 'img/logo.png' %}" alt="Coronatours">
+            <h2 class="suspend__title">pagina temporalmente fuera de servicio</h2>
+            <p class="suspend__info">Contactanos para mas informacion</p>
+            <div class="suspend__phone">
+                <span> <i class="fa-solid fa-phone"></i> (+57) 316 2203 798 </span>
+                <span> <i class="fa-solid fa-phone"></i> (+57) 301 6275 445 </span>
+            </div>
+        </div>
+    </body>
+</html>

@@ -79,3 +79,9 @@ def contact(request):
     return render(request, "contact.html", {
         'title': "Contacto"
     })
+
+
+def suspended(request):
+    return render(request, "suspend.html", {
+        'title': 'Suspendida'
+    })
