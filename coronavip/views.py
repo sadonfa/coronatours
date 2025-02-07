@@ -93,20 +93,20 @@ def transvip(request):
         if int(kilometros) in range(1, 12):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'vehiculo_lujo': 220000,  # multiplicar por personas
-                'camioneta': 230000,  # locale.currency(45000, grouping=True),
-                'lujo': 250000,  # locale.currency(85000, grouping=True),
-                'mini_van_lujo': 250000,
-                'van_lujo': 300000,  # locale.currency(150000, grouping=True),
+                'vehiculo_lujo': 350000,  # multiplicar por personas
+                'camioneta': 360000,  # locale.currency(45000, grouping=True),
+                'lujo': 380000,  # locale.currency(85000, grouping=True),
+                'mini_van_lujo': 360000,
+                'van_lujo': 360000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilometros) in range(13, 30):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'vehiculo_lujo': 250000,
-                'camioneta': 260000,  # locale.currency(60000, grouping=True),
-                'lujo': 300000,  # locale.currency(100000, grouping=True),
-                'mini_van_lujo': 300000,
-                'van_lujo': 350000,  # locale.currency(180000, grouping=True),
+                'vehiculo_lujo': 450000,
+                'camioneta': 460000,  # locale.currency(60000, grouping=True),
+                'lujo': 480000,  # locale.currency(100000, grouping=True),
+                'mini_van_lujo': 460000,
+                'van_lujo': 460000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilometros) in range(31, 58):
             print(f"correcto son {kilometros}km")

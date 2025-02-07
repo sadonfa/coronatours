@@ -75,19 +75,28 @@
       <nav>
         <ul>
           <li>
-            <a class="link-item" href="{% url 'home' %}">Inicio</a>
+            <a class="link-item {% if request.path == '/home/' %}active{% endif %}"
+               href="{% url 'home' %}">Inicio</a>
           </li>
           <li>
-            <a class="link-item" href="{% url 'about' %} ">Nosotros</a>
+            <a class="link-item {% if request.path == '/reservas/' %}active{% endif %}"
+               href="{% url 'reserve' %}">transportes</a>
           </li>
           <li>
-            <a class="link-item" href="{% url 'reserve' %}">transportes</a>
+            <a class="link-item {% if request.path == '/coronavip/' %}active{% endif %}"
+               href="{% url 'coronavip' %}">Transporte VIP</a>
           </li>
           <li>
-            <a class="link-item" href="{% url 'tours' %}">Actividades</a>
+            <a class="link-item {% if request.path == '/toures/' %}active{% endif %}"
+               href="{% url 'tours' %}">Actividades</a>
           </li>
           <li>
-            <a class="link-item" href="{% url 'contact' %} ">Contacto</a>
+            <a class="link-item {% if request.path == '/laborsocial/' %}active{% endif %}"
+               href="{% url 'laborsocial' %}">Labor Social</a>
+          </li>
+          <li>
+            <a class="link-item {% if request.path == '/contacto/' %}active{% endif %}"
+               href="{% url 'contact' %} ">Contacto</a>
             {% comment %} <a>Acerca de nosotros</a>
             <ul>
               <li>¿Quienes Somos?</li>

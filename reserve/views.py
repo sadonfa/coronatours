@@ -90,40 +90,40 @@ def transporte(request):
         if int(kilometros) in range(1, 12):
             
             valor_trayecto = {
-                'compartido': 15000,  # multiplicar por personas
-                'standar': 45000,  # locale.currency(45000, grouping=True),
-                'mini_van': 85000,  # locale.currency(85000, grouping=True),
+             'compartido': 15000,  # multiplicar por personas
+                'standar': 55000,  # locale.currency(45000, grouping=True),
+                'mini_van': 120000,  # locale.currency(85000, grouping=True),
                 # locale.currency(100000, grouping=True),
-                'van_standar': 100000,
-                'micro_bus': 140000,  # locale.currency(120000, grouping=True),
-                'buseta': 170000,  # locale.currency(170000, grouping=True),
-                'bus': 200000,  # locale.currency(200000, grouping=True),
+                'van_standar': 160000,
+                'micro_bus': 220000,  # locale.currency(120000, grouping=True),
+                'buseta': 250000,  # locale.currency(170000, grouping=True),
+                'bus': 350000,  # locale.currency(200000, grouping=True),
                 'SUV': 150000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilometros) in range(13, 30):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'compartido': 25000,
-                'standar': 60000,  # locale.currency(60000, grouping=True),
-                'mini_van': 100000,  # locale.currency(100000, grouping=True),
+               'compartido': 30000,
+                'standar': 85000,  # locale.currency(60000, grouping=True),
+                'mini_van': 150000,  # locale.currency(100000, grouping=True),
                 # locale.currency(120000, grouping=True),
-                'van_standar': 140000,
-                'micro_bus': 180000,  # locale.currency(150000, grouping=True),
-                'buseta': 190000,  # locale.currency(190000, grouping=True),
-                'bus': 260000,  # locale.currency(260000, grouping=True),
+                'van_standar': 190000,
+                'micro_bus': 250000,  # locale.currency(150000, grouping=True),
+                'buseta': 300000,  # locale.currency(190000, grouping=True),
+                'bus': 450000,  # locale.currency(260000, grouping=True),
                 'SUV': 180000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilometros) in range(31, 58):
             print(f"correcto son {kilometros}km")
             valor_trayecto = {
-                'compartido': 15000,  # locale.currency(10000, grouping=True),
-                'standar': 250000,  # locale.currency(190000, grouping=True),
-                'mini_van': 400000,  # locale.currency(280000,  grouping=True),
+                'compartido': 35000,  # locale.currency(10000, grouping=True),
+                'standar': 450000,  # locale.currency(190000, grouping=True),
+                'mini_van': 650000,  # locale.currency(280000,  grouping=True),
                 # locale.currency(400000, grouping=True),
-                'van_standar': 500000,
-                'micro_bus': 600000,  # locale.currency(480000, grouping=True),
-                'buseta': 650000,  # locale.currency(530000, grouping=True),
-                'bus': 750000,  # locale.currency(600000, grouping=True),
+                'van_standar': 750000,
+                'micro_bus': 900000,  # locale.currency(480000, grouping=True),
+                'buseta': 1050000,  # locale.currency(530000, grouping=True),
+                'bus': 1200000,  # locale.currency(600000, grouping=True),
                 'SUV': 550000  # locale.currency(500000, grouping=True),
             }
         else:
@@ -167,37 +167,37 @@ def transporte(request):
             
             valor_trayecto = {
                 'compartido': 15000,  # multiplicar por personas
-                'standar': 45000,  # locale.currency(45000, grouping=True),
-                'mini_van': 85000,  # locale.currency(85000, grouping=True),
+                'standar': 55000,  # locale.currency(45000, grouping=True),
+                'mini_van': 120000,  # locale.currency(85000, grouping=True),
                 # locale.currency(100000, grouping=True),
-                'van_standar': 100000,
-                'micro_bus': 140000,  # locale.currency(120000, grouping=True),
-                'buseta': 170000,  # locale.currency(170000, grouping=True),
-                'bus': 200000,  # locale.currency(200000, grouping=True),
+                'van_standar': 160000,
+                'micro_bus': 220000,  # locale.currency(120000, grouping=True),
+                'buseta': 250000,  # locale.currency(170000, grouping=True),
+                'bus': 350000,  # locale.currency(200000, grouping=True),
                 'SUV': 150000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilometros) in range(13, 30):
             valor_trayecto = {
-                'compartido': 25000,
-                'standar': 60000,  # locale.currency(60000, grouping=True),
-                'mini_van': 100000,  # locale.currency(100000, grouping=True),
+                'compartido': 30000,
+                'standar': 85000,  # locale.currency(60000, grouping=True),
+                'mini_van': 150000,  # locale.currency(100000, grouping=True),
                 # locale.currency(120000, grouping=True),
-                'van_standar': 140000,
-                'micro_bus': 180000,  # locale.currency(150000, grouping=True),
-                'buseta': 190000,  # locale.currency(190000, grouping=True),
-                'bus': 260000,  # locale.currency(260000, grouping=True),
+                'van_standar': 190000,
+                'micro_bus': 250000,  # locale.currency(150000, grouping=True),
+                'buseta': 300000,  # locale.currency(190000, grouping=True),
+                'bus': 450000,  # locale.currency(260000, grouping=True),
                 'SUV': 180000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilometros) in range(31, 58):
             valor_trayecto = {
-                'compartido': 15000,  # locale.currency(10000, grouping=True),
-                'standar': 250000,  # locale.currency(190000, grouping=True),
-                'mini_van': 400000,  # locale.currency(280000,  grouping=True),
+                'compartido': 35000,  # locale.currency(10000, grouping=True),
+                'standar': 450000,  # locale.currency(190000, grouping=True),
+                'mini_van': 650000,  # locale.currency(280000,  grouping=True),
                 # locale.currency(400000, grouping=True),
-                'van_standar': 500000,
-                'micro_bus': 600000,  # locale.currency(480000, grouping=True),
-                'buseta': 650000,  # locale.currency(530000, grouping=True),
-                'bus': 750000,  # locale.currency(600000, grouping=True),
+                'van_standar': 750000,
+                'micro_bus': 900000,  # locale.currency(480000, grouping=True),
+                'buseta': 1050000,  # locale.currency(530000, grouping=True),
+                'bus': 1200000,  # locale.currency(600000, grouping=True),
                 'SUV': 550000  # locale.currency(500000, grouping=True),
             }
         else:
@@ -206,37 +206,37 @@ def transporte(request):
         if int(kilm) in range(1, 12):
             v_trayecto_dos = {
                 'compartido': 15000,  # multiplicar por personas
-                'standar': 45000,  # locale.currency(45000, grouping=True),
-                'mini_van': 85000,  # locale.currency(85000, grouping=True),
+                'standar': 55000,  # locale.currency(45000, grouping=True),
+                'mini_van': 120000,  # locale.currency(85000, grouping=True),
                 # locale.currency(100000, grouping=True),
-                'van_standar': 100000,
-                'micro_bus': 140000,  # locale.currency(120000, grouping=True),
-                'buseta': 170000,  # locale.currency(170000, grouping=True),
-                'bus': 200000,  # locale.currency(200000, grouping=True),
+                'van_standar': 160000,
+                'micro_bus': 220000,  # locale.currency(120000, grouping=True),
+                'buseta': 250000,  # locale.currency(170000, grouping=True),
+                'bus': 350000,  # locale.currency(200000, grouping=True),
                 'SUV': 150000,  # locale.currency(150000, grouping=True),
             }
         elif int(kilm) in range(13, 30):
             v_trayecto_dos = {
-                'compartido': 25000,
-                'standar': 60000,  # locale.currency(60000, grouping=True),
-                'mini_van': 100000,  # locale.currency(100000, grouping=True),
+                'compartido': 30000,
+                'standar': 85000,  # locale.currency(60000, grouping=True),
+                'mini_van': 150000,  # locale.currency(100000, grouping=True),
                 # locale.currency(120000, grouping=True),
-                'van_standar': 140000,
-                'micro_bus': 180000,  # locale.currency(150000, grouping=True),
-                'buseta': 190000,  # locale.currency(190000, grouping=True),
-                'bus': 260000,  # locale.currency(260000, grouping=True),
+                'van_standar': 190000,
+                'micro_bus': 250000,  # locale.currency(150000, grouping=True),
+                'buseta': 300000,  # locale.currency(190000, grouping=True),
+                'bus': 450000,  # locale.currency(260000, grouping=True),
                 'SUV': 180000,  # locale.currency(180000, grouping=True),
             }
         elif int(kilm) in range(31, 58):
             v_trayecto_dos = {
-                'compartido': 15000,  # locale.currency(10000, grouping=True),
-                'standar': 250000,  # locale.currency(190000, grouping=True),
-                'mini_van': 400000,  # locale.currency(280000,  grouping=True),
+                'compartido': 35000,  # locale.currency(10000, grouping=True),
+                'standar': 450000,  # locale.currency(190000, grouping=True),
+                'mini_van': 650000,  # locale.currency(280000,  grouping=True),
                 # locale.currency(400000, grouping=True),
-                'van_standar': 500000,
-                'micro_bus': 600000,  # locale.currency(480000, grouping=True),
-                'buseta': 650000,  # locale.currency(530000, grouping=True),
-                'bus': 750000,  # locale.currency(600000, grouping=True),
+                'van_standar': 750000,
+                'micro_bus': 900000,  # locale.currency(480000, grouping=True),
+                'buseta': 1050000,  # locale.currency(530000, grouping=True),
+                'bus': 1200000,  # locale.currency(600000, grouping=True),
                 'SUV': 550000  # locale.currency(500000, grouping=True),
             }
         else:

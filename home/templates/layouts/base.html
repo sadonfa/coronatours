@@ -84,13 +84,18 @@
                             <a class="menu__link" href="{% url 'home' %}">Inicio</a>
                         </li>
                         <li class="menu__option">
-                            <a class="menu__link" href="{% url 'about' %} ">Nosotros</a>
-                        </li>
-                        <li class="menu__option">
                             <a class="menu__link" href="{% url 'reserve' %}">transportes</a>
                         </li>
                         <li class="menu__option">
+                            <a class="link-item {% if request.path == '/coronavip/' %}active{% endif %}"
+                               href="{% url 'coronavip' %}">Transporte VIP</a>
+                        </li>
+                        <li class="menu__option">
                             <a class="menu__link" href="{% url 'tours' %}">Actividades</a>
+                        </li>
+                        <li class="menu__option">
+                            <a class="menu__link {% if request.path == '/laborsocial/' %}active{% endif %}"
+                               href="{% url 'laborsocial' %}">Labor Social</a>
                         </li>
                         <li class="menu__option">
                             <a class="menu__link" href="{% url 'contact' %} ">Contacto</a>
