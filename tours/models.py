@@ -31,7 +31,7 @@ class Tours(models.Model):
     include = models.ManyToManyField(Inclusiones, blank=True, verbose_name="Incluye")
     noinclude = models.ManyToManyField(Exclusiones, blank=True, verbose_name="No Incluye")
     cash = models.IntegerField(verbose_name="Valor", default=0)
-    # cash = MoneyField(max_digits=14, decimal_places=2, default_currency='COP', default=0)
+    published = models.BooleanField(default=False, verbose_name="Publicado")                                     
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
     update_at = models.DateTimeField(auto_now=True, verbose_name="Editado el")
 

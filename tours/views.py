@@ -7,7 +7,7 @@ import locale
 
 def tours(request):
 
-    toures = Tours.objects.all()
+    toures = Tours.objects.filter(published=True)
 
     return render(request, 'toures.html', {
         'title': 'Toures',

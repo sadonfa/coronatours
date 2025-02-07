@@ -3,7 +3,7 @@ from .models import Tours, Inclusiones, Exclusiones
 
 # Register your models here.
 class ToursAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at', 'update_at')
+    list_display = ('name', 'published', 'cash' , 'created_at')
 
 class InclucionesAdmin(admin.ModelAdmin):
     list_display = ('description', 'created_at', 'update_at')
