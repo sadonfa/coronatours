@@ -1,136 +1,128 @@
-{%extends 'layouts/layout.html'%} {% comment %} cargar los estaticos {%
+{% extends 'layouts/layout.html' %} {% comment %} cargar los estaticos {%
 endcomment %} {%load static%} {% comment %} titulo del articulo {% endcomment %}
-{%block title%}{{tours.name}}{%endblock%} {%block content%}
-
+{% load humanize %}
+{% block title %}{{ tours.name }}{% endblock %}
+{% block content %}
 <div class="gallery">
-  <div class="one">
-    <img src="{{ tours.image1.url }}" />
-  </div>
-  <div class="two">
-    <img src="{{ tours.image2.url }}" />
-  </div>
-  <div class="tree">
-    <img src="{{ tours.image3.url }}" />
-  </div>
-  <div class="four">
-    <img src="{{ tours.image4.url }}" />
-  </div>
+<div class="one">
+<img src="{{ tours.image1.url }}" />
 </div>
-
+<div class="two">
+<img src="{{ tours.image2.url }}" />
+</div>
+<div class="tree">
+<img src="{{ tours.image3.url }}" />
+</div>
+<div class="four">
+<img src="{{ tours.image4.url }}" />
+</div>
+</div>
 <h1 class="title-p">{{ tours.name }}</h1>
-
 <div class="time-tour">
-  <span><i class="fa-solid fa-clock"></i> Duracion: 7 Hs.</span>
+<span><i class="fa-solid fa-clock"></i> Duracion: 7 Hs.</span>
 </div>
-
 <div class="h-booking">
-  <div class="serv-icon">
-    <div class="box-icon">
-      <i class="fa-solid fa-martini-glass-citrus"></i>
-      <p>Bebida (opcional)</p>
-    </div>
-    <div class="box-icon">
-      <i class="fa-solid fa-utensils"></i>
-      <p>Comida (opcional)</p>
-    </div>
-    <div class="box-icon">
-      <i class="fa-solid fa-car"></i>
-      <p>Translados</p>
-    </div>
-  </div>
-
-  <div class="box-btn">
-    {% comment %}
-    <button class="btn" onclick="enlace({{ tours.id }})">Reservar</button>
-    {% endcomment %}
-    <h1>$ {{ cash }}</h1>
-    <button class="btn" onclick="enlace({{ tours.id }})">Reservar</button>
-  </div>
+<div class="serv-icon">
+<div class="box-icon">
+<i class="fa-solid fa-martini-glass-citrus"></i>
+<p>Bebida (opcional)</p>
 </div>
-
+<div class="box-icon">
+<i class="fa-solid fa-utensils"></i>
+<p>Comida (opcional)</p>
+</div>
+<div class="box-icon">
+<i class="fa-solid fa-car"></i>
+<p>Translados</p>
+</div>
+</div>
+<div class="box-btn">
+{% comment %}
+    <button class="btn" onclick="enlace({{ tours.id }})">Reservar</button>
+{% endcomment %}
+<h1>$ {{ tours.cash|intcomma }}</h1>
+<button class="btn" onclick="enlace({{ tours.id }})">Reservar</button>
+</div>
+</div>
 <hr />
-
 <p class="parrafo">{{ tours.info|safe }}</p>
-
 <hr />
-
 <h2>Qué saber antes de comprar</h2>
-
 <div class="box-know">
-  <div class="box-one">
-    <h3 class="sub-title-3">¿Qué incluye?</h3>
-    <ul>
-      {% for incluye in tours.include.all %}
-
-      <li>
-        <i class="fa-solid fa-check"></i>
-        {{ incluye }}
-      </li>
-
-      {% endfor %}
-    </ul>
-  </div>
-
-  <div class="box-two">
-    <h3 class="sub-title-3">¿Qué no incluye?</h3>
-    <ul>
-      {% for noincluye in tours.noinclude.all %}
-      <li><i class="fa-solid fa-xmark"></i> {{ noincluye }}</li>
-      {% endfor %}
-    </ul>
-  </div>
+<div class="box-one">
+<h3 class="sub-title-3">¿Qué incluye?</h3>
+<ul>
+{% for incluye in tours.include.all %}
+<li>
+<i class="fa-solid fa-check"></i>
+{{ incluye }}
+</li>
+{% endfor %}
+</ul>
 </div>
-
+<div class="box-two">
+<h3 class="sub-title-3">¿Qué no incluye?</h3>
+<ul>
+{% for noincluye in tours.noinclude.all %}
+<li>
+<i class="fa-solid fa-xmark"></i> {{ noincluye }}
+</li>
+{% endfor %}
+</ul>
+</div>
+</div>
 <hr />
-
 <div class="higiene">
-  <h3 class="sub-title-3">Medidas de higiene y seguridad</h3>
-  <ul>
-    <li>
-      <i class="fa-solid fa-check"></i>Cantidad limitada de pasajeros, para
-      garantizar el distanciamiento
-    </li>
-    <li><i class="fa-solid fa-check"></i> Desinfección regular de vehículos</li>
-    <li>
-      <i class="fa-solid fa-check"></i> Personal capacitado en medidas de
-      higiene y seguridad
-    </li>
-    <li>
-      <i class="fa-solid fa-check"></i> Deberás llevar tu propio tapabocas
-    </li>
-    <li><i class="fa-solid fa-check"></i> Alcohol en gel a disposición</li>
-    <li>
-      <i class="fa-solid fa-check"></i>Refuerzo en tareas de limpieza y
-      desinfección
-    </li>
-    <li>
-      <i class="fa-solid fa-check"></i> El personal utiliza el equipo de
-      seguridad requerido
-    </li>
-    <li><i class="fa-solid fa-check"></i>Uso de tapabocas obligatorio</li>
-    <li><i class="fa-solid fa-check"></i>Control de temperatura</li>
-  </ul>
+<h3 class="sub-title-3">Medidas de higiene y seguridad</h3>
+<ul>
+<li>
+<i class="fa-solid fa-check"></i>Cantidad limitada de pasajeros, para
+garantizar el distanciamiento
+</li>
+<li>
+<i class="fa-solid fa-check"></i> Desinfección regular de vehículos
+</li>
+<li>
+<i class="fa-solid fa-check"></i> Personal capacitado en medidas de
+higiene y seguridad
+</li>
+<li>
+<i class="fa-solid fa-check"></i> Deberás llevar tu propio tapabocas
+</li>
+<li>
+<i class="fa-solid fa-check"></i> Alcohol en gel a disposición
+</li>
+<li>
+<i class="fa-solid fa-check"></i>Refuerzo en tareas de limpieza y
+desinfección
+</li>
+<li>
+<i class="fa-solid fa-check"></i> El personal utiliza el equipo de
+seguridad requerido
+</li>
+<li>
+<i class="fa-solid fa-check"></i>Uso de tapabocas obligatorio
+</li>
+<li>
+<i class="fa-solid fa-check"></i>Control de temperatura
+</li>
+</ul>
 </div>
-
 <div class="box-booking">
-  <button class="btn">Reservar</button>
+<button class="btn">Reservar</button>
 </div>
-
 <div class="email">
-  <i class="fa-regular fa-envelope-circle-check"></i>
-
-  <div class="descrip-email">
-    <h3>Ofertas exclusivas en tu email</h3>
-    <form>
-      <input type="text" placeholder="Ingresa tu email" />
-      <input type="submit" value="¡Quiero Recibirlas!" />
-    </form>
-
-    <p>
-      Recibirás emails promocionales en tu email. Para más información consulta
-      las <a src="#">políticas de privacidad. </a>
-    </p>
-  </div>
+<i class="fa-regular fa-envelope-circle-check"></i>
+<div class="descrip-email">
+<h3>Ofertas exclusivas en tu email</h3>
+<form>
+<input type="text" placeholder="Ingresa tu email" />
+<input type="submit" value="¡Quiero Recibirlas!" />
+</form>
+<p>
+Recibirás emails promocionales en tu email. Para más información consulta
+las <a src="#">políticas de privacidad.</a>
+</p>
 </div>
-
+</div>
 {% endblock %}

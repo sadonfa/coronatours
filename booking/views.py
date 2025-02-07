@@ -297,7 +297,7 @@ def answer_booking(request, id=False):
     id_wompi = request.GET['id']
     # tour = get_object_or_404(Tours, id=53)
 
-    #URL_API =  "https://sandbox.wompi.co/v1/transactions/" + id_wompi
+    # URL_API =  "https://sandbox.wompi.co/v1/transactions/" + id_wompi
     URL_API =  "https://production.wompi.co/v1/transactions/" + id_wompi
 
     response = requests.get(URL_API)
