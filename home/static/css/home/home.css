@@ -198,6 +198,7 @@ article .info p {
   }
   article {
     height: 190px;
+	padding: 20px 0px;
   }
 }
 
