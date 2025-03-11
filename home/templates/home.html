@@ -4,16 +4,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href="{% static 'css/home/home.css' %}" />
-
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
-
     <title>Home Corona tours</title>
   </head>
   <body>
     <nav class="nav">
-      <img src="{% static "img/logo.png" %} " alt="Logo Coronatours" />
+      <img src="{% static 'img/logo.png' %} " alt="Logo Coronatours" />
     </nav>
     <div class="content">
       <article class="men-standar">
@@ -24,16 +21,6 @@
             inolvidable.
           </p>
           <a href="{% url 'reserve' %}" class="btn">ver mas</a>
-        </div>
-      </article>
-      <article class="men-vip">
-        <div class="info">
-          <h1>Transporte Corona VIP</h1>
-          <p>
-            transportese seguro en nuestra ciudad, para que viva una experiencia
-            inolvidable.
-          </p>
-          <a href="{% url 'coronavip' %}" class="btn">ver mas</a>
         </div>
       </article>
       <article class="men-activiti">
@@ -57,6 +44,8 @@
         </div>
       </article>
     </div>
-    <footer class="footer">creado por &copy; gegova.com.co</footer>
+    <footer class="footer">
+      creado por &copy; gegova.com.co
+    </footer>
   </body>
 </html>

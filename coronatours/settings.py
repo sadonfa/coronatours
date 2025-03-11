@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'reserve',
     'tours',
     'booking',
-    'coronavip',
     'laborsocial',
     'djmoney'
 ]
