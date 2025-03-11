@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('', include('reserve.urls')),
     path('', include('tours.urls')),
+	path('', include('coronavip.urls')),
     path('', include('booking.urls')),
     path('', include('laborsocial.urls'))
 ]

@@ -268,9 +268,17 @@
   .serv-icon .box-icon p {
     font-size: 10px;
   }
+  .content{
+    flex-direction: column;
+    padding: 20px 0px;
+  }
 }
 
 @media screen and (max-width: 450px) {
+  .content{
+    flex-direction: column;
+    padding: 20px 0px;
+  }
   .form-anuncio {
     flex-direction: column;
     justify-content: center;
